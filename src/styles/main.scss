@@ -1,0 +1,14 @@
+//uno aca va importando los estilos dentro de la carpeta styles
+
+// ejemplo si hay una ca@import "abstracts/colors";
+@import "~bootstrap/scss/bootstrap";
+@import "abstracts/colors";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+@import "components/home.scss";
+@import "components/navbar.scss";
+@import "components/footer.scss";

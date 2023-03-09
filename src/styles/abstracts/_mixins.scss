@@ -1,0 +1,38 @@
+@mixin phone {
+  @media only screen and (max-width: $media-max-width-sm) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (max-width: $media-max-width-md) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media only screen and (min-width: $media-max-width-lg) {
+    @content;
+  }
+}
+
+ 
+// For landscape phone
+@mixin landscape-phone() {
+  @media screen and (min-height: $phone-min-height) and (max-height: $phone-max-height) and (orientation: landscape) {
+    @content;
+  }
+}
+// For landscape tablet
+@mixin landscape-tablet() {
+  @media screen and (min-height: $tablet-min-height) and (max-height: $tablet-max-height) and (orientation: landscape) {
+    @content;
+  }
+}
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  -ms-transform: $property;
+  -o-transform: $property;
+  transform: $property;
+}

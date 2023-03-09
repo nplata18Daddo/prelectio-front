@@ -1,0 +1,29 @@
+$font-size-xl: 62px;
+$font-size-lg: 42px;
+$font-size-default: 16px;
+$font-size-md: 28px;
+$font-size-sm: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-size-heading1: 24px;
+
+$font-size-heading3: 1.6rem;
+
+$font-family-text: "Roboto", sans-serif;
+
+$media-min-width-sm: 576px; // Small devices (landscape phones, 576px and up)
+$media-min-width-md: 768px; // Medium devices (tablets, 768px and up)
+$media-min-width-lg: 992px; // Large devices (desktops, 992px and up)
+$media-min-width-xl: 1200px; // Extra large devices (large desktops, 1200px and up)
+
+$media-max-width-xs: 575.98px;
+$media-max-width-sm: 767.98px; // Small devices (landscape phones, less than 768px)
+$media-max-width-md: 991.98px; // Medium devices (tablets, less than 992px)
+$media-max-width-lg: 1199.98px; // Large devices (desktops, less than 1200px)
+
+$phone-min-height: 346px !default;
+$phone-max-height: 695px !default;
+
+$tablet-min-height: 800px !default;
+$tablet-max-height: 1440px !default;

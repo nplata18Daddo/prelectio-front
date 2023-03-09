@@ -1,0 +1,16 @@
+
+.home {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    background-color: $mainBlack;
+    img{
+        width: 50%;
+    }
+    &__h1{
+        color: $mainWhite;
+    }
+}

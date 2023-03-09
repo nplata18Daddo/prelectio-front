@@ -1,0 +1,33 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body > #root > div {
+  height: 100vh;
+}
+
+html {
+  /* Root font size, defines what 1rem is */
+  font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+}
+
+body {
+  box-sizing: border-box;
+}
+
+p {
+  margin-bottom: 0;
+}
