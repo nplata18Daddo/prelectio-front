@@ -1,0 +1,23 @@
+.services
+{
+    &__mainContainer
+    {
+        &__titleRow
+        {
+            &__titleCol
+            {
+                background-color: $mainBlue;
+                border-radius: 25px;
+                height: 8vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &__title
+                {      
+                    font-size: $font-size-xl;
+                    color:$mainWhite
+                }
+            }
+        }
+    }
+}

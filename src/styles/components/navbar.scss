@@ -1,3 +1,117 @@
 .navbar {
-  
+  @include tablet {
+    display: none ;
+    height: auto;
+    padding-bottom: 1rem;
+  }
+  &__responsive {
+    @extend .navbar;
+    display: none !important;
+    @include tablet {
+      display: block !important;
+    }
+    &__col {
+      text-align: center;
+      padding: 1rem;
+      padding-left: 2rem;
+      &__buttonRow
+      {
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &__button
+        {
+            &__primary
+            {
+                @extend .base_button;
+                font-weight: bold;
+                width: 50%;
+                background-color: $mainBlue;
+                border-radius: 12px;
+                &:active
+                {
+                    background-color: $mainBlack !important;
+                }
+            }
+            &__secondary
+            {
+                @extend .base_button;
+                background-color: transparent;
+                width: 50%;
+                &:hover
+                {
+                    background-color: $mainBlack;
+                }
+                &:active
+                {
+                    background-color: $mainBlack !important;
+                }
+            }
+        }
+      }
+    }
+  }
+  min-height: 10vh;
+  background-color: #000000;
+  padding-top: 2vh;
+  padding-bottom: 1vh;
+  width: 100%;
+  margin: 0;
+  &__col {
+    &__buttonRow
+    {
+        display: flex;
+        align-items: center;
+        &__button
+        {
+            &__primary
+            {
+                @extend .base_button;
+                font-weight: bold;
+                min-width: 70%;
+                background-color: $mainBlue;
+                border-radius: 12px;
+                &:active
+                {
+                    text-decoration: none;
+                }
+            }
+            &__secondary
+            {
+                @extend .base_button;
+                background-color: transparent;
+                &:hover
+                {
+                    background-color: transparent;
+                    text-decoration: underline;
+                }
+                &:active
+                {
+                    text-decoration: none;
+                    background-color: transparent !important;
+                }
+            }
+        }
+
+    }
+}
+}
+.navbar-toggler {
+  width: 47px;
+  height: 34px;
+  background-color: none;
+  border: none;
+  border: 1px solid white;
+  align-self: left;
+}
+.navbar-toggler-icon {
+  width: 2em;
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28255,255,255, 1%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e");
+}
+.base_button
+{
+    font-size: $font-size-default;
+    border: none;
 }
