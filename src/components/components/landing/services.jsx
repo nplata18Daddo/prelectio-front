@@ -1,4 +1,8 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import {
+  OportunitiesTalentCarousel,
+  YoutubeVideo,
+} from "./servicesComponents/";
 
 export const Services = () => {
   return (
@@ -7,7 +11,7 @@ export const Services = () => {
         <Row className="services__mainContainer__titleRow">
           <Col
             className="services__mainContainer__titleRow__titleCol"
-            xs={12}
+            xs={{ offset: 1, span: 10 }}
             md={{ offset: 4, span: 4 }}
           >
             <h1 className="services__mainContainer__titleRow__titleCol__title">
@@ -15,6 +19,8 @@ export const Services = () => {
             </h1>
           </Col>
         </Row>
+        <OportunitiesTalentCarousel />
+        <YoutubeVideo url={"https://www.youtube.com/embed/A2NqpFsg1dQ"} />
       </Container>
     </div>
   );

@@ -18,7 +18,11 @@ export const Footer = () => {
         <Row className="footer__topRow">
           <Col xs={4} lg={3} className="text-left footer__topRow__col">
             <Link to="/">
-              <img style={{ width: "40%" }} src={logoPrelectio}></img>
+              <img
+                alt={"logo"}
+                style={{ width: "40%" }}
+                src={logoPrelectio}
+              ></img>
             </Link>
           </Col>
           <Col xs={8} lg={8} className="text-center footer__topRow__col">

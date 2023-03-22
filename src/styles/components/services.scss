@@ -1,5 +1,10 @@
 .services
 {
+    background-image: url(../../assets/home/Services_background.png) ;
+    background-color: $mainWhite;
+    background-size: 100% 100%;
+    background-position: right;
+    background-repeat: no-repeat;
     &__mainContainer
     {
         &__titleRow
@@ -16,6 +21,63 @@
                 {      
                     font-size: $font-size-xl;
                     color:$mainWhite
+                }
+            }
+        }
+        &__TalentOportunitiesRow
+        {
+            margin-top: 5vh;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__talentOportunitesButton
+            {
+                font-size: $font-size-mdlg;
+                background-color: $mainBlack;
+                border-radius: 10px;
+                border: none;
+                height: 5vh;
+                width: 75%;
+                @include phone{
+                    margin-top: 1vh;
+                    margin-bottom: 1vh;
+                }
+                &:hover
+                {
+                    background-color: $mainGrey;
+                    border: none;
+                }
+                &:active
+                {
+                    background-color: $mainBlack !important;
+                    border: none;
+                }
+                &#seleccionado
+                {
+                    background-color: $mainGrey;
+                }
+            }
+        }
+        &__videoRow
+        {
+            &__videoContainer
+            {
+                height: 60vh;
+                width: 60vw;
+                margin-top: 15vh;
+                margin-bottom: 15vh;
+                @include phone{
+                    margin-top: 10vh;
+                    margin-bottom: 10vh;
+                    width: 90vw;
+                    height: 100vw;
+                }
+                iframe
+                {
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
