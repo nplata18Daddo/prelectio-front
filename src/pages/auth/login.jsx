@@ -10,7 +10,7 @@ export const Login = () => {
   const [showPass, setShowPass] = useState(false);
 
   const schema = yup.object().shape({
-    password: yup.string().required("*Este campo es obligatorio"),
+    password: yup.string().required("*Este campo es requerido"),
     email: yup
       .string()
       .email("*Este campo debe ser un email válido")
@@ -19,6 +19,7 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -81,10 +82,18 @@ export const Login = () => {
                         <i className="bi bi-envelope"></i>
                       </InputGroup.Text>
                       <Form.Control
+                        {...register("email")}
                         className="login__input  display__small"
-                        type="email"
                         placeholder="Tu correo"
                       />
+                      {errors.email && (
+                        <Form.Control.Feedback
+                          className="d-block display__label mt-2"
+                          type="invalid"
+                        >
+                          {errors.email.message}
+                        </Form.Control.Feedback>
+                      )}
                     </InputGroup>
                   </Form.Group>
 
@@ -101,6 +110,7 @@ export const Login = () => {
                         <i className="bi bi-lock"></i>
                       </InputGroup.Text>
                       <Form.Control
+                        {...register("password")}
                         className="login__input__pass  display__small"
                         type={showPass ? "text" : "password"}
                         placeholder="Tu contraseña"
@@ -111,6 +121,14 @@ export const Login = () => {
                           class={showPass ? "bi bi-eye" : "bi bi-eye-slash"}
                         ></i>
                       </InputGroup.Text>
+                      {errors.password && (
+                        <Form.Control.Feedback
+                          className="d-block display__label mt-2"
+                          type="invalid"
+                        >
+                          {errors.password.message}
+                        </Form.Control.Feedback>
+                      )}
                     </InputGroup>
                   </Form.Group>
 
@@ -124,6 +142,7 @@ export const Login = () => {
                   </Form.Group>
 
                   <Button
+                    disabled={!watch("email") || !watch("password")}
                     variant="primary"
                     type="submit"
                     className="login__submit display__small weight__bold"

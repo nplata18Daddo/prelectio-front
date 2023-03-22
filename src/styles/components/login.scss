@@ -50,6 +50,13 @@
     padding-left: 50px;
     padding-right: 50px;
   }
+  &__submit:disabled {
+    background: grey;
+    border-radius: 7px;
+    border: 1px solid grey;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
   &__input__icon {
     background-color: #2d2d2d !important;
     color: white !important;
