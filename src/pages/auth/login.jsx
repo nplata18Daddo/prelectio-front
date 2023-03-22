@@ -54,28 +54,34 @@ export const Login = () => {
       </Row>
       <Row className="justify-content-center">
         <Col xs={10} md={4}>
-          <Card body className="login__card p-5">
+          <Card body className="login__card ">
             <Row>
               <Col xs={12}>
-                <h1 className="text-white">Bienvenido a Prelectio</h1>
+                <h1 className="text-white display__large weight__bold">
+                  Bienvenido a Prelectio
+                </h1>
               </Col>
               <Col xs={12}>
-                <p className="text-white">Inicia sesión con tu cuenta</p>
+                <p className="text-white display__medium">
+                  Inicia sesión con tu cuenta
+                </p>
               </Col>
               <Col xs={12}>
                 <Form onSubmit={handleSubmit(handleLogin)}>
                   <Form.Group
-                    className="mb-4 mt-4"
+                    className="mb-5 mt-5"
                     controlId="formBasicEmail"
                     style={{ textAlign: "start" }}
                   >
-                    <Form.Label className="text-white">Correo</Form.Label>
+                    <Form.Label className="text-white display__small">
+                      Correo
+                    </Form.Label>
                     <InputGroup>
-                      <InputGroup.Text className="login__input__icon">
+                      <InputGroup.Text className="login__input__icon display__small">
                         <i className="bi bi-envelope"></i>
                       </InputGroup.Text>
                       <Form.Control
-                        className="login__input"
+                        className="login__input  display__small"
                         type="email"
                         placeholder="Tu correo"
                       />
@@ -83,21 +89,23 @@ export const Login = () => {
                   </Form.Group>
 
                   <Form.Group
-                    className="mb-4 mt-4"
+                    className="mb-5 mt-5"
                     controlId="formBasicPassword"
                     style={{ textAlign: "start" }}
                   >
-                    <Form.Label className="text-white">Contraseña</Form.Label>
+                    <Form.Label className="text-white display__small">
+                      Contraseña
+                    </Form.Label>
                     <InputGroup>
-                      <InputGroup.Text className="login__input__icon">
+                      <InputGroup.Text className="login__input__icon display__small">
                         <i className="bi bi-lock"></i>
                       </InputGroup.Text>
                       <Form.Control
-                        className="login__input__pass"
+                        className="login__input__pass  display__small"
                         type={showPass ? "text" : "password"}
                         placeholder="Tu contraseña"
                       />
-                      <InputGroup.Text className="login__input__icon__pass">
+                      <InputGroup.Text className="login__input__icon__pass display__small">
                         <i
                           onClick={handleShowPass}
                           class={showPass ? "bi bi-eye" : "bi bi-eye-slash"}
@@ -107,10 +115,10 @@ export const Login = () => {
                   </Form.Group>
 
                   <Form.Group
-                    className="mb-4 mt-4"
+                    className="mb-5 mt-5"
                     style={{ textAlign: "end" }}
                   >
-                    <Form.Label className="colors__lightBlue">
+                    <Form.Label className="colors__lightBlue display__label">
                       ¿Olvidaste tu contraseña?
                     </Form.Label>
                   </Form.Group>
@@ -118,14 +126,14 @@ export const Login = () => {
                   <Button
                     variant="primary"
                     type="submit"
-                    className="login__submit"
+                    className="login__submit display__small weight__bold"
                   >
                     Continuar
                   </Button>
                 </Form>
               </Col>
-              <Col xs={12} className="mt-4">
-                <p className="text-white">
+              <Col xs={12} className="mt-5">
+                <p className="text-white display__small">
                   ¿No tienes una cuenta?{" "}
                   <span className="colors__lightBlue">Registrate ahora</span>
                 </p>
