@@ -31,3 +31,7 @@ body {
 p {
   margin-bottom: 0;
 }
+
+*:focus {
+  box-shadow: none !important;
+}

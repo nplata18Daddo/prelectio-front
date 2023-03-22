@@ -1,12 +1,18 @@
 // COLORS ----------------------------------------------
 $grey: #465153;
 $black: #282828;
-$white: #FFFFFF;
-$darkBlue: #00459A;
-$lightBlue: #00CCFF;
+$white: #ffffff;
+$darkBlue: #00459a;
+$lightBlue: #00ccff;
 // VARIABLES ----------------------------------------------
 $mainGrey: $grey;
 $mainBlack: $black;
 $mainWhite: $white;
 $mainBlue: $darkBlue;
 $accentBlue: $lightBlue;
+
+.colors {
+  &__lightBlue {
+    color: $lightBlue;
+  }
+}
