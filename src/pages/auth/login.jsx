@@ -5,6 +5,7 @@ import LogoPrelectio from "../../assets/logo_prelectio.png";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Link } from "react-router-dom";
 export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
@@ -136,9 +137,14 @@ export const Login = () => {
                     className="mb-5 mt-5"
                     style={{ textAlign: "end" }}
                   >
-                    <Form.Label className="colors__lightBlue display__label">
-                      ¿Olvidaste tu contraseña?
-                    </Form.Label>
+                    <Link to="/forgotPassword">
+                      <Form.Label
+                        className="colors__lightBlue display__label"
+                        style={{ cursor: "pointer" }}
+                      >
+                        ¿Olvidaste tu contraseña?
+                      </Form.Label>
+                    </Link>
                   </Form.Group>
 
                   <Button
