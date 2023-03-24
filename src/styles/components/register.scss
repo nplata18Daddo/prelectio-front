@@ -1,0 +1,34 @@
+.register {
+  &__background {
+    height: 100vh;
+    background: url("../../assets/register/registerBackground.png") right bottom
+        no-repeat,
+      linear-gradient(180deg, rgba(53, 53, 53, 0.76) 0%, #333333 46.35%);
+    background-color: white;
+  }
+  &__card {
+    background: #2d2d2d;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    mix-blend-mode: hard-light;
+    opacity: 0.81;
+  }
+  &__line {
+    width: 263px;
+    height: 7px;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      #0068e1 0%,
+      rgba(0, 218, 232, 0) 100%
+    );
+  }
+  &__shadow {
+    box-shadow: 1px 0px white;
+    @include tablet {
+      box-shadow: none !important;
+    }
+  }
+}
+.no__underline {
+  text-decoration: none !important;
+}

@@ -5,6 +5,7 @@ import { ForgotPassword } from "../pages/auth/forgotPassword";
 import { Login } from "../pages/auth/login";
 import { AnimatePresence } from "framer-motion";
 import { ChangePass } from "../pages/auth/changePass";
+import { Register } from "../pages/auth/register";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -16,6 +17,7 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/changePassword" element={<ChangePass />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </AnimatePresence>
   );

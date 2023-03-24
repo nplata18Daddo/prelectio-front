@@ -160,7 +160,9 @@ export const Login = () => {
               <Col xs={12} className="mt-5">
                 <p className="text-white display__small">
                   ¿No tienes una cuenta?{" "}
-                  <span className="colors__lightBlue">Registrate ahora</span>
+                  <Link to="/register">
+                    <span className="colors__lightBlue">Registrate ahora</span>
+                  </Link>
                 </p>
               </Col>
             </Row>
