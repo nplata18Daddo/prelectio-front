@@ -1,6 +1,8 @@
 import { Col, Container, Row } from "react-bootstrap";
 import {
+  ImageCarousel,
   OportunitiesTalentCarousel,
+  Reviews,
   YoutubeVideo,
 } from "./servicesComponents/";
 
@@ -21,6 +23,8 @@ export const Services = () => {
         </Row>
         <OportunitiesTalentCarousel />
         <YoutubeVideo url={"https://www.youtube.com/embed/A2NqpFsg1dQ"} />
+        <ImageCarousel/>
+        <Reviews />
       </Container>
     </div>
   );

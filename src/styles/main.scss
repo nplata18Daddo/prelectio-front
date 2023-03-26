@@ -1,4 +1,6 @@
 //uno aca va importando los estilos dentro de la carpeta styles
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
 
 // ejemplo si hay una ca@import "abstracts/colors";
 @import "~bootstrap/scss/bootstrap";
@@ -14,6 +16,8 @@
 @import "components/services.scss";
 @import "components/serviceSlider.scss";
 @import "components/callToAction.scss";
+@import "components/reviewCard.scss";
+@import "components/imgCarousel.scss";
 @import "components/navbar.scss";
 @import "components/footer.scss";
 @import "components/login.scss";

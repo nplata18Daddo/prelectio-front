@@ -81,5 +81,23 @@
                 }
             }
         }
+        &__rowTitleReviews
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &__title
+            {
+                text-align: left;
+                color: $mainBlue;
+                font-size: $font-size-lgmd;
+
+                @include phone
+                {
+                    width: 90%;
+                    font-size: $font-size-mdmd;
+                }
+            }
+        }
     }
 }
