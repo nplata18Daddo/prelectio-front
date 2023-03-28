@@ -1,0 +1,61 @@
+.register {
+  &__backgroundRecruiter {
+    height: 100vh;
+    background: linear-gradient(
+      180deg,
+      rgba(53, 53, 53, 0.76) 0%,
+      #333333 46.35%
+    );
+    background-color: white;
+  }
+  &__card {
+    background: #2d2d2d;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background: linear-gradient(90deg, #212121 50%, #2d2d2d 50%);
+    @include tablet {
+      background: #212121;
+    }
+  }
+  &__input,
+  &__input:active {
+    background-color: #2d2d2d !important;
+    color: white !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 7px !important;
+    border-left: none;
+    outline: none !important;
+    box-shadow: none;
+  }
+  &__input::placeholder,
+  &__input__pass::placeholder {
+    color: white !important;
+  }
+  &__select {
+    background-color: #2d2d2d !important;
+    color: white !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 7px !important;
+    border-left: none;
+    outline: none !important;
+    box-shadow: none;
+    fill: white !important;
+  }
+  &__logo {
+    width: 25rem;
+    &__row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  }
+  &__date__input,
+  &__date__input:focus {
+    background-color: #2d2d2d;
+    color: white;
+  }
+}
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

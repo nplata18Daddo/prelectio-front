@@ -1,0 +1,86 @@
+.reviewCard
+{
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+    justify-items: center;
+    display: flex;
+    align-items: center;
+    &__container
+    {
+        min-height: 40vh;
+        @include phone{
+            min-height: 30vh;
+            padding: 8%;
+            width: 90%;
+        }
+        width: 70%;
+        padding: 0% 8% 0 8%;
+        background-color: #FFFFFF;
+        color: $mainWhite;
+        border-radius: 7px;
+        box-shadow: 0px 0px 8px rgba(0,0,0,0.25);
+        &__topRow
+        {
+            margin-top: 8%;
+            margin-bottom: 5%;
+            color: $realBlack;
+            @include phone{
+                margin-top: 3%;
+                margin-bottom: 2%;
+            }
+            h1
+            {
+                text-align: justify;
+                font-size: $font-size-lgmd;
+                position: relative;
+                @include phone{
+                    font-size: $font-size-mdlg;
+                }
+                &::before
+                {
+                    content: '"';
+                    position: absolute;
+                    left: -5%;
+                    top: -8%;
+                    @include phone{
+                        left: 0%;
+                        top: -7%;
+                    }
+                }
+                &::after
+                {
+                    content: '"';
+                    position: absolute;
+                    right: -5%;
+                    bottom: -8%;
+                    @include phone{
+                        right: 1%;
+                        bottom: -5%;
+                    }
+                }
+            }
+        }
+        &__middleRow
+        {
+            color:  $realBlack;
+            h2
+            {
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+        &__bottomRow
+        {
+            margin-bottom: 2vh;
+            color:  $realBlack;
+            @include phone{
+                margin-bottom: 1vh;
+            }
+            h2
+            {
+                text-align: left;
+                font-weight: normal;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.aboutUs {
+  background-image: url(../../assets/home/backgroundRectangle.png);
+  background-color: $mainWhite;
+  background-size: 50% 100%;
+  background-position: right;
+  background-repeat: no-repeat;
+
+  @include phone {
+    background-size: 80% 100%;
+    background-position: top right;
+  }
+  &__mainContainer {
+    padding: 5vh 20% 5vh 1vw;
+    margin: 0% 10%;
+    @include phone {
+      padding: 10%;
+      margin: 0;
+    }
+    &__topRow {
+      h1 {
+        text-align: left;
+        font-size: $font-size-lg;
+        color: $mainBlue;
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 20%;
+        margin-bottom: 5vh;
+      }
+    }
+    &__bottomRow {
+      h2 {
+        font-size: 24px;
+        text-align: justify;
+        font-weight: normal;
+        @include phone {
+          font-size: $font-size-mdlg;
+        }
+      }
+    }
+  }
+}

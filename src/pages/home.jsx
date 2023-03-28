@@ -1,10 +1,12 @@
 import React from "react";
-import prelectioLogo from "../assets/logo_prelectio.png"
+import { AboutUs, Main, CallToAction, Services } from "../components/components";
 export const Home = () => {
   return (
-    <div className="home">
-      <img src={prelectioLogo}></img>
-      <h1 className="home__h1">Coming soon</h1>
+    <div>
+      <Main />
+      <AboutUs />
+      <Services />
+      <CallToAction />
     </div>
   );
 };
