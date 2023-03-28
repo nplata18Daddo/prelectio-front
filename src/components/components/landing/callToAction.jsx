@@ -1,4 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const CallToAction = () => {
   return (
@@ -17,9 +18,11 @@ export const CallToAction = () => {
             md={6}
             className="callToAction__mainContainer__mainRow__rightRow"
           >
-            <Button className="callToAction__mainContainer__mainRow__rightRow__button">
-              <h1>Únete</h1>
-            </Button>
+            <Link to="/register">
+              <Button className="callToAction__mainContainer__mainRow__rightRow__button">
+                <h1>Únete</h1>
+              </Button>
+            </Link>
           </Col>
         </Row>
       </Container>

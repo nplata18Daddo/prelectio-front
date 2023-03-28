@@ -37,9 +37,11 @@ export const NavBar = () => {
               </Button>
             </Col>
             <Col xs={2}>
-              <Button className="navbar__col__buttonRow__button__primary">
-                Ingresar
-              </Button>
+              <Link to="/login">
+                <Button className="navbar__col__buttonRow__button__primary">
+                  Ingresar
+                </Button>
+              </Link>
             </Col>
           </Row>
         </Col>
@@ -96,9 +98,11 @@ export const NavBar = () => {
               </Button>
             </Row>
             <Row className="navbar__responsive__col__buttonRow">
-              <Button className="navbar__responsive__col__buttonRow__button__primary">
-                Ingresar
-              </Button>
+              <Link to="/login">
+                <Button className="navbar__responsive__col__buttonRow__button__primary">
+                  Ingresar
+                </Button>
+              </Link>
             </Row>
           </div>
         </Collapse>

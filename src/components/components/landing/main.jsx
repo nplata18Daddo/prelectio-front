@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import homeBanner from "../../../assets/home/HomeBanner.png";
 export const Main = () => {
   return (
@@ -20,14 +21,19 @@ export const Main = () => {
               <h2>busca talento en un solo lugar</h2>
             </Row>
             <Row className="home__mainRow__leftCol__mainContainer__buttonRow">
-              <Button className="home__mainRow__leftCol__mainContainer__buttonRow__joinButton">
-                Únete
-              </Button>
+              <Link to="/register">
+                <Button className="home__mainRow__leftCol__mainContainer__buttonRow__joinButton">
+                  Únete
+                </Button>
+              </Link>
             </Row>
           </Container>
         </Col>
         <Col xs={12} md={6} className="home__mainRow__rightCol">
-          <img className="home__mainRow__rightCol__picture" src={homeBanner}></img>
+          <img
+            className="home__mainRow__rightCol__picture"
+            src={homeBanner}
+          ></img>
         </Col>
       </Row>
     </div>

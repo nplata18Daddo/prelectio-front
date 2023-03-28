@@ -1,102 +1,91 @@
-.serviceSlider
-{
-    margin-bottom: 5vh;
-    margin-top: 5vh;
-    justify-items: center;
-    display: flex;
-    align-items: center;
-    &__container
-    {
-        @include phone{
-            padding: 5% 2% 5% 5%;
-        }
-        width: 90%;
-        padding: 0% 2% 0 5%;
-        background-color: $mainBlack;
-        color: $mainWhite;
-        border-radius: 26px;
-        &__mainRow
-        {
-            min-height: 50vh;
-            width: 100%;
-            &__leftCol
-            {
-                display: flex;
-                justify-content:space-evenly;
-                flex-direction: column;
-                @include phone{
-                    justify-content: center;
-                    align-items: center;
-                }
-                h1
-                {
-                    text-align: left;
-                    font-size: $font-size-xl;
-                    margin-bottom: 5%;
-                    @include phone{
-                        font-size: $font-size-lg;
-                    }
-                }
-                p
-                {
-                    text-align: justify;
-                    font-size: $font-size-default;
-                    margin-bottom: 5%;
-                }
-                &__btn
-                {
-                    @include phone{
-                        width: 80%;
-                    }
-                    width: 30%;
-                    background-color: $accentGrey;
-                    border:none;
-                    font-size: $font-size-default;
-                    font-weight: bold;
-                    height: 5vh;
-                    border-radius: 15px;
-                    &:hover
-                    {
-                        background-color: $mainGrey;
-                        border: none;
-                    }
-                    &:active
-                    {  
-                        background-color: $mainGrey !important;
-                        border: none;
-                    }
-                }
-            }
-            &__rightCol
-            {
-                @include phone{
-                    margin-top: 5vh;
-                    font-size: $font-size-lg;
-                }
-                padding-left: 10%;
-                padding-right: 10%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                &__img
-                {
-                    height: 100%;
-                    background-color: $mainBlack;
-                    @include phone{
-                        display: none;
-                    }
-                }
-                &__imgRes
-                {
-                    display: none;
-                    @include phone{
-                        display: block;
-                        width: 100%;
-                        border-radius: 26px;
-                    }
-                }
-            }
-        }
+.serviceSlider {
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+  justify-items: center;
+  display: flex;
+  align-items: center;
+  &__container {
+    @include phone {
+      padding: 5% 2% 5% 5%;
     }
+    width: 90%;
+    padding: 0% 2% 0 5%;
+    background-color: $mainBlack;
+    color: $mainWhite;
+    border-radius: 26px;
+    &__mainRow {
+      min-height: 50vh;
+      width: 100%;
+      &__leftCol {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        text-align: initial;
+        @include phone {
+          justify-content: center;
+          align-items: center;
+        }
+        h1 {
+          text-align: left;
+          font-size: $font-size-xl;
+          margin-bottom: 5%;
+          @include phone {
+            font-size: $font-size-lg;
+          }
+        }
+        p {
+          text-align: justify;
+          font-size: $font-size-default;
+          margin-bottom: 5%;
+        }
+        &__btn {
+          @include phone {
+            width: 80%;
+          }
+          width: 30%;
+          background-color: $accentGrey;
+          border: none;
+          font-size: $font-size-default;
+          font-weight: bold;
+          height: 5vh;
+          border-radius: 15px;
+          &:hover {
+            background-color: $mainGrey;
+            border: none;
+          }
+          &:active {
+            background-color: $mainGrey !important;
+            border: none;
+          }
+        }
+      }
+      &__rightCol {
+        @include phone {
+          margin-top: 5vh;
+          font-size: $font-size-lg;
+        }
+        padding-left: 10%;
+        padding-right: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        &__img {
+          height: 100%;
+          background-color: $mainBlack;
+          @include phone {
+            display: none;
+          }
+        }
+        &__imgRes {
+          display: none;
+          @include phone {
+            display: block;
+            width: 100%;
+            border-radius: 26px;
+          }
+        }
+      }
+    }
+  }
 }

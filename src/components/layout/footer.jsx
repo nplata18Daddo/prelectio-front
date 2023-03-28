@@ -48,9 +48,11 @@ export const Footer = () => {
                 </Button>
               </Col>
               <Col md={2} xs={12}>
-                <Button className="footer__topRow__col__buttonRow__button">
-                  Ingresar
-                </Button>
+                <Link to="/login">
+                  <Button className="footer__topRow__col__buttonRow__button">
+                    Ingresar
+                  </Button>
+                </Link>
               </Col>
             </Row>
           </Col>

@@ -1,94 +1,90 @@
-
 .home {
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
-    background-color: $mainBlack;
-    background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(87,87,87,1) 100%);
-    &__mainRow
-    {
-        height: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background-color: $mainBlack;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(87, 87, 87, 1) 100%
+  );
+  &__mainRow {
+    height: 100%;
+    width: 100%;
+    &__leftCol {
+      height: 100%;
+      &__mainContainer {
         width: 100%;
-        &__leftCol
-        {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 14% 0% 15% 14%;
+
+        @include phone {
+          padding: 10% 5% 10% 5%;
+        }
+
+        &__title {
+          h1 {
+            color: $mainWhite;
+            font-weight: bold;
+            font-size: $font-size-lg;
+            text-align: left;
+          }
+          &__blueh1 {
+            color: $accentBlue;
+          }
+        }
+        &__buttonRow {
+          display: flex;
+          align-items: center;
+          justify-content: left;
+
+          text-align: initial;
+
+          @include phone {
+            justify-content: center;
+          }
+          &__joinButton {
+            width: 30%;
             height: 100%;
-            &__mainContainer
-            {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;        
-                padding: 14% 0% 15% 14%;  
-                
-                @include phone{
-                    padding: 10% 5% 10% 5%;  
-                }
-                
-                &__title
-                {
-                    h1{
-                        color: $mainWhite;
-                        font-weight: bold;
-                        font-size: $font-size-lg;
-                        text-align: left;
-                    }
-                    &__blueh1
-                    {
-                        color: $accentBlue;
-                    }
-                }
-                &__buttonRow
-                {
-                    display: flex;
-                    align-items: center;
-                    justify-content: left;
-                    @include phone{
-                        justify-content: center;
-                    }
-                    &__joinButton
-                    {
-                        width: 30%;
-                        height: 100%;
-                        background-color: $accentBlue;
-                        border: none;
-                        font-size: $font-size-mdlg;
-                        filter: drop-shadow(12px 10px 4px rgba(0,0,0,0.25));;
-                        border-radius: 12px;
-                        &:hover{
-                            background-color: $accentBlue;
-                            border: none;
-                        }
-                    }
-                }
+            background-color: $accentBlue;
+            border: none;
+            font-size: $font-size-mdlg;
+            filter: drop-shadow(12px 10px 4px rgba(0, 0, 0, 0.25));
+            border-radius: 12px;
+            &:hover {
+              background-color: $accentBlue;
+              border: none;
             }
-            h2
-            {
-                color: $mainWhite;
-                text-align: left;
-                font-size: $font-size-lg;
-                font-weight:normal ;
-            }
+          }
         }
-        &__rightCol
-        {
-            @include phone{
-                display: none;
-            }
-            height:100%;
-            padding: 0;
-            display: flex;
-            align-items:flex-end;
-            justify-content:right;
-            &__picture
-            {
-                max-height: 100%;
-                max-width: 100%;
-            }
-        }
+      }
+      h2 {
+        color: $mainWhite;
+        text-align: left;
+        font-size: $font-size-lg;
+        font-weight: normal;
+      }
     }
+    &__rightCol {
+      @include phone {
+        display: none;
+      }
+      height: 100%;
+      padding: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: right;
+      &__picture {
+        max-height: 100%;
+        max-width: 100%;
+      }
+    }
+  }
 }
