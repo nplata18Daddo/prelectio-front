@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import LogoPrelectio from "../../assets/logo_prelectio.png";
@@ -7,9 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { getCiudades, getDepartamentos } from "../../services/locationServices";
+import { CODES } from "../../consts/codes";
 export const RecruiterRegister = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState("");
+  const [departments, setDepartments] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [selectedCities, setSelectedCities] = useState([]);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -20,8 +25,12 @@ export const RecruiterRegister = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      department: "",
+    },
     resolver: yupResolver(schema),
   });
 
@@ -39,6 +48,26 @@ export const RecruiterRegister = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const [cities, departments] = await Promise.all([
+        getCiudades(),
+        getDepartamentos(),
+      ]);
+
+      if (cities.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+        setCities(cities.data.responseMessage);
+      }
+      if (
+        departments.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST
+      ) {
+        setDepartments(departments.data.responseMessage);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const getDisabled = () => {
     let disabled =
       !watch("email") !== "" &&
@@ -54,6 +83,17 @@ export const RecruiterRegister = () => {
 
     return disabled;
   };
+
+  const filterCities = (event) => {
+    let selectedDepartment = event.target.value;
+    setValue("department", selectedDepartment);
+
+    let filteredCities = cities.filter(
+      (item) => String(item.id_departamento) === String(selectedDepartment)
+    );
+
+    setSelectedCities(filteredCities);
+  };
   return (
     <motion.main
       className="main__container"
@@ -64,7 +104,7 @@ export const RecruiterRegister = () => {
     >
       <Row className="register__backgroundRecruiter justify-content-center">
         <Col xs={10} md={8}>
-          <Card body className="register__card mt-5 ">
+          <Card body className="register__card mt-5 mb-3">
             <Row>
               <Col xs={12} lg={6}>
                 <Row className="register__logo__row">
@@ -149,11 +189,9 @@ export const RecruiterRegister = () => {
                             aria-label="Default select example"
                           >
                             <option value="" disabled selected>
-                              Departamento
+                              Tipo Documento
                             </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="1">CC</option>
                           </Form.Select>
                         </Form.Group>
                         <Form.Group
@@ -256,13 +294,21 @@ export const RecruiterRegister = () => {
                             className="register__select display__small"
                             aria-label="Default select example"
                             {...register("department")}
+                            onChange={filterCities}
                           >
                             <option value="" disabled selected>
                               Departamento
                             </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            {departments.map((item) => {
+                              return (
+                                <option
+                                  value={item.id_departamento}
+                                  key={item.id_departamento}
+                                >
+                                  {item.nombre_departamento}
+                                </option>
+                              );
+                            })}
                           </Form.Select>
                         </Form.Group>
                         <Form.Group
@@ -274,6 +320,7 @@ export const RecruiterRegister = () => {
                             Municipio*
                           </Form.Label>
                           <Form.Select
+                            disabled={watch("department") === ""}
                             className="register__select display__small"
                             aria-label="Default select example"
                             {...register("city")}
@@ -281,9 +328,16 @@ export const RecruiterRegister = () => {
                             <option value="" disabled selected>
                               Municipio
                             </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            {selectedCities.map((item) => {
+                              return (
+                                <option
+                                  value={item.id_ciudad}
+                                  key={item.id_ciudad}
+                                >
+                                  {item.nombre_ciudad}
+                                </option>
+                              );
+                            })}
                           </Form.Select>
                         </Form.Group>
                         <Form.Group
