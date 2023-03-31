@@ -7,9 +7,14 @@ import * as yup from "yup";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { REGEXP } from "../../consts/regex";
+import { ChangePasswordService } from "../../services/authServices";
+import { CODES } from "../../consts/codes";
+import { ModalInfo } from "../../components/components/modals/ModalInfo";
 export const ChangePass = () => {
   const [showPass, setShowPass] = useState(false);
   const [showPassConfirmation, setShowPassConfirmation] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(false);
+  const [openModalInfo, setOpenModalInfo] = useState(false);
   const handleShowPass = (event) => {
     event.preventDefault();
     setShowPass(!showPass);
@@ -64,6 +69,7 @@ export const ChangePass = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -72,11 +78,26 @@ export const ChangePass = () => {
     resolver: yupResolver(schema),
   });
   const handleForgotPass = async (data) => {
+    const activeUser = JSON.parse(localStorage.getItem("user"));
     try {
       const obj = {
-        email: data.email,
-        password: data.password,
+        idUser: activeUser.id_usuario,
+        password: data.passwordConfirmation,
       };
+      const service = await ChangePasswordService(obj);
+
+      if (service.status === 200) {
+        setResponseMessage(service);
+        setOpenModalInfo(true);
+        reset();
+        if (service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          // const token = service.data.responseMessage.accessToken;
+          // localStorage.setItem("access_token", token);
+          // const user = service.data.responseMessage.user;
+          // localStorage.setItem("user", JSON.stringify(user));
+          // navigate("/dashboard");
+        }
+      }
     } catch (error) {
       console.log("==============Error login======================");
       console.log(error);
@@ -105,6 +126,11 @@ export const ChangePass = () => {
       transition={{ duration: 0.7 }}
     >
       <Row className="forgotPass__background justify-content-center">
+        <ModalInfo
+          data={responseMessage}
+          open={openModalInfo}
+          setOpen={setOpenModalInfo}
+        />
         <Col xs={10} md={7} className=" my-auto">
           <Card body className="forgotPass__card ">
             <Row>

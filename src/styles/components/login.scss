@@ -4,6 +4,9 @@
     background: url("../../assets/login/fondoLogin.png") left bottom no-repeat,
       linear-gradient(180deg, rgba(53, 53, 53, 0.76) 0%, #333333 46.35%);
     background-color: white;
+    .row {
+      --bs-gutter-x: 0 !important;
+    }
   }
   &__logo {
     width: 17rem;

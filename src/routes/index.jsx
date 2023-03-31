@@ -7,6 +7,8 @@ import { AnimatePresence } from "framer-motion";
 import { ChangePass } from "../pages/auth/changePass";
 import { Register } from "../pages/auth/register";
 import { RecruiterRegister } from "../pages/recruiter/recruiterRegister";
+import ProtectedRoute from "./protectedRoute";
+import { NotFound } from "../pages/general/notFound";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -17,10 +19,18 @@ function AppRoutes() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/changePassword" element={<ChangePass />} />
+
         <Route path="/register" element={<Register />} />
         <Route path="/registerRecruit" element={<RecruiterRegister />} />
+
+        <Route element={<ProtectedRoute requiredRole={"user"} />}>
+          <Route path="user">
+            <Route path="changePassword" element={<ChangePass />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      {/* Not Found */}
     </AnimatePresence>
   );
 }

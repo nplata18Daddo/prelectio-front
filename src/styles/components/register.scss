@@ -8,6 +8,9 @@
     @include tablet {
       height: 100%;
     }
+    .row {
+      --bs-gutter-x: 0 !important;
+    }
   }
   &__card {
     background: #2d2d2d;
@@ -34,8 +37,4 @@
 }
 .no__underline {
   text-decoration: none !important;
-}
-
-.row {
-  --bs-gutter-x: 0 !important;
 }

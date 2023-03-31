@@ -174,7 +174,7 @@ export const RecruiterRegister = () => {
                           )}
                         </InputGroup>
                       </Form.Group>
-                      <Row style={{ alignItems: "baseline" }}>
+                      <Row style={{ alignItems: "baseline", padding: "1.5px" }}>
                         <Form.Group
                           className="mb-3 col-xs-12 col-lg-4"
                           controlId="documentType"

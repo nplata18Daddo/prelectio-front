@@ -13,9 +13,10 @@ import LogoPrelectio from "../../assets/logo_prelectio.png";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CODES } from "../../consts/codes";
 import { LoginService } from "../../services/authServices";
+import bcrypt from "bcryptjs";
 export const Login = () => {
   const [loading, setLoading] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
@@ -39,6 +40,8 @@ export const Login = () => {
     resolver: yupResolver(schema),
   });
 
+  const navigate = useNavigate();
+
   const handleLogin = async (data) => {
     try {
       try {
@@ -50,17 +53,28 @@ export const Login = () => {
           email_usuario: data.email,
           password_usuario: data.password,
         };
+        console.log(obj);
         const service = await LoginService(obj);
 
         if (service.status === 200) {
           if (
             service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST
           ) {
-            // const token = service.data.responseMessage.accessToken;
-            // localStorage.setItem("access_token", token);
-            // const user = service.data.responseMessage.user;
-            // localStorage.setItem("user", JSON.stringify(user));
-            // navigate("/dashboard");
+            const token = service.data.responseMessage.accessToken;
+            localStorage.setItem("access_token", token);
+            const user = service.data.responseMessage.user;
+            localStorage.setItem("user", JSON.stringify(user));
+            if (user.changePass) {
+              navigate("user/changePassword");
+            } else {
+              if (user.rol_usuario === CODES.COD_ROLES_ADMIN) {
+                navigate("admin/home");
+              } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
+                navigate("recruiter/home");
+              } else {
+                navigate("athlete/home");
+              }
+            }
           } else if (service.data.responseCode === CODES.COD_RESPONSE_ERROR) {
             setInvalidPassword(true);
           } else {
