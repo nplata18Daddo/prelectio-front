@@ -1,13 +1,26 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  InputGroup,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import LogoPrelectio from "../../assets/logo_prelectio.png";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
+import { CODES } from "../../consts/codes";
+import { LoginService } from "../../services/authServices";
 export const Login = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [invalidPassword, setInvalidPassword] = useState(false);
+  const [systemError, setSystemError] = useState(false);
+  const [noUser, setNoUser] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
   const schema = yup.object().shape({
@@ -28,10 +41,41 @@ export const Login = () => {
 
   const handleLogin = async (data) => {
     try {
-      const obj = {
-        email: data.email,
-        password: data.password,
-      };
+      try {
+        setLoading(true);
+        setInvalidPassword(false);
+        setSystemError(false);
+        setNoUser(false);
+        const obj = {
+          email_usuario: data.email,
+          password_usuario: data.password,
+        };
+        const service = await LoginService(obj);
+
+        if (service.status === 200) {
+          if (
+            service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST
+          ) {
+            // const token = service.data.responseMessage.accessToken;
+            // localStorage.setItem("access_token", token);
+            // const user = service.data.responseMessage.user;
+            // localStorage.setItem("user", JSON.stringify(user));
+            // navigate("/dashboard");
+          } else if (service.data.responseCode === CODES.COD_RESPONSE_ERROR) {
+            setInvalidPassword(true);
+          } else {
+            setNoUser(true);
+          }
+        } else {
+          setSystemError(true);
+        }
+
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setSystemError(true);
+        console.log(error);
+      }
     } catch (error) {
       console.log("==============Error login======================");
       console.log(error);
@@ -153,7 +197,7 @@ export const Login = () => {
                     type="submit"
                     className="login__submit display__small weight__bold"
                   >
-                    Continuar
+                    {loading ? <Spinner animation="border" /> : "Continuar"}
                   </Button>
                 </Form>
               </Col>
@@ -164,6 +208,23 @@ export const Login = () => {
                     <span className="colors__lightBlue">Registrate ahora</span>
                   </Link>
                 </p>
+              </Col>
+              <Col xs={12}>
+                {invalidPassword && (
+                  <p className="text-danger pt-4 display__label">
+                    Crendenciales Incorrectas
+                  </p>
+                )}
+                {systemError && (
+                  <p className="text-danger pt-4 display__label">
+                    Error en el sistema
+                  </p>
+                )}
+                {noUser && (
+                  <p className="text-danger pt-4 display__label">
+                    El usuario no se encuentra registrado
+                  </p>
+                )}
               </Col>
             </Row>
           </Card>
