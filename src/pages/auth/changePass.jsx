@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  InputGroup,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import LogoPrelectio from "../../assets/logo_prelectio.png";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,11 +18,15 @@ import { REGEXP } from "../../consts/regex";
 import { ChangePasswordService } from "../../services/authServices";
 import { CODES } from "../../consts/codes";
 import { ModalInfo } from "../../components/components/modals/ModalInfo";
+import { ModalAction } from "../../components/components/modals/ModalAction";
 export const ChangePass = () => {
   const [showPass, setShowPass] = useState(false);
   const [showPassConfirmation, setShowPassConfirmation] = useState(false);
   const [responseMessage, setResponseMessage] = useState(false);
   const [openModalInfo, setOpenModalInfo] = useState(false);
+  const [openModalAction, setOpenModalAction] = useState(false);
+
+  const [loading, setLoading] = useState(false);
   const handleShowPass = (event) => {
     event.preventDefault();
     setShowPass(!showPass);
@@ -79,32 +91,31 @@ export const ChangePass = () => {
   });
   const handleForgotPass = async (data) => {
     const activeUser = JSON.parse(localStorage.getItem("user"));
+    setLoading(true);
     try {
       const obj = {
         idUser: activeUser.id_usuario,
         newPassword: data.passwordConfirmation,
       };
       const service = await ChangePasswordService(obj);
-
+      setLoading(false);
       if (service.status === 200) {
         setResponseMessage(service);
         setOpenModalInfo(true);
         reset();
+
         if (service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          setOpenModalAction(true);
           const token = service.data.responseLoad.accessToken;
           localStorage.setItem("access_token", token);
           const user = service.data.responseLoad.user;
           localStorage.setItem("user", JSON.stringify(user));
-          if (user.rol_usuario === CODES.COD_ROLES_ADMIN) {
-            navigate("/admin/home", { replace: true });
-          } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
-            navigate("/recruiter/home", { replace: true });
-          } else {
-            navigate("/athlete/home", { replace: true });
-          }
+        } else if (service.data.responseCode === CODES.COD_RESPONSE_ERROR) {
+          setOpenModalInfo(true);
         }
       }
     } catch (error) {
+      setLoading(false);
       console.log("==============Error login======================");
       console.log(error);
       console.log("====================================");
@@ -122,6 +133,17 @@ export const ChangePass = () => {
     );
   }
 
+  const goHome = () => {
+    setOpenModalAction(false);
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user.rol_usuario === CODES.COD_ROLES_ADMIN) {
+      navigate("/admin/home", { replace: true });
+    } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
+      navigate("/recruiter/home", { replace: true });
+    } else {
+      navigate("/athlete/home", { replace: true });
+    }
+  };
   const navigate = useNavigate();
   return (
     <motion.main
@@ -136,6 +158,12 @@ export const ChangePass = () => {
           data={responseMessage}
           open={openModalInfo}
           setOpen={setOpenModalInfo}
+        />
+        <ModalAction
+          data={responseMessage}
+          open={openModalAction}
+          setOpen={setOpenModalAction}
+          action={goHome}
         />
         <Col xs={10} md={7} className=" my-auto">
           <Card body className="forgotPass__card ">
@@ -246,7 +274,7 @@ export const ChangePass = () => {
                         type="submit"
                         className="login__submit display__small weight__bold"
                       >
-                        Continuar
+                        {loading ? <Spinner animation="border" /> : "Continuar"}
                       </Button>
                     </Form>
                   </Col>
