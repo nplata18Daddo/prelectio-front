@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  InputGroup,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import LogoPrelectio from "../../assets/logo_prelectio.png";
 import ColombianFlag from "../../assets/register/colombia.png";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +17,20 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { getCiudades, getDepartamentos } from "../../services/locationServices";
 import { CODES } from "../../consts/codes";
+import { RegisterService } from "../../services/recruiterServices";
+import { ModalInfo } from "../../components/components/modals/ModalInfo";
+import { ModalAction } from "../../components/components/modals/ModalAction";
 export const RecruiterRegister = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState("");
   const [departments, setDepartments] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
+  const [responseMessage, setResponseMessage] = useState(false);
+  const [openModalInfo, setOpenModalInfo] = useState(false);
+  const [openModalAction, setOpenModalAction] = useState(false);
+
+  const [loading, setLoading] = useState(false);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -36,12 +52,41 @@ export const RecruiterRegister = () => {
 
   const handleRegister = async (data) => {
     console.log(data);
+    setLoading(true);
     try {
       const obj = {
-        email: data.email,
-        password: data.password,
+        nombre_usuario: data.name,
+        email_usuario: data.email,
+        telefono_usuario: data.phone,
+        tipo_documento_usuario: data.documentType,
+        numero_documento_usuario: data.documentNumber,
+        entidad_reclutador: data.represents,
+        fecha_nacimiento_usuario: date,
+        id_departamento: data.department,
+        id_ciudad: data.city,
+
+        descripcion_usuario: data.description,
+        rol_usuario: "1",
+        changePass: true,
+        id_estado: 0,
       };
+      const service = await RegisterService(obj);
+
+      setResponseMessage(service);
+      setLoading(false);
+      if (service.status === 200) {
+        if (service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          setOpenModalAction(true);
+        } else if (service.data.responseCode === CODES.COD_RESPONSE_ERROR) {
+          setOpenModalInfo(true);
+          // setInvalidPassword(true);
+        } else {
+          // setNoUser(true);
+        }
+      }
+      console.log(obj);
     } catch (error) {
+      setLoading(false);
       console.log("==============Error login======================");
       console.log(error);
       console.log("====================================");
@@ -70,17 +115,18 @@ export const RecruiterRegister = () => {
 
   const getDisabled = () => {
     let disabled =
-      !watch("email") !== "" &&
-      !watch("name") !== "" &&
-      !watch("documentType") !== "" &&
-      !watch("documentNumber") !== "" &&
-      !watch("represents") !== "" &&
-      !(date !== "") &&
-      !watch("phone") !== "" &&
-      !watch("department") !== "" &&
-      !watch("city") !== "" &&
-      !watch("description") !== "";
+      watch("email") === "" ||
+      watch("name") === "" ||
+      watch("documentType") === "" ||
+      watch("documentNumber") === "" ||
+      watch("represents") === "" ||
+      date === "" ||
+      watch("phone") === "" ||
+      watch("department") === "" ||
+      watch("city") === "" ||
+      watch("description") === "";
 
+    console.log(disabled);
     return disabled;
   };
 
@@ -94,6 +140,11 @@ export const RecruiterRegister = () => {
 
     setSelectedCities(filteredCities);
   };
+
+  const goHome = () => {
+    setOpenModalAction(false);
+    navigate("/");
+  };
   return (
     <motion.main
       className="main__container"
@@ -103,8 +154,23 @@ export const RecruiterRegister = () => {
       transition={{ duration: 0.7 }}
     >
       <Row className="register__backgroundRecruiter justify-content-center">
+        <ModalInfo
+          data={responseMessage}
+          open={openModalInfo}
+          setOpen={setOpenModalInfo}
+        />
+        <ModalAction
+          data={responseMessage}
+          open={openModalAction}
+          setOpen={setOpenModalAction}
+          action={goHome}
+        />
         <Col xs={10} md={8}>
-          <Card body className="register__card mt-5 mb-3">
+          <Card
+            body
+            className="register__card  mb-3"
+            style={{ marginTop: "8rem" }}
+          >
             <Row>
               <Col xs={12} lg={6}>
                 <Row className="register__logo__row">
@@ -192,6 +258,8 @@ export const RecruiterRegister = () => {
                               Tipo Documento
                             </option>
                             <option value="1">CC</option>
+                            <option value="2">CE</option>
+                            <option value="3">TI</option>
                           </Form.Select>
                         </Form.Group>
                         <Form.Group
@@ -367,7 +435,7 @@ export const RecruiterRegister = () => {
                         type="submit"
                         className="login__submit display__small weight__bold"
                       >
-                        Solicitar
+                        {loading ? <Spinner animation="border" /> : "Solicitar"}
                       </Button>
                       <p className="display__label text-white mt-4">
                         El producto esta solo disponible para

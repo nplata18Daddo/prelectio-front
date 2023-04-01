@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Card,
@@ -21,6 +21,7 @@ export const Login = () => {
   const [loading, setLoading] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [systemError, setSystemError] = useState(false);
+  const [unathorized, setUnauthorized] = useState(false);
   const [noUser, setNoUser] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
@@ -42,18 +43,33 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user.rol_usuario === CODES.COD_ROLES_ADMIN) {
+        navigate("/admin/home", { replace: true });
+      } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
+        navigate("/recruiter/home", { replace: true });
+      } else {
+        navigate("/athlete/home", { replace: true });
+      }
+    }
+  }, [navigate]);
+
   const handleLogin = async (data) => {
     try {
       try {
         setLoading(true);
         setInvalidPassword(false);
+        setUnauthorized(false);
         setSystemError(false);
         setNoUser(false);
         const obj = {
           email_usuario: data.email,
           password_usuario: data.password,
         };
-        console.log(obj);
+
         const service = await LoginService(obj);
 
         if (service.status === 200) {
@@ -65,18 +81,22 @@ export const Login = () => {
             const user = service.data.responseMessage.user;
             localStorage.setItem("user", JSON.stringify(user));
             if (user.changePass) {
-              navigate("user/changePassword");
+              navigate("/user/changePassword", { replace: true });
             } else {
               if (user.rol_usuario === CODES.COD_ROLES_ADMIN) {
-                navigate("admin/home");
+                navigate("/admin/home", { replace: true });
               } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
-                navigate("recruiter/home");
+                navigate("/recruiter/home", { replace: true });
               } else {
-                navigate("athlete/home");
+                navigate("/athlete/home", { replace: true });
               }
             }
           } else if (service.data.responseCode === CODES.COD_RESPONSE_ERROR) {
             setInvalidPassword(true);
+          } else if (
+            service.data.responseCode === CODES.COD_RESPONSE_ERROR_UNAUTHORIZED
+          ) {
+            setUnauthorized(true);
           } else {
             setNoUser(true);
           }
@@ -226,17 +246,23 @@ export const Login = () => {
               <Col xs={12}>
                 {invalidPassword && (
                   <p className="text-danger pt-4 display__label">
-                    Crendenciales Incorrectas
+                    Crendenciales Incorrectas.
                   </p>
                 )}
                 {systemError && (
                   <p className="text-danger pt-4 display__label">
-                    Error en el sistema
+                    Error en el sistema.
                   </p>
                 )}
                 {noUser && (
                   <p className="text-danger pt-4 display__label">
-                    El usuario no se encuentra registrado
+                    El usuario no se encuentra registrado.
+                  </p>
+                )}
+                {unathorized && (
+                  <p className="text-danger pt-4 display__label">
+                    El usuario no se encuentra habilitado para ingresar a la
+                    plataforma.
                   </p>
                 )}
               </Col>

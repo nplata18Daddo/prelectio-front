@@ -52,6 +52,9 @@
     border: 1px solid #00ccff;
     padding-left: 50px;
     padding-right: 50px;
+    @include tablet {
+      padding: 5px !important;
+    }
   }
   &__submit:disabled {
     background: grey;

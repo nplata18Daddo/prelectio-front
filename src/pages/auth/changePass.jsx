@@ -82,7 +82,7 @@ export const ChangePass = () => {
     try {
       const obj = {
         idUser: activeUser.id_usuario,
-        password: data.passwordConfirmation,
+        newPassword: data.passwordConfirmation,
       };
       const service = await ChangePasswordService(obj);
 
@@ -91,11 +91,17 @@ export const ChangePass = () => {
         setOpenModalInfo(true);
         reset();
         if (service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
-          // const token = service.data.responseMessage.accessToken;
-          // localStorage.setItem("access_token", token);
-          // const user = service.data.responseMessage.user;
-          // localStorage.setItem("user", JSON.stringify(user));
-          // navigate("/dashboard");
+          const token = service.data.responseLoad.accessToken;
+          localStorage.setItem("access_token", token);
+          const user = service.data.responseLoad.user;
+          localStorage.setItem("user", JSON.stringify(user));
+          if (user.rol_usuario === CODES.COD_ROLES_ADMIN) {
+            navigate("/admin/home", { replace: true });
+          } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
+            navigate("/recruiter/home", { replace: true });
+          } else {
+            navigate("/athlete/home", { replace: true });
+          }
         }
       }
     } catch (error) {
