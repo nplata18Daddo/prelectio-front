@@ -12,9 +12,10 @@ import {
   VideoYFotoPerfil,
 } from "../../components/components";
 import { CODES } from "../../consts/codes";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterDeportista = () => {
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [departments, setDepartments] = useState([]);
   const [cities, setCities] = useState([]);
@@ -166,127 +167,125 @@ export const RegisterDeportista = () => {
         alt={"logo"}
         className="registerDeportista__logo"
       />
-      <Container className="registerDeportista__container">
-        <Row className="registerDeportista__container__topRow">
-          <Col
-            xs={2}
-            className="registerDeportista__container__topRow__buttonCol"
-          >
-            <Link to="/register" className="no__underline">
+        <Container className="registerDeportista__container">
+          <Row className="registerDeportista__container__topRow">
+            <Col
+              xs={2}
+              className="registerDeportista__container__topRow__buttonCol"
+            >
               <Button
                 onClick={() => {
-                  console.log("PANTALLA ANTERIOR");
+                  navigate(-1);
                 }}
                 className="registerDeportista__container__topRow__buttonCol__button"
               >
                 ←
               </Button>
-            </Link>
-            <div className="registerDeportista__container__topRow__buttonCol__div">
-              <p>Ir atrás</p>
-            </div>
-          </Col>
-        </Row>
-        <Stepper
-          activeStep={activeStep}
-          className="registerDeportista__container__stepper"
-        >
-          {steps.map((label, index) => {
-            return (
-              <Step
-                key={label}
-                className="registerDeportista__container__stepper__step"
-              >
-                <StepLabel className="registerDeportista__container__stepper__step__label">
-                  {label}
-                </StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
-        <div style={{ minHeight: "50%" }}>
-          {activeStep === steps.length ? (
-            <>
-              <Button onClick={handleReset} className={""}>
-                Reset
-              </Button>
-            </>
-          ) : (
-            <FormProvider {...methods}>
-              <form>
-                <div className={"registerDeportista__container__content"}>
-                  {getStepContent(activeStep)}
-                </div>
-                <div
-                  style={{
-                    paddingTop: "5vh",
-                  }}
+              <div className="registerDeportista__container__topRow__buttonCol__div">
+                <p>Ir atrás</p>
+              </div>
+            </Col>
+          </Row>
+          <Stepper
+            activeStep={activeStep}
+            className="registerDeportista__container__stepper"
+          >
+            {steps.map((label, index) => {
+              return (
+                <Step
+                  key={label}
+                  className="registerDeportista__container__stepper__step"
                 >
-                  <Row>
-                    <Col
-                      xs={6}
-                      style={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        alignContent: "flex-start",
-                      }}
-                    >
-                      {activeStep !== 0 ? (
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={handleBack}
-                          className={
-                            "registerDeportista__container__nextButton"
-                          }
-                        >
-                          Anterior
-                        </Button>
-                      ) : (
-                        <></>
-                      )}
-                    </Col>
-                    <Col
-                      xs={6}
-                      style={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        alignContent: "flex-end",
-                      }}
-                    >
-                      {activeStep === steps.length - 1 ? (
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={() => {
-                            handleSubmit(onSubmit);
-                          }}
-                          className={
-                            "registerDeportista__container__nextButton"
-                          }
-                        >
-                          Finalizar
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={handleNext}
-                          className={
-                            "registerDeportista__container__nextButton"
-                          }
-                        >
-                          Siguiente
-                        </Button>
-                      )}
-                    </Col>
-                  </Row>
-                </div>
-              </form>
-            </FormProvider>
-          )}
-        </div>
-      </Container>
+                  <StepLabel className="registerDeportista__container__stepper__step__label">
+                    {label}
+                  </StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+          <div style={{ minHeight: "50%" }}>
+            {activeStep === steps.length ? (
+              <>
+                <Button onClick={handleReset} className={""}>
+                  Reset
+                </Button>
+              </>
+            ) : (
+              <FormProvider {...methods}>
+                <form>
+                  <div className={"registerDeportista__container__content"}>
+                    {getStepContent(activeStep)}
+                  </div>
+                  <div
+                    style={{
+                      paddingTop: "5vh",
+                    }}
+                  >
+                    <Row>
+                      <Col
+                        xs={6}
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          alignContent: "flex-start",
+                        }}
+                      >
+                        {activeStep !== 0 ? (
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleBack}
+                            className={
+                              "registerDeportista__container__nextButton"
+                            }
+                          >
+                            Anterior
+                          </Button>
+                        ) : (
+                          <></>
+                        )}
+                      </Col>
+                      <Col
+                        xs={6}
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignContent: "flex-end",
+                        }}
+                      >
+                        {activeStep === steps.length - 1 ? (
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                              handleSubmit(onSubmit);
+                            }}
+                            className={
+                              "registerDeportista__container__nextButton"
+                            }
+                          >
+                            Finalizar
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleNext}
+                            className={
+                              "registerDeportista__container__nextButton"
+                            }
+                          >
+                            Siguiente
+                          </Button>
+                        )}
+                      </Col>
+                    </Row>
+                  </div>
+                </form>
+              </FormProvider>
+            )}
+          </div>
+        </Container>
     </div>
   );
 };
