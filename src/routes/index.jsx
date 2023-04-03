@@ -46,7 +46,7 @@ function AppRoutes() {
         </Route>
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />
-        <Route path="/registerDeportista" element={<RegisterDeportista />} />
+        <Route path="/registerAthlete" element={<RegisterDeportista />} />
       </Routes>
     </AnimatePresence>
   );

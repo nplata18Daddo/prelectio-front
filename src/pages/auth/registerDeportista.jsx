@@ -12,6 +12,7 @@ import {
   VideoYFotoPerfil,
 } from "../../components/components";
 import { CODES } from "../../consts/codes";
+import { Link } from "react-router-dom";
 
 export const RegisterDeportista = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -171,14 +172,16 @@ export const RegisterDeportista = () => {
             xs={2}
             className="registerDeportista__container__topRow__buttonCol"
           >
-            <Button
-              onClick={() => {
-                console.log("PANTALLA ANTERIOR");
-              }}
-              className="registerDeportista__container__topRow__buttonCol__button"
-            >
-              ←
-            </Button>
+            <Link to="/register" className="no__underline">
+              <Button
+                onClick={() => {
+                  console.log("PANTALLA ANTERIOR");
+                }}
+                className="registerDeportista__container__topRow__buttonCol__button"
+              >
+                ←
+              </Button>
+            </Link>
             <div className="registerDeportista__container__topRow__buttonCol__div">
               <p>Ir atrás</p>
             </div>
