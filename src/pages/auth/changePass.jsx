@@ -25,7 +25,7 @@ export const ChangePass = () => {
   const [responseMessage, setResponseMessage] = useState(false);
   const [openModalInfo, setOpenModalInfo] = useState(false);
   const [openModalAction, setOpenModalAction] = useState(false);
-
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const handleShowPass = (event) => {
     event.preventDefault();
@@ -144,7 +144,6 @@ export const ChangePass = () => {
       navigate("/athlete/home", { replace: true });
     }
   };
-  const navigate = useNavigate();
   return (
     <motion.main
       className="main__container"

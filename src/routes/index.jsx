@@ -9,6 +9,10 @@ import { Register } from "../pages/auth/register";
 import { RecruiterRegister } from "../pages/recruiter/recruiterRegister";
 import ProtectedRoute from "./protectedRoute";
 import { NotFound } from "../pages/general/notFound";
+import { LayoutUser } from "../components/layout/user/layoutUser";
+import { AdminHome } from "../pages/admin/adminHome";
+import { AdminRecruiters } from "../pages/admin/adminRecruiters";
+import { AdminRecruiterDetail } from "../pages/admin/adminRecruiterDetail";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -28,9 +32,21 @@ function AppRoutes() {
             <Route path="changePassword" element={<ChangePass />} />
           </Route>
         </Route>
+        {/*Admin routes */}
+        <Route element={<LayoutUser role="admin" routeName="Inicio" />}>
+          <Route path="admin">
+            <Route path="home" element={<AdminHome />} />
+          </Route>
+        </Route>
+        <Route element={<LayoutUser role="admin" routeName="Reclutadores" />}>
+          <Route path="admin">
+            <Route path="recruiters" element={<AdminRecruiters />} />
+            <Route path="recruiter/:id" element={<AdminRecruiterDetail />} />
+          </Route>
+        </Route>
+        {/* Not Found */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* Not Found */}
     </AnimatePresence>
   );
 }
