@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router";
 import { Layout } from "../components/layout";
-import { Home } from "../pages";
+import { Home, RegisterDeportista } from "../pages";
 import { ForgotPassword } from "../pages/auth/forgotPassword";
 import { Login } from "../pages/auth/login";
 import { AnimatePresence } from "framer-motion";
@@ -46,6 +46,7 @@ function AppRoutes() {
         </Route>
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />
+        <Route path="/registerDeportista" element={<RegisterDeportista />} />
       </Routes>
     </AnimatePresence>
   );

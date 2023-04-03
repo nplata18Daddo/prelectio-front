@@ -1,0 +1,45 @@
+import React from "react";
+import { TextField } from "@mui/material";
+import {
+  Controller,
+  useFormContext,
+  useController,
+  get,
+} from "react-hook-form";
+
+export const InputField = ({ ...props }) => {
+  const { fieldState } = useController(props);
+  const { control } = useFormContext();
+  const { _formState } = control;
+  const error = get(_formState.errors, props.name);
+  const errorText = fieldState.invalid ? error.message : "";
+
+  return (
+    <>
+      <Controller
+        {...props}
+        render={({ field: { ref, ...field } }) => (
+          <TextField
+            inputRef={ref}
+            autoComplete="off"
+            fullWidth
+            label={props.label}
+            value={field.value ? field.value : ""}
+            required
+            size="small"
+            shrink="true"
+            error={error?.message ? true : false}
+            onChange={(e) => field.onChange(e.target.value)}
+          />
+        )}
+        rules={{ required: true }}
+        variant="outlined"
+        size="small"
+        control={control}
+        helperText={errorText ? errorText : props.helperText}
+        error={!!errorText}
+        defaultValue={props.defaultValue}
+      />
+    </>
+  );
+};

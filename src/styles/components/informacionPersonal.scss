@@ -1,0 +1,74 @@
+.informacionPersonal {
+  &__container {
+    min-height: 35vh;
+    &__row {
+      margin-top: 3vh;
+      margin-bottom: 3vh;
+      &__col {
+        padding: 0 1vw;
+        input {
+          color: $mainWhite;
+        }
+        .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
+          color: rgba($color: $mainWhite, $alpha: 0.5);
+        }
+        .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+          color: $mainWhite;
+          display: none;
+          &.Mui-focused {
+            color: $mainWhite;
+          }
+        }
+        .MuiOutlinedInput-notchedOutline {
+          .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+            color: white;
+          }
+        }
+        .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+          color: white !important;
+        }
+        .css-1ualgfl-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+          border: solid 1px rgba($color: $mainWhite, $alpha: 0.8);
+          &:hover {
+            border: solid 1px rgba($color: $accentBlue, $alpha: 0.8);
+          }
+          &:focus {
+            border: solid 1px rgba($color: $accentBlue, $alpha: 0.8);
+          }
+        }
+        .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+          color: white;
+        }
+        .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+          border-color: rgba($color: $mainWhite, $alpha: 0.8);
+          color: $mainWhite;
+        }
+        .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root {
+          color: white;
+        }
+
+        .MuiInputBase-root {
+          &.MuiOutlinedInput-root {
+            &.MuiInputBase-colorPrimary {
+              &.MuiInputBase-fullWidth {
+                &.Mui-focused {
+                  fieldset {
+                    border: none;
+                  }
+                }
+                &.MuiInputBase-formControl {
+                  &.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+                    border: solid 1px rgba($color: $mainWhite, $alpha: 0.8);
+                    &:hover {
+                      border: solid 1px rgba($color: $accentBlue, $alpha: 0.8);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
