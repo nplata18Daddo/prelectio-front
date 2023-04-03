@@ -151,7 +151,7 @@ export const AdminRecruiters = () => {
         filterTable: "Filtrar tabla",
       },
       body: {
-        noMatch: "No se encuentran coincidencias.",
+        noMatch: "No se encuentran reclutadores.",
         toolTip: "Sort",
 
         columnHeaderTooltip: (column) => "Ordenar por " + column.label,
