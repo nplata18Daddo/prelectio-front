@@ -45,7 +45,7 @@ export const Register = () => {
       transition={{ duration: 0.7 }}
     >
       <div className="register__background">
-        <Row className=" p-4">
+        <Row className=" p-4 responsive__margin">
           <Col xs={12} style={{ textAlign: "left" }}>
             <img
               className="login__logo"
@@ -54,7 +54,7 @@ export const Register = () => {
             ></img>
           </Col>
         </Row>
-        <Row className="justify-content-center mt-5 ">
+        <Row className="justify-content-center mt-5 pb-5">
           <Col xs={10} md={6}>
             <Card body className="register__card p-4 ">
               <Row>

@@ -1,3 +1,3 @@
 import { Home } from "./home";
-
-export { Home };
+import { RegisterDeportista } from "./auth/registerDeportista";
+export { Home, RegisterDeportista };

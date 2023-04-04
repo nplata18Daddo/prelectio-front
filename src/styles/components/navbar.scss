@@ -99,3 +99,7 @@
   font-size: $font-size-default;
   border: none;
 }
+.navbar__titulo {
+  @extend .navbar;
+  clip-path: polygon(0% -16%, 100% -6%, 100% 64%, 0 100%);
+}

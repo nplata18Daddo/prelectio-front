@@ -7,6 +7,9 @@
       #333333 46.35%
     );
     background-color: white;
+    @include tablet {
+      height: 100%;
+    }
   }
   &__card {
     background: #2d2d2d;

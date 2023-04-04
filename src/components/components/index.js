@@ -2,4 +2,15 @@ import { Main } from "./landing/main";
 import { AboutUs } from "./landing/aboutUs";
 import { CallToAction } from "./landing/callToAction";
 import { Services } from "./landing/services";
-export { Main, AboutUs, CallToAction, Services};
+import { InformacionPersonal } from "./registerDeportista/informacionPersonal";
+import { InformacionDeportiva } from "./registerDeportista/informacionDeportiva";
+import { VideoYFotoPerfil } from "./registerDeportista/videoFotoPerfil";
+export {
+  Main,
+  AboutUs,
+  CallToAction,
+  Services,
+  InformacionPersonal,
+  InformacionDeportiva,
+  VideoYFotoPerfil,
+};

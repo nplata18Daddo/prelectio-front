@@ -1,0 +1,96 @@
+.videoFotoPerfil {
+  &__container {
+    min-height: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    &__row {
+      padding: 0 1vw;
+      input {
+        color: $mainWhite !important;
+      }
+      .css-z1o969-MuiInputBase-root-MuiOutlinedInput-root {
+        color: $mainWhite;
+        border: solid 1px $mainWhite;
+      }
+      .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+        border-color: rgba($color: $mainWhite, $alpha: 0.8);
+      }
+      .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
+        color: $mainWhite;
+      }
+      .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+        display: none;
+      }
+      .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
+        color: rgba($color: $mainWhite, $alpha: 0.5);
+      }
+      .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+        color: $mainWhite;
+        display: none;
+        &.Mui-focused {
+          color: $mainWhite;
+        }
+      }
+      .MuiOutlinedInput-notchedOutline {
+        .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+          color: white;
+        }
+      }
+      .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+        color: white !important;
+      }
+      .css-1ualgfl-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+        border: solid 1px rgba($color: $mainWhite, $alpha: 0.8);
+        &:hover {
+          border: solid 1px rgba($color: $accentBlue, $alpha: 0.8);
+        }
+        &:focus {
+          border: solid 1px rgba($color: $accentBlue, $alpha: 0.8);
+        }
+      }
+      .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+        color: white;
+      }
+      .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+        border-color: rgba($color: $mainWhite, $alpha: 0.8);
+        color: $mainWhite;
+      }
+      .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root {
+        color: white;
+      }
+
+      .MuiInputBase-root {
+        &.MuiOutlinedInput-root {
+          &.MuiInputBase-colorPrimary {
+            &.MuiInputBase-fullWidth {
+              &.Mui-focused {
+                fieldset {
+                  border: none;
+                }
+              }
+              &.MuiInputBase-formControl {
+                border: solid 1px rgba($color: $mainWhite, $alpha: 0.8);
+                &:hover {
+                  border: solid 1px rgba($color: $accentBlue, $alpha: 0.8);
+                }
+              }
+            }
+          }
+        }
+      }
+      height: 100%;
+      margin-top: 3vh;
+      margin-bottom: 3vh;
+      width: 100%;
+      &__leftCol {
+        &__topRow {
+          margin-bottom: 5vh;
+        }
+        &__bottomRow {
+        }
+      }
+    }
+  }
+}

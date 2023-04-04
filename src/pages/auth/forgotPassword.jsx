@@ -1,12 +1,26 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  InputGroup,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import LogoPrelectio from "../../assets/logo_prelectio.png";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ForgotPasswordService } from "../../services/authServices";
+import { CODES } from "../../consts/codes";
+import { ModalInfo } from "../../components/components/modals/ModalInfo";
 export const ForgotPassword = () => {
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(false);
+  const [openModalInfo, setOpenModalInfo] = useState(false);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -17,22 +31,39 @@ export const ForgotPassword = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const handleForgotPass = async (data) => {
     try {
+      setLoading(true);
+
       const obj = {
-        email: data.email,
-        password: data.password,
+        email_usuario: data.email,
       };
+      const service = await ForgotPasswordService(obj);
+
+      setResponseMessage(service);
+      setOpenModalInfo(true);
+      reset();
+      if (service.status === 200) {
+        if (service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          // const token = service.data.responseMessage.accessToken;
+          // localStorage.setItem("access_token", token);
+          // const user = service.data.responseMessage.user;
+          // localStorage.setItem("user", JSON.stringify(user));
+          // navigate("/dashboard");
+        }
+      }
+
+      setLoading(false);
     } catch (error) {
-      console.log("==============Error login======================");
       console.log(error);
-      console.log("====================================");
     }
   };
+
   const navigate = useNavigate();
   return (
     <motion.main
@@ -43,6 +74,11 @@ export const ForgotPassword = () => {
       transition={{ duration: 0.7 }}
     >
       <Row className="forgotPass__background justify-content-center">
+        <ModalInfo
+          data={responseMessage}
+          open={openModalInfo}
+          setOpen={setOpenModalInfo}
+        />
         <Col xs={10} md={6} className=" my-auto">
           <Card body className="forgotPass__card ">
             <Row>
@@ -105,7 +141,7 @@ export const ForgotPassword = () => {
                         type="submit"
                         className="login__submit display__small weight__bold"
                       >
-                        Continuar
+                        {loading ? <Spinner animation="border" /> : "Continuar"}
                       </Button>
                     </Form>
                   </Col>
