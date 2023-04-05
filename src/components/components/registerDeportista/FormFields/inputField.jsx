@@ -19,18 +19,21 @@ export const InputField = ({ ...props }) => {
       <Controller
         {...props}
         render={({ field: { ref, ...field } }) => (
-          <TextField
-            inputRef={ref}
-            autoComplete="off"
-            fullWidth
-            label={props.label}
-            value={field.value ? field.value : ""}
-            required
-            size="small"
-            shrink="true"
-            error={error?.message ? true : false}
-            onChange={(e) => field.onChange(e.target.value)}
-          />
+          <>
+            <TextField
+              inputRef={ref}
+              autoComplete="off"
+              fullWidth
+              label={props.label}
+              value={field.value ? field.value : ""}
+              required
+              size="small"
+              shrink="true"
+              error={error?.message ? true : false}
+              onChange={(e) => field.onChange(e.target.value)}
+            />
+            {error && <p style={{ color: "red" }}>{error.message}</p>}
+          </>
         )}
         rules={{ required: true }}
         variant="outlined"

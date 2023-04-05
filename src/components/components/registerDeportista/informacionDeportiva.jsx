@@ -32,6 +32,7 @@ export const InformacionDeportiva = () => {
               </h4>
             </InputLabel>
             <SelectField
+              placeholder="Pierna Hábil"
               label="Pierna Habil"
               name="pierna_habil"
               options={[
@@ -45,6 +46,7 @@ export const InformacionDeportiva = () => {
               <h4 style={{ textAlign: "left", color: "white" }}>Posición</h4>
             </InputLabel>
             <SelectField
+              placeholder={"Posición"}
               label="Posicion"
               name="posicion"
               options={[
@@ -66,9 +68,7 @@ export const InformacionDeportiva = () => {
         <Row className="informacionDeportiva__container__row">
           <Col md={6} className="informacionDeportiva__container__row__col">
             <InputLabel style={{ marginBottom: "0.5vh" }}>
-              <h4 style={{ textAlign: "left", color: "white" }}>
-                Trayectoria
-              </h4>
+              <h4 style={{ textAlign: "left", color: "white" }}>Trayectoria</h4>
             </InputLabel>
           </Col>
           <Col md={6} className="informacionDeportiva__container__row__col">
@@ -78,6 +78,7 @@ export const InformacionDeportiva = () => {
               </h4>
             </InputLabel>
             <MultipleSelectField
+              placeholder={"Habilidades"}
               label="Habilidades"
               name="habilidades"
               options={[

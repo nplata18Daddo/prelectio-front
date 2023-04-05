@@ -1,0 +1,27 @@
+.imageInput {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  &__fotoDiv {
+    position: relative;
+    &__iconButton {
+      position: absolute;
+      right: 25%;
+      bottom: 15%;
+    }
+    &__profilePic {
+      border-radius: 50%;
+      width: 43%;
+      display: block;
+      overflow: hidden;
+      aspect-ratio: 1/1;
+      border: solid 8px $mainWhite;
+    }
+    &__fileUpload {
+      display: none;
+    }
+  }
+}

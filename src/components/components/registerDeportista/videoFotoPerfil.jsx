@@ -4,13 +4,18 @@ import { Col, Container, Row } from "react-bootstrap";
 import { InputField } from "./FormFields/inputField";
 import { InputFieldMultiline } from "./FormFields/inputFieldMultiLine";
 import InfoIcon from "@mui/icons-material/Info";
+import { ImageInput } from "./FormFields/imageInput";
 
-export const VideoYFotoPerfil = () => {
+export const VideoYFotoPerfil = (props) => {
   return (
     <div className="videoFotoPerfil">
       <Container className="videoFotoPerfil__container">
         <Row className="videoFotoPerfil__container__row">
-          <Col md={6} className="videoFotoPerfil__container__row__leftCol">
+          <Col
+            xs={12}
+            md={6}
+            className="videoFotoPerfil__container__row__leftCol"
+          >
             <Row className="videoFotoPerfil__container__row__leftCol__topRow">
               <InputFieldMultiline
                 rows={4}
@@ -73,6 +78,14 @@ export const VideoYFotoPerfil = () => {
                 <InputField label="Link a video" name="link_video" />
               </Row>
             </Row>
+          </Col>
+          <Col xs={12} md={6}>
+            <ImageInput
+              handleImageChange={props.handleImageChange}
+              imagePreviewUrl={props.imagePreviewUrl}
+              label="Foto de perfil"
+              name="image"
+            />
           </Col>
         </Row>
       </Container>

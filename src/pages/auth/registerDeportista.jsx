@@ -21,9 +21,11 @@ export const RegisterDeportista = () => {
   const [cities, setCities] = useState([]);
   const [selectedDpto, setSelectedDpto] = useState("");
   const [selectedCities, setSelectedCities] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
   useEffect(() => {
-    if (selectedDpto != "") {
+    if (selectedDpto !== "") {
       let filtradas = cities
         .filter((item) => item.id_departamento === selectedDpto)
         .map((item, index) => {
@@ -65,6 +67,18 @@ export const RegisterDeportista = () => {
     "Video y Foto de Perfil",
   ];
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageFile(file);
+        setImagePreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -79,7 +93,12 @@ export const RegisterDeportista = () => {
       case 1:
         return <InformacionDeportiva />;
       case 2:
-        return <VideoYFotoPerfil />;
+        return (
+          <VideoYFotoPerfil
+            handleImageChange={handleImageChange}
+            imagePreviewUrl={imagePreviewUrl}
+          />
+        );
       case 3:
       default:
         return "Unknown step";
@@ -109,33 +128,57 @@ export const RegisterDeportista = () => {
     posicion: "",
     descripcion: "",
     link_video: "",
+    image: "",
   };
 
   const validationSchema = [
     //validation for step1
     yup.object({
-      nombreCompleto: yup.string().required(),
-      email: yup.string().email().required(),
-      tipoDoc: yup.number().required(),
-      numDoc: yup.string().required(),
-      fechaNacimiento: yup.string().required(),
-      celular: yup.number().required(),
-      departamento: yup.number().required(),
-      municipio: yup.number().required(),
-      genero: yup.number().required(),
+      nombreCompleto: yup.string().required("Ingresa tu nombre completo"),
+      email: yup
+        .string()
+        .email()
+        .required("Ingresa un email válido")
+        .typeError("Ingresa un email válido"),
+      tipoDoc: yup
+        .number()
+        .required()
+        .typeError("Selecciona un tipo de documento"),
+      numDoc: yup.string().required("Ingresa tu número de documento"),
+      fechaNacimiento: yup
+        .string()
+        .required("Selecciona una fecha de nacimiento"),
+      celular: yup.number().required().typeError("Ingresa un número válido"),
+      departamento: yup
+        .number()
+        .required()
+        .typeError("Selecciona un departamento"),
+      municipio: yup.number().required().typeError("Selecciona un municipio"),
+      genero: yup.number().required().typeError("Selecciona un género"),
     }),
     //validation for step2
     yup.object({
-      estatura: yup.number().required(),
-      peso: yup.number().required(),
-      pierna_habil: yup.string().required(),
-      posicion: yup.number().required(),
-      habilidades: yup.array().max(5).min(1),
+      estatura: yup
+        .number()
+        .required()
+        .typeError("Ingresa una estatura válida (cm)"),
+      peso: yup.number().required().typeError("Ingresa un peso válido (Kg)"),
+      pierna_habil: yup
+        .string()
+        .required("Selecciona una pierna hábil")
+        .typeError("Selecciona una pierna hábil"),
+      posicion: yup.number().required().typeError("Selecciona una posición"),
+      habilidades: yup
+        .array()
+        .max(5)
+        .min(1)
+        .typeError("Selecciona entre 1 y 5 habilidades"),
     }),
     //validation for step3
-    yup.object({
+    yup.object().shape({
       descripcion: yup.string().required(),
       link_video: yup.string().required(),
+      image: yup.string(),
     }),
   ];
 
@@ -167,125 +210,123 @@ export const RegisterDeportista = () => {
         alt={"logo"}
         className="registerDeportista__logo"
       />
-        <Container className="registerDeportista__container">
-          <Row className="registerDeportista__container__topRow">
-            <Col
-              xs={2}
-              className="registerDeportista__container__topRow__buttonCol"
-            >
-              <Button
-                onClick={() => {
-                  navigate(-1);
-                }}
-                className="registerDeportista__container__topRow__buttonCol__button"
-              >
-                ←
-              </Button>
-              <div className="registerDeportista__container__topRow__buttonCol__div">
-                <p>Ir atrás</p>
-              </div>
-            </Col>
-          </Row>
-          <Stepper
-            activeStep={activeStep}
-            className="registerDeportista__container__stepper"
+      <Container className="registerDeportista__container">
+        <Row className="registerDeportista__container__topRow">
+          <Col
+            xs={2}
+            className="registerDeportista__container__topRow__buttonCol"
           >
-            {steps.map((label, index) => {
-              return (
-                <Step
-                  key={label}
-                  className="registerDeportista__container__stepper__step"
+            <Button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="registerDeportista__container__topRow__buttonCol__button"
+            >
+              ←
+            </Button>
+            <div className="registerDeportista__container__topRow__buttonCol__div">
+              <p>Ir atrás</p>
+            </div>
+          </Col>
+        </Row>
+        <Stepper
+          activeStep={activeStep}
+          className="registerDeportista__container__stepper"
+        >
+          {steps.map((label, index) => {
+            return (
+              <Step
+                key={label}
+                className="registerDeportista__container__stepper__step"
+              >
+                <StepLabel className="registerDeportista__container__stepper__step__label">
+                  {label}
+                </StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+        <div style={{ minHeight: "50%" }}>
+          {activeStep === steps.length ? (
+            <>
+              <Button onClick={handleReset} className={""}>
+                Reset
+              </Button>
+            </>
+          ) : (
+            <FormProvider {...methods}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className={"registerDeportista__container__content"}>
+                  {getStepContent(activeStep)}
+                </div>
+                <div
+                  style={{
+                    paddingTop: "5vh",
+                  }}
                 >
-                  <StepLabel className="registerDeportista__container__stepper__step__label">
-                    {label}
-                  </StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
-          <div style={{ minHeight: "50%" }}>
-            {activeStep === steps.length ? (
-              <>
-                <Button onClick={handleReset} className={""}>
-                  Reset
-                </Button>
-              </>
-            ) : (
-              <FormProvider {...methods}>
-                <form>
-                  <div className={"registerDeportista__container__content"}>
-                    {getStepContent(activeStep)}
-                  </div>
-                  <div
-                    style={{
-                      paddingTop: "5vh",
-                    }}
-                  >
-                    <Row>
-                      <Col
-                        xs={6}
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-start",
-                          alignContent: "flex-start",
-                        }}
-                      >
-                        {activeStep !== 0 ? (
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleBack}
-                            className={
-                              "registerDeportista__container__nextButton"
-                            }
-                          >
-                            Anterior
-                          </Button>
-                        ) : (
-                          <></>
-                        )}
-                      </Col>
-                      <Col
-                        xs={6}
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          alignContent: "flex-end",
-                        }}
-                      >
-                        {activeStep === steps.length - 1 ? (
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                              handleSubmit(onSubmit);
-                            }}
-                            className={
-                              "registerDeportista__container__nextButton"
-                            }
-                          >
-                            Finalizar
-                          </Button>
-                        ) : (
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleNext}
-                            className={
-                              "registerDeportista__container__nextButton"
-                            }
-                          >
-                            Siguiente
-                          </Button>
-                        )}
-                      </Col>
-                    </Row>
-                  </div>
-                </form>
-              </FormProvider>
-            )}
-          </div>
-        </Container>
+                  <Row>
+                    <Col
+                      xs={6}
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignContent: "flex-start",
+                      }}
+                    >
+                      {activeStep !== 0 ? (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleBack}
+                          className={
+                            "registerDeportista__container__nextButton"
+                          }
+                        >
+                          Anterior
+                        </Button>
+                      ) : (
+                        <></>
+                      )}
+                    </Col>
+                    <Col
+                      xs={6}
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignContent: "flex-end",
+                      }}
+                    >
+                      {activeStep === steps.length - 1 ? (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={
+                            "registerDeportista__container__nextButton"
+                          }
+                          type="submit"
+                        >
+                          Finalizar
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleNext}
+                          className={
+                            "registerDeportista__container__nextButton"
+                          }
+                        >
+                          Siguiente
+                        </Button>
+                      )}
+                    </Col>
+                  </Row>
+                </div>
+              </form>
+            </FormProvider>
+          )}
+        </div>
+      </Container>
     </div>
   );
 };

@@ -35,6 +35,7 @@ export const InformacionPersonal = (props) => {
               </h4>
             </InputLabel>
             <SelectField
+              placeholder={"Tipo Documento"}
               options={[
                 { value: 1, label: "CC" },
                 { value: 2, label: "CE" },
@@ -44,15 +45,12 @@ export const InformacionPersonal = (props) => {
               name="tipoDoc"
             />
           </Col>
-          <Col
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "1.5vh",
-            }}
-            md={4}
-            className="informacionPersonal__container__row__col"
-          >
+          <Col md={4} className="informacionPersonal__container__row__col">
+            <InputLabel style={{ marginBottom: "0.5vh" }}>
+              <h4 style={{ textAlign: "left", color: "white" }}>
+                Número de documento
+              </h4>
+            </InputLabel>
             <InputField label="Numero Documento" name="numDoc" />
           </Col>
           <Col md={3} className="informacionPersonal__container__row__col">
@@ -78,6 +76,7 @@ export const InformacionPersonal = (props) => {
               </h4>
             </InputLabel>
             <DptoSelectField
+              placeholder={"Departamento"}
               options={props.departamentos}
               label="Departamento"
               name="departamento"
@@ -91,6 +90,7 @@ export const InformacionPersonal = (props) => {
             <SelectField
               label="Municipio"
               name="municipio"
+              placeholder="Departamento"
               options={props.selectedCities}
             />
           </Col>
@@ -101,6 +101,7 @@ export const InformacionPersonal = (props) => {
             <SelectField
               label="Genero"
               name="genero"
+              placeholder="Género"
               options={[
                 { value: 1, label: "Masculino" },
                 { value: 2, label: "Femenino" },
