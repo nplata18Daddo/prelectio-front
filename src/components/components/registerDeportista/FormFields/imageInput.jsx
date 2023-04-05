@@ -94,31 +94,6 @@ export const ImageInput = ({ ...props }) => {
                   />
                 </IconButton>
               </div>
-              {/* <IconButton style={{ padding: 0 }} htmlFor="photo-upload">
-                <UploadIcon
-                  fontSize="medium"
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    padding: "15%",
-                  }}
-                  sx={{
-                    backgroundColor: "#00ccff",
-                    color: "white",
-                    borderRadius: "50%",
-                  }}
-                />
-                <input
-                  id="photo-upload"
-                  className="imageInput__fotoDiv__fileUpload"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    props.handleImageChange(e);
-                    field.onChange(e.target.value);
-                  }}
-                ></input>
-              </IconButton> */}
             </div>
             {error && (
               <span style={{ color: "red" }}> {JSON.stringify(error)}</span>

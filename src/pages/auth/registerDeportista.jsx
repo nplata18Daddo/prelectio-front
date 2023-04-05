@@ -13,6 +13,7 @@ import {
 } from "../../components/components";
 import { CODES } from "../../consts/codes";
 import { useNavigate } from "react-router-dom";
+import { RegisterDeportistaService } from "../../services/deportistaServices";
 
 export const RegisterDeportista = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export const RegisterDeportista = () => {
   const [selectedCities, setSelectedCities] = useState([]);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (selectedDpto !== "") {
@@ -72,8 +74,10 @@ export const RegisterDeportista = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImageFile(file);
-        setImagePreviewUrl(reader.result);
+        const imageDataUrl = reader.result;
+        setImagePreviewUrl(imageDataUrl);
+        const imageData = imageDataUrl.split(",")[1];
+        setImageFile(imageData);
       };
       reader.readAsDataURL(file);
     }
@@ -105,10 +109,11 @@ export const RegisterDeportista = () => {
     }
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(JSON.stringify(data));
-    alert(JSON.stringify(data));
-    handleNext();
+    const obj = {};
+    const service = await RegisterDeportistaService(obj);
+    //handleNext();
   };
 
   const defaultValues = {
