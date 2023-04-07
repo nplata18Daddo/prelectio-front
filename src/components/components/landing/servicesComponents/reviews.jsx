@@ -6,7 +6,7 @@ export const Reviews = () => {
   return (
     <>
       <Row className="services__mainContainer__rowTitleReviews">
-        <h1 className="services__mainContainer__rowTitleReviews__title">
+        <h1 className="services__mainContainer__rowTitleReviews__title text-center">
           Lo que la industria tiene que decir sobre Prelectio
         </h1>
       </Row>

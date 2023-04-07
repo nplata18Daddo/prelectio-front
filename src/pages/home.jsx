@@ -1,8 +1,13 @@
 import React from "react";
-import { AboutUs, Main, CallToAction, Services } from "../components/components";
+import {
+  AboutUs,
+  Main,
+  CallToAction,
+  Services,
+} from "../components/components";
 export const Home = () => {
   return (
-    <div>
+    <div style={{ back }}>
       <Main />
       <AboutUs />
       <Services />

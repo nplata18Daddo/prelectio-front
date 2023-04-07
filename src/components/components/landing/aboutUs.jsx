@@ -5,7 +5,7 @@ export const AboutUs = () => {
     <div className="aboutUs">
       <Container className="aboutUs__mainContainer">
         <Row className="aboutUs__mainContainer__topRow">
-          <h1>¿Qué es Prelectio?</h1>
+          <h1 className="text-center">¿Qué es Prelectio?</h1>
         </Row>
         <Row className="aboutUs__mainContainer__bottomRow">
           <h2>
