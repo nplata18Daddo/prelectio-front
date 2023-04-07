@@ -132,7 +132,7 @@ export const Login = () => {
           ></img>
         </Col>
       </Row>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center pb-3">
         <Col xs={10} md={4}>
           <Card body className="login__card ">
             <Row>
