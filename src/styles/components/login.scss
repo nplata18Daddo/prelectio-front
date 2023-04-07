@@ -5,7 +5,7 @@
       linear-gradient(180deg, rgba(53, 53, 53, 0.76) 0%, #333333 46.35%);
     background-color: white;
     @include tablet {
-      height: auto !important;
+      height: 100% !important;
     }
     .row {
       --bs-gutter-x: 0 !important;
