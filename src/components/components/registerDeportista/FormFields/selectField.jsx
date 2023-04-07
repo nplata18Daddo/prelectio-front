@@ -34,7 +34,6 @@ export const SelectField = ({ ...props }) => {
                   borderColor: "white",
                 },
               }}
-              s
               inputRef={ref}
               autoComplete="off"
               fullWidth
