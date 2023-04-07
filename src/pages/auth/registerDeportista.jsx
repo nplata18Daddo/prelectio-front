@@ -15,7 +15,6 @@ import { CODES } from "../../consts/codes";
 import { useNavigate } from "react-router-dom";
 import { RegisterDeportistaService } from "../../services/deportistaServices";
 
-
 export const RegisterDeportista = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
@@ -127,6 +126,7 @@ export const RegisterDeportista = () => {
       posicion_deportista: data.posicion,
       pierna_habil_deportista: data.pierna_habil,
       habilidades: data.habilidades,
+      direccion_usuario: data.direccion,
     };
     console.log(obj);
     const service = await RegisterDeportistaService(obj);
@@ -142,6 +142,7 @@ export const RegisterDeportista = () => {
     celular: "",
     departamento: "",
     municipio: "",
+    direccion: "",
     genero: "",
     estatura: "",
     peso: "",
@@ -176,6 +177,7 @@ export const RegisterDeportista = () => {
         .required()
         .typeError("Selecciona un departamento"),
       municipio: yup.number().required().typeError("Selecciona un municipio"),
+      direccion: yup.string().required("Ingresa tu dirección"),
       genero: yup.number().required().typeError("Selecciona un género"),
     }),
     //validation for step2

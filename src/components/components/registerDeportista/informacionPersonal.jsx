@@ -18,10 +18,7 @@ export const InformacionPersonal = (props) => {
             <InputLabel style={{ marginBottom: "0.5vh" }}>
               <h4 style={{ textAlign: "left", color: "white" }}>Nombre</h4>
             </InputLabel>
-            <InputField
-              label="Nombre Completo"
-              name="nombreCompleto"
-            />
+            <InputField label="Nombre Completo" name="nombreCompleto" />
           </Col>
           <Col md={6} className="informacionPersonal__container__row__col">
             <InputLabel style={{ marginBottom: "0.5vh" }}>
@@ -96,6 +93,12 @@ export const InformacionPersonal = (props) => {
               placeholder="Departamento"
               options={props.selectedCities}
             />
+          </Col>
+          <Col md={3} className="informacionPersonal__container__row__col">
+            <InputLabel style={{ marginBottom: "0.5vh" }}>
+              <h4 style={{ textAlign: "left", color: "white" }}>Direccion</h4>
+            </InputLabel>
+            <InputField label="Direccion" name="direccion" />
           </Col>
           <Col md={3} className="informacionPersonal__container__row__col">
             <InputLabel style={{ marginBottom: "0.5vh" }}>
