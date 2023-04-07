@@ -7,7 +7,7 @@ import {
 } from "../components/components";
 export const Home = () => {
   return (
-    <div style={{ back }}>
+    <div>
       <Main />
       <AboutUs />
       <Services />
