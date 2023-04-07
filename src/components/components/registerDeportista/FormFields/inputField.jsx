@@ -21,10 +21,30 @@ export const InputField = ({ ...props }) => {
         render={({ field: { ref, ...field } }) => (
           <>
             <TextField
+              sx={{
+                border: "1px solid white",
+                borderRadius: "5px",
+                "& ::placeholder": {
+                  color: "white",
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
+              inputProps={{
+                sx: {
+                  color: "red",
+                  borderColor: "white",
+                },
+              }}
               inputRef={ref}
               autoComplete="off"
               fullWidth
-              label={props.label}
+              label=""
+              placeholder={props.label}
               value={field.value ? field.value : ""}
               required
               size="small"

@@ -21,6 +21,25 @@ export const DptoSelectField = ({ ...props }) => {
         render={({ field: { ref, ...field } }) => (
           <>
             <Select
+              sx={{
+                border: "1px solid white",
+                borderRadius: "5px",
+                "& .MuiSvgIcon-root": {
+                  color: "white",
+                },
+              }}
+              inputlabelprops={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
+              inputProps={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
               inputRef={ref}
               autoComplete="off"
               fullWidth

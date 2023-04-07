@@ -23,11 +23,30 @@ export const DateField = ({ ...props }) => {
           <>
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DesktopDatePicker
+                sx={{
+                  border: "1px solid white",
+                  borderRadius: "5px",
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                }}
+                inputlabelprops={{
+                  sx: {
+                    color: "white",
+                    borderColor: "white",
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: "red",
+                    borderColor: "white",
+                  },
+                }}
                 inputRef={ref}
                 autoComplete="off"
                 fullWidth
                 format="DD/MM/YYYY"
-                label={props.label}
+                label=""
                 value={field.value ? field.value : ""}
                 required
                 size="small"

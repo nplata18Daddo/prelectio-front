@@ -21,6 +21,20 @@ export const SelectField = ({ ...props }) => {
         render={({ field: { ref, ...field } }) => (
           <>
             <Select
+              sx={{
+                border: "1px solid white",
+                borderRadius: "5px",
+                "& .MuiSvgIcon-root": {
+                  color: "white",
+                },
+              }}
+              inputProps={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
+              s
               inputRef={ref}
               autoComplete="off"
               fullWidth

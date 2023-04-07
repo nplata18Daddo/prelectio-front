@@ -15,6 +15,7 @@ import { CODES } from "../../consts/codes";
 import { useNavigate } from "react-router-dom";
 import { RegisterDeportistaService } from "../../services/deportistaServices";
 
+
 export const RegisterDeportista = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
@@ -110,8 +111,24 @@ export const RegisterDeportista = () => {
   }
 
   const onSubmit = async (data) => {
-    console.log(JSON.stringify(data));
-    const obj = {};
+    const obj = {
+      telefono_usuario: data.celular,
+      email_usuario: data.email,
+      numero_documento_usuario: data.numDoc,
+      tipo_documento_usuario: data.tipoDoc,
+      foto_usuario: imageFile,
+      fecha_nacimiento_usuario: data.fechaNacimiento,
+      genero_usuario: data.genero,
+      descripcion_usuario: data.descripcion,
+      id_departamento: data.departamento,
+      id_ciudad: data.municipio,
+      peso_deportista: data.peso,
+      altura_deportista: data.estatura,
+      posicion_deportista: data.posicion,
+      pierna_habil_deportista: data.pierna_habil,
+      habilidades: data.habilidades,
+    };
+    console.log(obj);
     const service = await RegisterDeportistaService(obj);
     //handleNext();
   };
@@ -175,8 +192,8 @@ export const RegisterDeportista = () => {
       posicion: yup.number().required().typeError("Selecciona una posición"),
       habilidades: yup
         .array()
-        .max(5)
-        .min(1)
+        .max(5, "Máximo selecciona 5 habilidades")
+        .min(1, "Mínimo seleccona 1 habilidad")
         .typeError("Selecciona entre 1 y 5 habilidades"),
     }),
     //validation for step3
@@ -241,11 +258,33 @@ export const RegisterDeportista = () => {
           {steps.map((label, index) => {
             return (
               <Step
+                sx={{
+                  "& .Mui-completed .MuiStepIcon-root": {
+                    color: "#00ccff",
+                    height: "25px",
+                    width: "25px",
+                  },
+                  "& .Mui-disabled .MuiStepIcon-root": {
+                    color: "#484848",
+                    height: "25px",
+                    width: "25px",
+                  },
+                  "& .Mui-active .MuiStepIcon-root": {
+                    color: "#00ccff",
+                    height: "25px",
+                    width: "25px",
+                  },
+                }}
                 key={label}
                 className="registerDeportista__container__stepper__step"
               >
-                <StepLabel className="registerDeportista__container__stepper__step__label">
-                  {label}
+                <StepLabel
+                  sx={{
+                    color: "white !important",
+                  }}
+                  className="registerDeportista__container__stepper__step__label"
+                >
+                  <p style={{ color: "white" }}>{label}</p>
                 </StepLabel>
               </Step>
             );

@@ -18,7 +18,10 @@ export const InformacionPersonal = (props) => {
             <InputLabel style={{ marginBottom: "0.5vh" }}>
               <h4 style={{ textAlign: "left", color: "white" }}>Nombre</h4>
             </InputLabel>
-            <InputField label="Nombre Completo" name="nombreCompleto" />
+            <InputField
+              label="Nombre Completo"
+              name="nombreCompleto"
+            />
           </Col>
           <Col md={6} className="informacionPersonal__container__row__col">
             <InputLabel style={{ marginBottom: "0.5vh" }}>

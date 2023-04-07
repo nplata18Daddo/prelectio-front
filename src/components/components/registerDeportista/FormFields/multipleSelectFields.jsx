@@ -1,5 +1,12 @@
 import React from "react";
-import { Checkbox, ListItemText, MenuItem, Select } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  Chip,
+  ListItemText,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import {
   Controller,
   useFormContext,
@@ -21,6 +28,22 @@ export const MultipleSelectField = ({ ...props }) => {
         render={({ field: { ref, ...field } }) => (
           <>
             <Select
+              sx={{
+                border: "1px solid white",
+                borderRadius: "5px",
+                "& ::placeholder": {
+                  color: "white",
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "white",
+                },
+              }}
+              inputProps={{
+                sx: {
+                  color: "red",
+                  borderColor: "white",
+                },
+              }}
               multiple
               inputRef={ref}
               autoComplete="off"
@@ -31,23 +54,27 @@ export const MultipleSelectField = ({ ...props }) => {
               size="small"
               shrink="true"
               error={error?.message ? true : false}
-              renderValue={(selected) =>
-                "(" +
-                selected.length +
-                ") " +
-                selected
-                  .map((item) => {
-                    return props.options.find(function (option, i) {
-                      if (option.value === item) {
-                        return option.label;
-                      }
-                    });
-                  })
-                  .map((a) => {
-                    return a.label;
-                  })
-                  .join(",")
-              }
+              renderValue={(selected) => (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected
+                    .map((item) => {
+                      return props.options.find(function (option, i) {
+                        if (option.value === item) {
+                          return option.label;
+                        }
+                      });
+                    })
+                    .map((a) => {
+                      return (
+                        <Chip
+                          style={{ color: "white", backgroundColor: "#484848" }}
+                          key={a.value}
+                          label={a.label}
+                        />
+                      );
+                    })}
+                </Box>
+              )}
               onChange={(e) => {
                 field.onChange(e.target.value);
               }}

@@ -17,6 +17,18 @@ export const VideoYFotoPerfil = (props) => {
             className="videoFotoPerfil__container__row__leftCol"
           >
             <Row className="videoFotoPerfil__container__row__leftCol__topRow">
+              <InputLabel style={{ marginBottom: "0.5vh" }}>
+                <h5
+                  style={{
+                    textAlign: "left",
+                    color: "white",
+                    textOverflow: "clip",
+                    whiteSpace: "initial",
+                  }}
+                >
+                  Descripción
+                </h5>
+              </InputLabel>
               <InputFieldMultiline
                 rows={4}
                 label="Descripción del jugador"

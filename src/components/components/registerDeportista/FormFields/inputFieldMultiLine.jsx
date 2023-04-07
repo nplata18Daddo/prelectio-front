@@ -21,12 +21,29 @@ export const InputFieldMultiline = ({ ...props }) => {
         render={({ field: { ref, ...field } }) => (
           <>
             <TextField
+              sx={{
+                border: "1px solid white",
+                borderRadius: "5px",
+              }}
+              inputlabelprops={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
+              inputProps={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
               inputRef={ref}
               autoComplete="off"
               fullWidth
               multiline
               rows={props.rows}
-              label={props.label}
+              label=""
+              placeholder={props.label}
               value={field.value ? field.value : ""}
               required
               size="small"
