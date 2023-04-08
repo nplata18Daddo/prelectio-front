@@ -55,7 +55,7 @@ export const AdminRecruiters = () => {
             return {
               name: item.nombre_usuario,
               email: !item.email_usuario ? " - " : item.email_usuario,
-              documentType: item.tipo_documento_usuario,
+              documentType: GetDocumentType(item.tipo_documento_usuario),
               documentNumber: !item.numero_documento_usuario
                 ? " - "
                 : item.numero_documento_usuario,

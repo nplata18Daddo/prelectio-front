@@ -13,6 +13,7 @@ import { LayoutUser } from "../components/layout/user/layoutUser";
 import { AdminHome } from "../pages/admin/adminHome";
 import { AdminRecruiters } from "../pages/admin/adminRecruiters";
 import { AdminRecruiterDetail } from "../pages/admin/adminRecruiterDetail";
+import { AdminAthletes } from "../pages/admin/adminAthletes";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -42,6 +43,8 @@ function AppRoutes() {
           <Route path="admin">
             <Route path="recruiters" element={<AdminRecruiters />} />
             <Route path="recruiter/:id" element={<AdminRecruiterDetail />} />
+
+            <Route path="athletes" element={<AdminAthletes />} />
           </Route>
         </Route>
         {/* Not Found */}
