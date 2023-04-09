@@ -5,6 +5,9 @@
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
     margin-right: 5rem;
     margin-left: 5rem;
+    @include tablet {
+      height: auto !important;
+    }
   }
   &__searchBar {
     background: rgba(0, 0, 0, 0.75);
@@ -69,6 +72,9 @@
     color: #8c8c8c;
     font-size: 0.9rem;
     font-size: 1.5rem;
+    @include tablet {
+      position: initial !important;
+    }
   }
   .email-item__message p {
     margin-bottom: 0;
@@ -131,4 +137,36 @@
 }
 .pull-right {
   float: right;
+}
+.loading__wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.messages__searchBar {
+  width: 25rem !important;
+  font-size: 14px !important;
+  background-color: none !important;
+  background: none !important;
+  color: white !important;
+  @include tablet {
+    width: 18rem !important;
+  }
+}
+
+.messages__searchBar::placeholder {
+  color: white !important;
+  font-size: 14px !important;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  color: white;
+  fill: white;
+  background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+    no-repeat 50% 50%;
 }

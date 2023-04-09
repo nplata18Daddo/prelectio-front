@@ -8,17 +8,22 @@ export const MailDetail = (props) => {
 
   return (
     <div className="email-item" onClick={props.handleClick}>
-      <div className="email-item__name">{props.email.from}</div>
-      <div className="email-item__subject">
-        <strong>{props.email.subject}</strong>
+      <div className="email-item__name">
+        {props.email.usuario_de.nombre_usuario}
       </div>
-      <div className="email-item__read" data-read={props.email.read}></div>
+      <div className="email-item__subject">
+        <strong>{props.email.subject_mensaje}</strong>
+      </div>
+      <div
+        className="email-item__read"
+        data-read={props.email.leido_mensaje}
+      ></div>
 
       <div className="email-item__time">
-        {moment(props.email.date).format("h:mm:ss a")}
+        {moment(props.email.fecha_envio).format("h:mm:ss a")}
       </div>
       <div className="email-item__message">
-        <p>{truncateString(props.email.content, 85)}</p>
+        <p>{truncateString(props.email.contenido_mensaje, 85)}</p>
       </div>
     </div>
   );

@@ -141,7 +141,7 @@ export const ChangePass = () => {
     } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
       navigate("/recruiter/home", { replace: true });
     } else {
-      navigate("/athlete/home", { replace: true });
+      navigate("/athlete/messages", { replace: true });
     }
   };
   return (

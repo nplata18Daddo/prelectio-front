@@ -52,7 +52,7 @@ export const Login = () => {
       } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
         navigate("/recruiter/home", { replace: true });
       } else {
-        navigate("/athlete/home", { replace: true });
+        navigate("/athlete/messages", { replace: true });
       }
     }
   }, [navigate]);
@@ -88,7 +88,7 @@ export const Login = () => {
               } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
                 navigate("/recruiter/home", { replace: true });
               } else {
-                navigate("/athlete/home", { replace: true });
+                navigate("/athlete/messages", { replace: true });
               }
             }
           } else if (service.data.responseCode === CODES.COD_RESPONSE_ERROR) {

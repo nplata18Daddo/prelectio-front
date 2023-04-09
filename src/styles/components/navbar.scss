@@ -24,7 +24,7 @@
         &__button {
           &__primary {
             @extend .base_button;
-            font-weight: bold;
+            font-weight: 700;
             width: 50%;
             background-color: $mainBlue;
             border-radius: 12px;
@@ -36,7 +36,7 @@
             @extend .base_button;
             background-color: transparent;
             width: 50%;
-            font-weight: bold;
+            font-weight: 700;
             &:hover {
               background-color: $mainBlack;
             }
@@ -62,7 +62,7 @@
         &__primary {
           background: linear-gradient(270deg, #00459a 0%, #00ccff 105.68%);
           @extend .base_button;
-          font-weight: bold;
+          font-weight: 700;
           min-width: 70%;
 
           border-radius: 12px;
@@ -71,6 +71,7 @@
           }
         }
         &__secondary {
+          font-weight: 700 !important;
           @extend .base_button;
           background-color: transparent;
           &:hover {
