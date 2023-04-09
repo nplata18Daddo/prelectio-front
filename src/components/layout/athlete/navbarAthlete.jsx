@@ -21,9 +21,9 @@ export const NavBarAthlete = (props) => {
     <div>
       <Row className="navbar">
         <Col xs={4} lg={3} className="text-left navbar__col">
-          {props.role === "admin" && (
+          {props.role === "athlete" && (
             <>
-              <Link to="/admin/home">
+              <Link to="/athlete/messages">
                 <img style={{ width: "50%" }} src={logoPrelectio}></img>
               </Link>
             </>
@@ -31,29 +31,23 @@ export const NavBarAthlete = (props) => {
         </Col>
         <Col xs={8} lg={8} className="text-center navbar__col">
           <Row className="navbar__col__buttonRow">
-            {props.role === "admin" && (
+            {props.role === "athlete" && (
               <>
                 <Col xs={2}>
-                  <Link to="/admin/home">
+                  <Link to="/athlete/messages">
                     <Button className="navbar__col__buttonRow__button__secondary">
-                      Inicio
+                      Mensajes
                     </Button>
                   </Link>
                 </Col>
                 <Col xs={2}>
-                  <Link to="/admin/recruiters">
+                  <Link to="/athlete/profile">
                     <Button className="navbar__col__buttonRow__button__secondary">
-                      Reclutadores
+                      Mi perfil
                     </Button>
                   </Link>
                 </Col>
-                <Col xs={2}>
-                  <Link to="/admin/athletes">
-                    <Button className="navbar__col__buttonRow__button__secondary">
-                      Deportistas
-                    </Button>
-                  </Link>
-                </Col>
+
                 <Col xs={2}>
                   <Button
                     className="navbar__col__buttonRow__button__primary"
@@ -109,29 +103,23 @@ export const NavBarAthlete = (props) => {
         </Row>
         <Collapse in={open}>
           <div id="navbarCollapse">
-            {props.role === "admin" && (
+            {props.role === "athlete" && (
               <>
                 <Row className="navbar__responsive__col__buttonRow">
-                  <Link to="/admin/home">
+                  <Link to="/athlete/messages">
                     <Button className="navbar__responsive__col__buttonRow__button__secondary">
-                      Inicio
+                      Mensajes
                     </Button>
                   </Link>
                 </Row>
                 <Row className="navbar__responsive__col__buttonRow">
-                  <Link to="/admin/recruiters">
+                  <Link to="/athlete/profile">
                     <Button className="navbar__responsive__col__buttonRow__button__secondary">
-                      Reclutadores
+                      Mi perfil
                     </Button>
                   </Link>
                 </Row>
-                <Row className="navbar__responsive__col__buttonRow">
-                  <Link to="/admin/athletes">
-                    <Button className="navbar__responsive__col__buttonRow__button__secondary">
-                      Deportistas
-                    </Button>
-                  </Link>
-                </Row>
+
                 <Row className="navbar__responsive__col__buttonRow">
                   <Link to="/login">
                     <Button

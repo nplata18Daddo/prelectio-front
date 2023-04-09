@@ -3,7 +3,7 @@ import { Button, Col, Collapse, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logoPrelectio from "../../../assets/logo_prelectio.png";
 
-export const NavBarUser = (props) => {
+export const NavBarRecruiter = (props) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -23,9 +23,9 @@ export const NavBarUser = (props) => {
     <div>
       <Row className="navbar">
         <Col xs={4} lg={3} className="text-left navbar__col">
-          {props.role === "admin" && (
+          {props.role === "recruiter" && (
             <>
-              <Link to="/admin/home">
+              <Link to="/recruiter/messages">
                 <img style={{ width: "50%" }} src={logoPrelectio}></img>
               </Link>
             </>
@@ -33,29 +33,30 @@ export const NavBarUser = (props) => {
         </Col>
         <Col xs={8} lg={8} className="text-center navbar__col">
           <Row className="navbar__col__buttonRow">
-            {props.role === "admin" && (
+            {props.role === "recruiter" && (
               <>
                 <Col xs={2}>
-                  <Link to="/admin/home">
-                    <Button className="navbar__col__buttonRow__button__secondary">
-                      Inicio
-                    </Button>
-                  </Link>
-                </Col>
-                <Col xs={2}>
-                  <Link to="/admin/recruiters">
-                    <Button className="navbar__col__buttonRow__button__secondary">
-                      Reclutadores
-                    </Button>
-                  </Link>
-                </Col>
-                <Col xs={2}>
-                  <Link to="/admin/athletes">
+                  <Link to="/recruiter/athletes">
                     <Button className="navbar__col__buttonRow__button__secondary">
                       Deportistas
                     </Button>
                   </Link>
                 </Col>
+                <Col xs={2}>
+                  <Link to="/recruiter/messages">
+                    <Button className="navbar__col__buttonRow__button__secondary">
+                      Mensajes
+                    </Button>
+                  </Link>
+                </Col>
+                <Col xs={2}>
+                  <Link to="/recruiter/profile">
+                    <Button className="navbar__col__buttonRow__button__secondary">
+                      Mi perfil
+                    </Button>
+                  </Link>
+                </Col>
+
                 <Col xs={2}>
                   <Button
                     className="navbar__col__buttonRow__button__primary"
@@ -111,29 +112,30 @@ export const NavBarUser = (props) => {
         </Row>
         <Collapse in={open}>
           <div id="navbarCollapse">
-            {props.role === "admin" && (
+            {props.role === "recruiter" && (
               <>
                 <Row className="navbar__responsive__col__buttonRow">
-                  <Link to="/admin/home">
-                    <Button className="navbar__responsive__col__buttonRow__button__secondary">
-                      Inicio
-                    </Button>
-                  </Link>
-                </Row>
-                <Row className="navbar__responsive__col__buttonRow">
-                  <Link to="/admin/recruiters">
-                    <Button className="navbar__responsive__col__buttonRow__button__secondary">
-                      Reclutadores
-                    </Button>
-                  </Link>
-                </Row>
-                <Row className="navbar__responsive__col__buttonRow">
-                  <Link to="/admin/athletes">
+                  <Link to="/recruiter/athletes">
                     <Button className="navbar__responsive__col__buttonRow__button__secondary">
                       Deportistas
                     </Button>
                   </Link>
                 </Row>
+                <Row className="navbar__responsive__col__buttonRow">
+                  <Link to="/recruiter/messages">
+                    <Button className="navbar__responsive__col__buttonRow__button__secondary">
+                      Mensajes
+                    </Button>
+                  </Link>
+                </Row>
+                <Row className="navbar__responsive__col__buttonRow">
+                  <Link to="/recruiter/profile">
+                    <Button className="navbar__responsive__col__buttonRow__button__secondary">
+                      Mi perfil
+                    </Button>
+                  </Link>
+                </Row>
+
                 <Row className="navbar__responsive__col__buttonRow">
                   <Link to="/login">
                     <Button

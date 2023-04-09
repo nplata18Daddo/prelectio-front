@@ -8,7 +8,7 @@ import {
   AiFillTwitterCircle,
 } from "react-icons/ai";
 
-export const FooterAthlete = (props) => {
+export const FooterRecruiter = (props) => {
   return (
     <div>
       <div className="footer__degrade">
@@ -17,9 +17,9 @@ export const FooterAthlete = (props) => {
       <Row className="footer">
         <Row className="footer__topRow">
           <Col xs={4} lg={3} className="text-left footer__topRow__col">
-            {props.role === "athlete" && (
+            {props.role === "recruiter" && (
               <>
-                <Link to="/athlete/messages">
+                <Link to="/recruiter/messages">
                   <img
                     alt={"logo"}
                     style={{ width: "40%" }}
@@ -34,19 +34,26 @@ export const FooterAthlete = (props) => {
               className="footer__topRow__col__buttonRow"
               style={{ justifyContent: "center" }}
             >
-              {props.role === "athlete" && (
+              {props.role === "recruiter" && (
                 <>
                   <Col md={2} xs={12}>
-                    <Link to="/athlete/messages">
+                    <Link to="/recruiter/athletes">
+                      <Button className="footer__topRow__col__buttonRow__button">
+                        Deportistas
+                      </Button>
+                    </Link>
+                  </Col>
+                  <Col md={2} xs={12}>
+                    <Link to="/recruiter/messages">
                       <Button className="footer__topRow__col__buttonRow__button">
                         Mensajes
                       </Button>
                     </Link>
                   </Col>
                   <Col md={2} xs={12}>
-                    <Link to="/athlete/profile">
+                    <Link to="/recruiter/profile">
                       <Button className="footer__topRow__col__buttonRow__button">
-                        Mi perfil
+                        Perfil
                       </Button>
                     </Link>
                   </Col>

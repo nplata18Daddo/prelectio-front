@@ -15,6 +15,9 @@ import { AdminRecruiters } from "../pages/admin/adminRecruiters";
 import { AdminRecruiterDetail } from "../pages/admin/adminRecruiterDetail";
 import { AdminAthletes } from "../pages/admin/adminAthletes";
 import { AthleteMessages } from "../pages/athlete/athleteMessages";
+import { LayoutRecruiter } from "../components/layout/recruiter/layoutRecruiter";
+import { RecruiterMessages } from "../pages/recruiter/recruiterMessages";
+import { LayoutAthlete } from "../components/layout/athlete/layoutAthlete";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -49,9 +52,17 @@ function AppRoutes() {
           </Route>
         </Route>
 
-        <Route element={<LayoutUser role="athlete" routeName="Mensajes" />}>
+        <Route element={<LayoutAthlete role="athlete" routeName="Mensajes" />}>
           <Route path="athlete">
             <Route path="messages" element={<AthleteMessages />} />
+          </Route>
+        </Route>
+
+        <Route
+          element={<LayoutRecruiter role="recruiter" routeName="Mensajes" />}
+        >
+          <Route path="recruiter">
+            <Route path="messages" element={<RecruiterMessages />} />
           </Route>
         </Route>
         {/* Not Found */}
