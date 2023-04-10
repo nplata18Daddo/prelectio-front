@@ -36,7 +36,7 @@ export const InputField = ({ ...props }) => {
               }}
               inputProps={{
                 sx: {
-                  color: "red",
+                  color: "white",
                   borderColor: "white",
                 },
               }}
