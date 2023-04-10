@@ -103,3 +103,21 @@
     font-family: "Urbanist", sans-serif !important;
   }
 }
+.edit__input {
+  outline: none !important;
+  box-shadow: none;
+}
+.edit__select {
+  outline: none !important;
+  box-shadow: none;
+  fill: white !important;
+}
+.edit__form__container {
+  padding-left: 20rem;
+  padding-right: 20rem;
+  padding-top: 5rem;
+  @include tablet {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}

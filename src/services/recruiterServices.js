@@ -16,3 +16,11 @@ export function GetMessagesReclutador(data) {
     data: data,
   });
 }
+export function UpdateProfileRecruiter(data) {
+  return axios({
+    method: "PUT",
+    data: data,
+    url: "api/reclutador/update/",
+    baseURL: process.env.REACT_APP_BASE_URL,
+  });
+}

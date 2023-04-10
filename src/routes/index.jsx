@@ -18,6 +18,7 @@ import { AthleteMessages } from "../pages/athlete/athleteMessages";
 import { LayoutRecruiter } from "../components/layout/recruiter/layoutRecruiter";
 import { RecruiterMessages } from "../pages/recruiter/recruiterMessages";
 import { LayoutAthlete } from "../components/layout/athlete/layoutAthlete";
+import { RecruiterProfile } from "../pages/recruiter/recruiterProfile";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -43,6 +44,7 @@ function AppRoutes() {
             <Route path="home" element={<AdminHome />} />
           </Route>
         </Route>
+
         <Route element={<LayoutUser role="admin" routeName="Reclutadores" />}>
           <Route path="admin">
             <Route path="recruiters" element={<AdminRecruiters />} />
@@ -52,17 +54,27 @@ function AppRoutes() {
           </Route>
         </Route>
 
+        {/* rutas deportista */}
         <Route element={<LayoutAthlete role="athlete" routeName="Mensajes" />}>
           <Route path="athlete">
             <Route path="messages" element={<AthleteMessages />} />
           </Route>
         </Route>
 
+        {/* rutas reclutador */}
         <Route
           element={<LayoutRecruiter role="recruiter" routeName="Mensajes" />}
         >
           <Route path="recruiter">
             <Route path="messages" element={<RecruiterMessages />} />
+          </Route>
+        </Route>
+
+        <Route
+          element={<LayoutRecruiter role="recruiter" routeName="Perfil" />}
+        >
+          <Route path="recruiter">
+            <Route path="profile" element={<RecruiterProfile />} />
           </Route>
         </Route>
         {/* Not Found */}
