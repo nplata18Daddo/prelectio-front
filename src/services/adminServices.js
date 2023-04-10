@@ -48,3 +48,14 @@ export function ChangeRecruiterStatus(data) {
     data: data,
   });
 }
+export function GetDashboardInfo(data) {
+  return axios({
+    method: "GET",
+    url: "api/dashboard/",
+    headers: {
+      Authorization: GetToken(),
+    },
+    baseURL: process.env.REACT_APP_BASE_URL,
+    data: data,
+  });
+}
