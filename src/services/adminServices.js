@@ -47,6 +47,30 @@ export function GetAthleteDetail(data) {
     data: data,
   });
 }
+export function GetHabilidadDeportista(data) {
+  console.log(data)
+  return axios({
+    method: "GET",
+    url: "api/habilidadDeportista/deportista/" + data,
+    headers: {
+      Authorization: GetToken(),
+    },
+    baseURL: process.env.REACT_APP_BASE_URL,
+    data: data,
+  });
+}
+export function GetTrayectoriaDeportista(data) {
+  console.log(data)
+  return axios({
+    method: "GET",
+    url: "api/trayectoria/findByDeportista/" + data,
+    headers: {
+      Authorization: GetToken(),
+    },
+    baseURL: process.env.REACT_APP_BASE_URL,
+    data: data,
+  });
+}
 
 export function ChangeRecruiterStatus(data) {
   return axios({
