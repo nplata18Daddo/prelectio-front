@@ -19,6 +19,7 @@ import { LayoutRecruiter } from "../components/layout/recruiter/layoutRecruiter"
 import { RecruiterMessages } from "../pages/recruiter/recruiterMessages";
 import { LayoutAthlete } from "../components/layout/athlete/layoutAthlete";
 import { RecruiterProfile } from "../pages/recruiter/recruiterProfile";
+import { AthleteProfile } from "../pages/athlete/athleteProfile";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -59,6 +60,10 @@ function AppRoutes() {
           <Route path="athlete">
             <Route path="messages" element={<AthleteMessages />} />
           </Route>
+
+          <Route path="athlete">
+            <Route path="profile" element={<AthleteProfile />} />
+          </Route>
         </Route>
 
         {/* rutas reclutador */}
@@ -68,6 +73,8 @@ function AppRoutes() {
           <Route path="recruiter">
             <Route path="messages" element={<RecruiterMessages />} />
           </Route>
+
+          
         </Route>
 
         <Route

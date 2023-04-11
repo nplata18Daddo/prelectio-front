@@ -36,6 +36,17 @@ export function GetRecruiterDetail(data) {
     data: data,
   });
 }
+export function GetAthleteDetail(data) {
+  return axios({
+    method: "GET",
+    url: "api/deportista/" + data.id,
+    headers: {
+      Authorization: GetToken(),
+    },
+    baseURL: process.env.REACT_APP_BASE_URL,
+    data: data,
+  });
+}
 
 export function ChangeRecruiterStatus(data) {
   return axios({

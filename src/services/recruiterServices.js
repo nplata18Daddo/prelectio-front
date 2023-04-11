@@ -24,3 +24,11 @@ export function UpdateProfileRecruiter(data) {
     baseURL: process.env.REACT_APP_BASE_URL,
   });
 }
+export function UpdateProfileAthlete(data) {
+  return axios({
+    method: "PUT",
+    data: data,
+    url: "api/deportista/update/",
+    baseURL: process.env.REACT_APP_BASE_URL,
+  });
+}
