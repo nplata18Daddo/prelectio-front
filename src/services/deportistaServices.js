@@ -6,6 +6,7 @@ export function RegisterDeportistaService(data) {
     url: "api/deportista",
     baseURL: process.env.REACT_APP_BASE_URL,
     data: data,
+    headers: { "Content-Type": "multipart/form-data" },
   });
 }
 

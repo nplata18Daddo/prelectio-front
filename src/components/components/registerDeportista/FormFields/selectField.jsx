@@ -58,7 +58,11 @@ export const SelectField = ({ ...props }) => {
                 );
               })}
             </Select>
-            {error && <p style={{ color: "red" }}>{error.message}</p>}
+            {error && (
+              <p className="error__message" style={{ color: "red" }}>
+                {error.message}
+              </p>
+            )}
           </>
         )}
         rules={{ required: true }}

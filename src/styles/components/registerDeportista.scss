@@ -75,8 +75,8 @@
           height: 20px;
           width: 20px;
           color: $accentBlue;
-          font-size: $font-size-sm;
-          font-weight: bold;
+          font-size: 16px;
+          font-weight: 700;
           &:hover,
           &:disabled,
           &:active,
@@ -130,6 +130,9 @@
       color: white;
     }
     &__nextButton {
+      font-family: "Urbanist", sans-serif;
+      font-size: 12px !important;
+      padding: 10px;
       background-color: $accentBlue;
       color: $mainWhite;
       font-weight: bold;
@@ -145,4 +148,30 @@
       }
     }
   }
+}
+.MuiStepLabel-label,
+.MuiStepIcon-text {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  font-family: "Urbanist", sans-serif;
+  p {
+    font-family: "Urbanist", sans-serif !important;
+  }
+}
+.MuiFormLabel-root {
+  font-family: "Urbanist", sans-serif !important;
+  font-size: 14px !important;
+}
+.MuiInputBase-input {
+  font-family: "Urbanist", sans-serif !important;
+  font-size: 14px !important;
+}
+.error__message {
+  font-size: 12px !important;
+  font-family: "Urbanist", sans-serif !important;
+  text-align: left;
+  padding-top: 5px !important;
+}
+.MuiSelect-select {
+  text-align: start !important;
 }

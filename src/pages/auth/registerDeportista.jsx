@@ -88,13 +88,12 @@ export const RegisterDeportista = () => {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
+    setImageFile(file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const imageDataUrl = reader.result;
         setImagePreviewUrl(imageDataUrl);
-        const imageData = imageDataUrl.split(",")[1];
-        setImageFile(imageData);
       };
       reader.readAsDataURL(file);
     }
@@ -136,65 +135,52 @@ export const RegisterDeportista = () => {
 
   const goHome = () => {
     setOpenModalAction(false);
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user.rol_usuario === CODES.COD_ROLES_ADMIN) {
-      navigate("/admin/home", { replace: true });
-    } else if (user.rol_usuario === CODES.COD_ROLES_RECRUITER) {
-      navigate("/recruiter/home", { replace: true });
-    } else {
-      navigate("/athlete/home", { replace: true });
-    }
+    navigate("/login", { replace: true });
   };
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const obj = {
-        telefono_usuario: data.celular,
-        nombre_usuario: data.nombreCompleto,
-        email_usuario: data.email,
-        numero_documento_usuario: data.numDoc,
-        tipo_documento_usuario: data.tipoDoc,
-        foto_usuario: "76",
-        fecha_nacimiento_usuario: data.fechaNacimiento,
-        genero_usuario: data.genero,
-        descripcion_usuario: data.descripcion,
-        id_departamento: data.departamento,
-        id_ciudad: data.municipio,
-        peso_deportista: data.peso,
-        altura_deportista: data.estatura,
-        posicion_deportista: data.posicion,
-        pierna_habil_deportista: data.pierna_habil,
-        habilidades: data.habilidades,
-        direccion_usuario: data.direccion,
-        password_usuario: data.password,
-        id_estado: "1",
-        rol_usuario: "2",
-        historia_clinica_deportista: data.historia_clinica,
-        changePass: false,
-        link_video: data.link_video,
-        trayectoria: trayectoria,
-      };
-      console.log(obj);
-      const service = await RegisterDeportistaService(obj);
+      const formData = new FormData();
+      formData.append("telefono_usuario", data.celular);
+      formData.append("nombre_usuario", data.nombreCompleto);
+      formData.append("email_usuario", data.email);
+      formData.append("numero_documento_usuario", data.numDoc);
+      formData.append("tipo_documento_usuario", data.tipoDoc);
+      formData.append("foto_usuario", imageFile);
+      formData.append("fecha_nacimiento_usuario", data.fechaNacimiento);
+      formData.append("genero_usuario", data.genero);
+      formData.append("descripcion_usuario", data.descripcion);
+      formData.append("id_departamento", data.departamento);
+      formData.append("id_ciudad", data.municipio);
+      formData.append("peso_deportista", data.peso);
+      formData.append("altura_deportista", data.estatura);
+      formData.append("posicion_deportista", data.posicion);
+      formData.append("pierna_habil_deportista", data.pierna_habil);
+      formData.append("habilidades", data.habilidades);
+      formData.append("direccion_usuario", data.direccion);
+      formData.append("password_usuario", data.password);
+      formData.append("rol_usuario", "2");
+      formData.append("historia_clinica_deportista", data.historia_clinica);
+      formData.append("changePass", false);
+      formData.append("link_video", data.link_video);
+      formData.append("trayectoria", trayectoria);
+
+      const service = await RegisterDeportistaService(formData);
+      setLoading(false);
       if (service.status === 200) {
         setResponseMessage(service);
         setOpenModalInfo(true);
-        reset();
 
         if (service.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          reset();
           setOpenModalAction(true);
-          const token = service.data.responseLoad.accessToken;
-          localStorage.setItem("access_token", token);
-          const user = service.data.responseLoad.user;
-          localStorage.setItem("user", JSON.stringify(user));
         } else if (service.data.responseCode === CODES.COD_RESPONSE_ERROR) {
           setOpenModalInfo(true);
         }
       }
       //handleNext();
     } catch (error) {
-      setLoading(false);
       console.log(
         "==============Error Register Deportista======================"
       );
@@ -234,9 +220,8 @@ export const RegisterDeportista = () => {
       nombreCompleto: yup.string().required("Ingresa tu nombre completo"),
       email: yup
         .string()
-        .email()
-        .required("Ingresa un email válido")
-        .typeError("Ingresa un email válido"),
+        .email("*Este campo debe ser un email válido")
+        .required("*Este campo es requerido"),
       tipoDoc: yup
         .number()
         .required()
@@ -279,7 +264,7 @@ export const RegisterDeportista = () => {
     yup.object().shape({
       descripcion: yup.string().required("Agrega la descripcion"),
       link_video: yup.string().required("Ingresa un link a tu video"),
-      image: yup.string(),
+      image: yup.string().required("Debes seleccionar una foto de perfil"),
     }),
     //Validation for trayectoria
     yup.object().shape({}),

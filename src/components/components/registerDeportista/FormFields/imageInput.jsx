@@ -96,7 +96,10 @@ export const ImageInput = ({ ...props }) => {
               </div>
             </div>
             {error && (
-              <span style={{ color: "red" }}> {JSON.stringify(error)}</span>
+              <span style={{ color: "red", marginTop: "10px" }}>
+                {" "}
+                {error.message}
+              </span>
             )}
           </div>
         )}
