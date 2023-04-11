@@ -98,7 +98,7 @@ export const Register = () => {
                           </p>
                         </Col>
                         <Col xs={12}>
-                          <p className="display__label text-white  mt-3">
+                          <p className="display__label  weight__bold text-white  mt-3">
                             Busca talento y contacta futuras estrellas.
                           </p>
                         </Col>
@@ -131,7 +131,7 @@ export const Register = () => {
                           </p>
                         </Col>
                         <Col xs={12}>
-                          <p className="display__label text-white mt-3">
+                          <p className="display__label weight__bold text-white mt-3">
                             Crea tu perfil y maximiza tus oportunidades
                           </p>
                         </Col>
