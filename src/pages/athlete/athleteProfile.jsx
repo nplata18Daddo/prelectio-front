@@ -18,6 +18,7 @@ import {
   GetAthleteDetail,
   GetHabilidadDeportista,
   GetTrayectoriaDeportista,
+  UpdateProfileAthlete,
 } from "../../services/adminServices";
 import { UpdateProfileRecruiter } from "../../services/recruiterServices";
 import { ModalInfo } from "../../components/components/modals/ModalInfo";
@@ -151,6 +152,7 @@ export const AthleteProfile = () => {
           setValue("historia", data.deportista[0].historia_clinica_deportista);
           setValue("video", data.deportista[0].video_deportista);
           setValue("posicion", data.deportista[0].posicion_deportista);
+          setValue("pierna", data.deportista[0].pierna_habil_deportista);
         }
       };
 
@@ -165,6 +167,7 @@ export const AthleteProfile = () => {
         id: activeUser.id_usuario,
       };
       const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
+      console.log(userInfo)
       const [trayectoriasD] = await Promise.all([
         GetTrayectoriaDeportista(
           userInfo.data.responseMessage.deportista[0].id_deportista
@@ -198,6 +201,7 @@ export const AthleteProfile = () => {
         id: activeUser.id_usuario,
       };
       const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
+      
 
       id_deportistaa =
         userInfo.data.responseMessage.deportista[0].id_deportista;
@@ -265,7 +269,8 @@ export const AthleteProfile = () => {
       watch("genero") === "" ||
       watch("historia") === "" ||
       watch("video") === "" ||
-      watch("posicion") === "";
+      watch("posicion") === "" ||
+      watch("pierna") === "" ;
 
     return disabled;
   };
@@ -283,11 +288,22 @@ export const AthleteProfile = () => {
 
   const handleUpdate = async (data) => {
     console.log(data);
+
+
+    let id_deportistaa = 0  
+    const activeUser = JSON.parse(localStorage.getItem("user"));
+      const obj = {
+        id: activeUser.id_usuario,
+      };
+      const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
+
+      id_deportistaa =
+        userInfo.data.responseMessage.deportista[0].id_deportista;
     setLoading(true);
     try {
       const obj = {
         id_usuario: userData.id_usuario,
-        id_reclutador: userData.deportista.id_deportista,
+        id_deportista: id_deportistaa,
         nombre_usuario: data.name,
         email_usuario: data.email,
         telefono_usuario: data.phone,
@@ -305,8 +321,12 @@ export const AthleteProfile = () => {
         habilidades: selectedValues,
         video_deportista: data.video,
         posicion_deportista: data.posicion,
+        trayectoria: trayectorias,
+        foto_usuario: userData.foto_usuario,
+        pierna_habil_deportista: data.pierna,
       };
-      const service = await UpdateProfileRecruiter(obj);
+      console.log(obj)
+      const service = await UpdateProfileAthlete(obj);
 
       setResponseMessage(service);
       setLoading(false);
@@ -541,7 +561,7 @@ export const AthleteProfile = () => {
               </InputGroup>
             </Form.Group>
             <Form.Group
-              className="mb-3 col-xs-12 col-lg-12"
+              className="mb-3 col-xs-12 col-lg-6"
               controlId="genero"
               style={{ textAlign: "start" }}
             >
@@ -565,6 +585,25 @@ export const AthleteProfile = () => {
                 <option value="9">Extremo derecho</option>
                 <option value="10">Extremo izquierdo</option>
                 <option value="11">Delantero centro</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group
+              className="mb-3 col-xs-12 col-lg-6"
+              controlId="genero"
+              style={{ textAlign: "start" }}
+            >
+              <Form.Label className="display__small">Pierna Hábil*</Form.Label>
+              <Form.Select
+                {...register("pierna")}
+                className="edit__select display__small"
+                aria-label="Default select example"
+              >
+                <option value="" disabled selected>
+                  Pierna Hábil
+                </option>
+                <option value="1">Derecha</option>
+                <option value="2">Izquierda</option>
+                
               </Form.Select>
             </Form.Group>
             <Form.Group
@@ -679,7 +718,7 @@ export const AthleteProfile = () => {
             </Form.Group>
 
             <Form.Group
-              className="mb-3 col-xs-12 col-lg-12"
+              className="mb-1 col-xs-12 col-lg-12"
               controlId="genero"
               style={{
                 textAlign: "start",
@@ -689,7 +728,7 @@ export const AthleteProfile = () => {
               <Form.Label className="display__small">
                 Trayectorias* {}
               </Form.Label>
-              <Row className="mb-4">
+              <Row className="mb-2">
                 {trayectorias.map((option, index) => (
                   <Row className="mb-2" key={index}>
                     <Col xs={11}>
@@ -786,18 +825,19 @@ export const AthleteProfile = () => {
                 ))}
               </Row>
             </Form.Group>
-            <Col xs={4}>
+            <Col xs={12} style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
               <Button
+              
                 color="primary"
                 onClick={() => {
                   addTrayectoriaField();
                 }}
               >
-                Agregar Instructores
+                Agregar Trayectoria a la lista
               </Button>
             </Col>
             <Form.Group
-              className="mb-1 mt-1"
+              className="mb-5 mt-1"
               controlId="formBasicEmail"
               style={{ textAlign: "start" }}
             >
@@ -824,8 +864,7 @@ export const AthleteProfile = () => {
             {loading ? <Spinner animation="border" /> : "Actualizar"}
           </Button>
           <p className="display__label text-white mt-4">
-            El producto esta solo disponible para profesionales(sujetos a
-            aprobación)
+           
           </p>
         </Form>
       </Col>
