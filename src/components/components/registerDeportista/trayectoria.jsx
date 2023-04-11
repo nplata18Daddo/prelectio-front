@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import moment from "moment";
 
 export const Trayectoria = (props) => {
   const addFields = () => {
@@ -29,6 +30,8 @@ export const Trayectoria = (props) => {
     data.splice(index, 1);
     props.setTrayectoria(data);
   };
+
+  console.log(props.trayectoria);
   return (
     <div className="trayectoria">
       <Container className="trayectoria__container">
@@ -96,6 +99,11 @@ export const Trayectoria = (props) => {
                               handleFormChange(index, "titulo_trayectoria", "");
                             }
                           }}
+                          value={
+                            item.titulo_trayectoria
+                              ? item.titulo_trayectoria
+                              : ""
+                          }
                         ></TextField>
                       </Col>
                       <Col
@@ -136,7 +144,9 @@ export const Trayectoria = (props) => {
                             fullWidth
                             format="DD/MM/YYYY"
                             label=""
-                            //value={field.value ? field.value : ""}
+                            value={
+                              item.fecha_inicio ? moment(item.fecha_inicio) : ""
+                            }
                             required
                             size="small"
                             shrink="true"
@@ -192,7 +202,7 @@ export const Trayectoria = (props) => {
                             autoComplete="off"
                             format="DD/MM/YYYY"
                             label=""
-                            //value={field.value ? field.value : ""}
+                            value={item.fecha_fin ? moment(item.fecha_fin) : ""}
                             required
                             size="small"
                             shrink="true"
@@ -256,6 +266,7 @@ export const Trayectoria = (props) => {
                               handleFormChange(index, "descripcion", "");
                             }
                           }}
+                          value={item.descripcion ? item.descripcion : ""}
                         ></TextField>
                       </Col>
                     </Row>

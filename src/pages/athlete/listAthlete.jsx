@@ -12,6 +12,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Form, InputGroup, Col } from "react-bootstrap";
+import { AthleteCard } from "../../components/components/athlete/athleteCard";
 import { CODES } from "../../consts/codes";
 import { GetDeportistas } from "../../services/deportistaServices";
 
@@ -28,19 +29,7 @@ export const ListAthletes = () => {
   const [showedAthletes, setShowedAthletes] = useState(5);
   const [selectedPage, setSelectedPage] = useState(1);
 
-  const posiciones = [
-    { label: "Portero", value: 1 },
-    { label: "Lateral Derecho", value: 2 },
-    { label: "Central Derecho", value: 3 },
-    { label: "Central Izquierdo", value: 4 },
-    { label: "Lateral Izquierdo", value: 5 },
-    { label: "Volante de Marca", value: 6 },
-    { label: "Volante Mixto", value: 7 },
-    { label: "Volante Ofensivo", value: 8 },
-    { label: "Extremo Derecho", value: 9 },
-    { label: "Extremo Izquierdo", value: 10 },
-    { label: "Delantero Centro", value: 11 },
-  ];
+  const posiciones = CODES.CODES_POSICIONES;
   const handleGeneroChange = (event) => {
     setSelectedGenero(event.target.value);
   };
@@ -162,7 +151,7 @@ export const ListAthletes = () => {
                     onChange={handleGeneroChange}
                   >
                     <MenuItem value={1}>Masculino</MenuItem>
-                    <MenuItem value={2}>Fémenino</MenuItem>
+                    <MenuItem value={2}>Femenino</MenuItem>
                   </Select>
                   {selectedGenero && (
                     <InputGroup.Text
@@ -300,11 +289,9 @@ export const ListAthletes = () => {
           <Row className="listAthletes__listWrapper">
             {filteredAthletes.map((item, index) => {
               return (
-                <h4 key={index}>
-                  {"------------------------------------------- \n" +
-                    JSON.stringify(item) +
-                    "------------------------------------------- \n"}
-                </h4>
+                <Col md={4} key={index}>
+                  <AthleteCard item={item} key={index} />
+                </Col>
               );
             })}
           </Row>
