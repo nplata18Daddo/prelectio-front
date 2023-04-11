@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CODES } from "../../consts/codes";
 import { GetRecruiterDetail } from "../../services/adminServices";
 import Accordion from "react-bootstrap/Accordion";
-import { GetDocumentType } from "../../consts/generalFunctions";
+import { GetDocumentType, GetRepresents } from "../../consts/generalFunctions";
 import { ModalConfirmStatusChange } from "../../components/components/recruiter/modalConfirmStatusChange";
 
 import { ModalAction } from "../../components/components/modals/ModalAction";
@@ -191,7 +191,9 @@ export const AdminRecruiterDetail = () => {
                             <span className="weight__bold  colors__lightBlue ">
                               A quien representa:{" "}
                             </span>
-                            {userData.email_usuario}
+                            {GetRepresents(
+                              userData.reclutador?.entidad_reclutador
+                            )}
                           </p>
                         </Col>
                         <Col xs={12}>
