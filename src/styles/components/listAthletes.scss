@@ -1,0 +1,15 @@
+.listAthletes {
+  &__container {
+    height: 90vh;
+    margin-right: 5vh;
+    margin-left: 5vh;
+    @include tablet {
+      height: auto !important;
+    }
+  }
+
+  &__listWrapper {
+    height: 100%;
+    overflow-x: scroll;
+  }
+}

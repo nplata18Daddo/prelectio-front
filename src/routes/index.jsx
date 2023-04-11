@@ -20,6 +20,7 @@ import { RecruiterMessages } from "../pages/recruiter/recruiterMessages";
 import { LayoutAthlete } from "../components/layout/athlete/layoutAthlete";
 import { RecruiterProfile } from "../pages/recruiter/recruiterProfile";
 import { AthleteProfile } from "../pages/athlete/athleteProfile";
+import { ListAthletes } from "../pages/athlete/listAthlete";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -73,8 +74,18 @@ function AppRoutes() {
           <Route path="recruiter">
             <Route path="messages" element={<RecruiterMessages />} />
           </Route>
-
-          
+        </Route>
+        <Route
+          element={
+            <LayoutRecruiter
+              role="recruiter"
+              routeName="¡Encuentra a tu siguiente jugador estrella!"
+            />
+          }
+        >
+          <Route path="recruiter">
+            <Route path="home" element={<ListAthletes />} />
+          </Route>
         </Route>
 
         <Route

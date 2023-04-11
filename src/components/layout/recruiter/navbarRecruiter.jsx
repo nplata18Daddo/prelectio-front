@@ -36,7 +36,7 @@ export const NavBarRecruiter = (props) => {
             {props.role === "recruiter" && (
               <>
                 <Col xs={2}>
-                  <Link to="/recruiter/athletes">
+                  <Link to="/recruiter/home">
                     <Button className="navbar__col__buttonRow__button__secondary">
                       Deportistas
                     </Button>
@@ -115,7 +115,7 @@ export const NavBarRecruiter = (props) => {
             {props.role === "recruiter" && (
               <>
                 <Row className="navbar__responsive__col__buttonRow">
-                  <Link to="/recruiter/athletes">
+                  <Link to="/recruiter/home">
                     <Button className="navbar__responsive__col__buttonRow__button__secondary">
                       Deportistas
                     </Button>
