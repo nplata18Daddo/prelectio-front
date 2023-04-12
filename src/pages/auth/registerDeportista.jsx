@@ -157,14 +157,14 @@ export const RegisterDeportista = () => {
       formData.append("altura_deportista", data.estatura);
       formData.append("posicion_deportista", data.posicion);
       formData.append("pierna_habil_deportista", data.pierna_habil);
-      formData.append("habilidades", data.habilidades);
+      formData.append("habilidades", JSON.stringify(data.habilidades));
       formData.append("direccion_usuario", data.direccion);
       formData.append("password_usuario", data.password);
       formData.append("rol_usuario", "2");
       formData.append("historia_clinica_deportista", data.historia_clinica);
       formData.append("changePass", false);
-      formData.append("link_video", data.link_video);
-      formData.append("trayectoria", trayectoria);
+      formData.append("video_deportista", data.link_video);
+      formData.append("trayectoria", JSON.stringify(trayectoria));
 
       const service = await RegisterDeportistaService(formData);
       setLoading(false);

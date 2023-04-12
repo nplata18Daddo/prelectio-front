@@ -22,8 +22,8 @@ export const Services = () => {
           </Col>
         </Row>
         <OportunitiesTalentCarousel />
-        <YoutubeVideo url={"https://www.youtube.com/embed/A2NqpFsg1dQ"} />
-        <ImageCarousel/>
+        <YoutubeVideo url={"https://www.youtube.com/embed/kknwPAONA8M"} />
+        <ImageCarousel />
         <Reviews />
       </Container>
     </div>
