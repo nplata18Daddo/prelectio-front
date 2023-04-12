@@ -1,6 +1,6 @@
 .listAthletes {
   &__container {
-    height: 95vh;
+    height: auto;
     margin-right: 5vw;
     margin-left: 5vw;
     margin-bottom: 5vh;
@@ -21,10 +21,24 @@
     height: 5%;
     margin-bottom: 2vh;
     margin-top: 2vh;
+    &__col {
+      margin-bottom: 1vh !important;
+    }
   }
   &__paginationWrapper {
     margin-bottom: 3vh;
     padding-right: 3%;
     height: 5%;
+  }
+  &__cardCol {
+    padding: 1% 1%;
+  }
+}
+.MuiTypography-h5 {
+  @include tablet {
+    font-size: large !important;
+  }
+  @include phone {
+    font-size: large !important;
   }
 }

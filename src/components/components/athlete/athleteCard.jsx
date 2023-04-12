@@ -1,27 +1,45 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import moment from "moment";
-import React from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { CODES } from "../../../consts/codes";
+import baseProfile from "../../../assets/register/emptyProfile.png";
 
 export const AthleteCard = (props) => {
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const img =
+    props.item.usuario.foto_usuario_base_64 != null
+      ? "data:image/png;base64," + props.item.usuario.foto_usuario_base_64
+      : baseProfile;
+
   return (
-    <Card>
-      <CardMedia
-        sx={{ height: 140 }}
-        image={props.item.usuario.foto_usuario}
-        title="Profile Picture"
-      />
+    <Card
+      sx={{
+        filter: "drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.37))",
+        backgroundColor: "#282828",
+        borderRadius: "15px",
+      }}
+    >
+      <CardMedia title="Profile Picture" style={{ position: "relative" }}>
+        {img ? <img style={{ width: "100%" }} src={img}></img> : <Spinner />}{" "}
+      </CardMedia>
       <CardContent>
         <Typography
           gutterBottom
           variant="h4"
           component="div"
-          sx={{ fontWeight: "bold" }}
+          sx={{ fontWeight: "bold", color: "#FFFFFF" }}
+          noWrap
         >
           {props.item.usuario.nombre_usuario}
         </Typography>
-        <Typography gutterBottom variant="p" component="div">
+        <Typography
+          gutterBottom
+          variant="p"
+          component="div"
+          sx={{ color: "#FFFFFF" }}
+        >
           {props.item.usuario.genero_usuario == 1
             ? "Masculino"
             : props.item.usuario.genero_usuario == 2
@@ -29,14 +47,14 @@ export const AthleteCard = (props) => {
             : "Otro"}
         </Typography>
         <Row>
-          <Col xs={6} style={{ marginBottom: "7vh" }}>
+          <Col xs={6} style={{ marginBottom: "10vh" }}>
             <Row>
               <Typography
                 align={"left"}
                 gutterBottom
                 variant="h5"
                 component="div"
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", color: "#FFFFFF" }}
               >
                 {
                   CODES.CODES_POSICIONES.find(
@@ -51,6 +69,7 @@ export const AthleteCard = (props) => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                sx={{ color: "#FFFFFF" }}
               >
                 {
                   CODES.PIERNA_HABIL_ADJETIVO_CODES.find(
@@ -65,6 +84,7 @@ export const AthleteCard = (props) => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                sx={{ color: "#FFFFFF" }}
               >
                 {props.item.peso_deportista}
                 <span> kg</span>
@@ -76,6 +96,8 @@ export const AthleteCard = (props) => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                sx={{ color: "#FFFFFF" }}
+                className="pruebaTypo"
               >
                 {props.item.altura_deportista}
                 <span> cm</span>
@@ -94,9 +116,9 @@ export const AthleteCard = (props) => {
             <Row>
               <Typography
                 align={"center"}
-                variant="h3"
+                variant="h2"
                 component="div"
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", color: "#FFFFFF" }}
               >
                 {moment(props.item.usuario.fecha_nacimiento_usuario).format(
                   "YYYY"
@@ -109,11 +131,15 @@ export const AthleteCard = (props) => {
                 gutterBottom
                 variant="h5"
                 component="div"
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", color: "#FFFFFF" }}
               >
-                {moment(props.item.usuario.fecha_nacimiento_usuario).format(
-                  "MMMM"
-                )}
+                {moment(props.item.usuario.fecha_nacimiento_usuario)
+                  .format("MMMM")
+                  .charAt(0)
+                  .toUpperCase() +
+                  moment(props.item.usuario.fecha_nacimiento_usuario)
+                    .format("MMMM")
+                    .slice(1)}
               </Typography>
             </Row>
           </Col>

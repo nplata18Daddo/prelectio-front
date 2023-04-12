@@ -72,7 +72,7 @@ export const ListAthletes = () => {
       }
       return true;
     });
-    if (Math.ceil(filteredLength / showedAthletes) < selectedPage - 1) {
+    if (Math.ceil(filteredLength / showedAthletes) <= selectedPage - 1) {
       setSelectedPage(1);
     }
     setFilteredLength(filteredAthletes.length);
@@ -99,7 +99,10 @@ export const ListAthletes = () => {
         setLoading(false);
         setAthletes(messages.data.responseMessage);
         setFilteredLength(messages.data.responseMessage.length);
-        setFilteredAthletes(messages.data.responseMessage);
+        let filteredAthletes = JSON.parse(
+          JSON.stringify(messages.data.responseMessage)
+        ).splice(showedAthletes * (selectedPage - 1), showedAthletes);
+        setFilteredAthletes(filteredAthletes);
       }
     };
 
@@ -138,7 +141,12 @@ export const ListAthletes = () => {
             </InputGroup>
           </Row>
           <Row className="listAthletes__filterWrapper">
-            <Col xs={6} md={3}>
+            <Col
+              xs={12}
+              sm={6}
+              lg={3}
+              className="listAthletes__filterWrapper__col"
+            >
               <FormControl fullWidth>
                 <InputGroup>
                   <InputLabel id="genero-label">Género</InputLabel>
@@ -165,7 +173,12 @@ export const ListAthletes = () => {
                 </InputGroup>
               </FormControl>
             </Col>
-            <Col xs={6} md={3}>
+            <Col
+              xs={12}
+              sm={6}
+              lg={3}
+              className="listAthletes__filterWrapper__col"
+            >
               <FormControl fullWidth>
                 <InputGroup>
                   <InputLabel id="posicion-label">Posición</InputLabel>
@@ -197,7 +210,12 @@ export const ListAthletes = () => {
                 </InputGroup>
               </FormControl>
             </Col>
-            <Col xs={6} md={3}>
+            <Col
+              xs={12}
+              sm={6}
+              lg={3}
+              className="listAthletes__filterWrapper__col"
+            >
               <FormControl fullWidth>
                 <InputGroup>
                   <InputLabel id="posicion-label">Pierna Hábil</InputLabel>
@@ -224,7 +242,12 @@ export const ListAthletes = () => {
                 </InputGroup>
               </FormControl>
             </Col>
-            <Col xs={6} md={3}>
+            <Col
+              xs={12}
+              sm={6}
+              lg={3}
+              className="listAthletes__filterWrapper__col"
+            >
               <FormControl fullWidth>
                 <InputGroup>
                   <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -255,7 +278,11 @@ export const ListAthletes = () => {
             </Col>
           </Row>
           <Row className="listAthletes__paginationWrapper">
-            <Col xs={{ offset: 9, span: 3 }}>
+            <Col
+              xl={{ offset: 9, span: 3 }}
+              sm={{ offset: 7, span: 5 }}
+              xs={{ offset: 6, span: 6 }}
+            >
               <Row style={{ margin: "0" }}>
                 <Col
                   style={{
@@ -263,13 +290,14 @@ export const ListAthletes = () => {
                     alignItems: "center",
                     justifyContent: "Center",
                   }}
+                  xs={6}
                   md={8}
                 >
                   <h5 style={{ textAlign: "center" }}>
                     Deportistas Por Página
                   </h5>
                 </Col>
-                <Col md={4}>
+                <Col xs={6} md={4}>
                   <Select
                     fullWidth
                     value={showedAthletes}
@@ -277,7 +305,6 @@ export const ListAthletes = () => {
                       setShowedAthletes(e.target.value);
                     }}
                   >
-                    <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={5}>5</MenuItem>
                     <MenuItem value={10}>10</MenuItem>
                     <MenuItem value={20}>20</MenuItem>
@@ -289,7 +316,14 @@ export const ListAthletes = () => {
           <Row className="listAthletes__listWrapper">
             {filteredAthletes.map((item, index) => {
               return (
-                <Col md={4} key={index}>
+                <Col
+                  xs={12}
+                  sm={6}
+                  md={6}
+                  lg={3}
+                  key={index}
+                  className="listAthletes__cardCol"
+                >
                   <AthleteCard item={item} key={index} />
                 </Col>
               );
