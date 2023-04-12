@@ -9,6 +9,9 @@
     }
     &__mainRow {
       width: 100%;
+      @include tablet {
+        padding: 2rem;
+      }
       &__leftRow {
       }
       &__rightRow {
@@ -27,7 +30,7 @@
           box-shadow: 12px 8px 4px rgba(0, 0, 0, 0.25);
 
           @include phone {
-            width: 80%;
+            width: 100% !important;
             aspect-ratio: 4/1;
             margin-top: 2vh;
           }

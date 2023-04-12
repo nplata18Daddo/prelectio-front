@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import homeBanner from "../../../assets/home/HomeBanner.png";
 export const Main = () => {
   return (
-    <div className="home">
+    <div className="home" id="home">
       <Row className="home__mainRow">
         <Col xs={12} md={6} className="home__mainRow__leftCol">
           <Container className="home__mainRow__leftCol__mainContainer">

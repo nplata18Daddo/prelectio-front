@@ -8,7 +8,7 @@ import {
 
 export const Services = () => {
   return (
-    <div className="services">
+    <div className="services" id="services">
       <Container className="services__mainContainer">
         <Row className="services__mainContainer__titleRow">
           <Col
