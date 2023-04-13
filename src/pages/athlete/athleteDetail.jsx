@@ -88,7 +88,7 @@ export const AthleteDetail = () => {
           <Row className="athleteDetail__mainInfoRow">
             <Col xs={12}>
             <Row xs={12}style={{display:"flex", flexDirection:"column", alignItems:"flex-end", minWidth:"20%"}}>
-            <Col xs={12} style={{ minHeight:"35px", marginTop:"10px"}}> 
+            <Col xs={4} style={{ minHeight:"10%", marginTop:"10px"}}> 
            
            <SendEmailModal id_usuario= {athleteInfo.id_usuario}/>
            </Col>

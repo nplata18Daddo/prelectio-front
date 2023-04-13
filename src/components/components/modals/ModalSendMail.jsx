@@ -49,7 +49,7 @@ function SendEmailModal(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="listAthletes__button">
+      <Button variant="primary" onClick={handleShow} className="listAthletes__button" style={{minHeight:"40px"}}>
         Contactar
       </Button>
       <ModalInfo
