@@ -21,6 +21,7 @@ import { LayoutAthlete } from "../components/layout/athlete/layoutAthlete";
 import { RecruiterProfile } from "../pages/recruiter/recruiterProfile";
 import { AthleteProfile } from "../pages/athlete/athleteProfile";
 import { ListAthletes } from "../pages/athlete/listAthlete";
+import { AthleteDetail } from "../pages/athlete/athleteDetail";
 function AppRoutes() {
   const location = useLocation();
   return (
@@ -93,6 +94,13 @@ function AppRoutes() {
         >
           <Route path="recruiter">
             <Route path="profile" element={<RecruiterProfile />} />
+          </Route>
+        </Route>
+        <Route
+          element={<LayoutRecruiter role="recruiter" routeName="Atleta" />}
+        >
+          <Route path="recruiter">
+            <Route path="athlete/:id" element={<AthleteDetail />} />
           </Route>
         </Route>
         {/* Not Found */}

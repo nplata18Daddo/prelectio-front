@@ -48,7 +48,6 @@ export function GetAthleteDetail(data) {
   });
 }
 export function GetHabilidadDeportista(data) {
-  console.log(data)
   return axios({
     method: "GET",
     url: "api/habilidadDeportista/deportista/" + data,
@@ -60,7 +59,6 @@ export function GetHabilidadDeportista(data) {
   });
 }
 export function GetTrayectoriaDeportista(data) {
-  console.log(data)
   return axios({
     method: "GET",
     url: "api/trayectoria/findByDeportista/" + data,

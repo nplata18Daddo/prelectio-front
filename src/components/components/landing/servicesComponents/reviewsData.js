@@ -1,20 +1,27 @@
 export const reviews = [
   {
     veredict:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p",
-    name: "Néstor Plata",
-    position: "DT Prelectio",
+      "Excelente herramienta, muy útil para agilizar los procesos de los clubes",
+    name: "Eduardo Orozco JR",
+    position: "Delegado de la federación colombiana de fútbol (FCF)",
   },
   {
     veredict:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore",
-    name: "Juan Andres Caycedo",
-    position: "DT",
+      "Revolucionaria plataforma ¿me gustaria saber cuando estará disponible a nivel internacional? ayudara a muchos jovenes talentosos",
+    name: "Wilmar Baez",
+    position: "Técnico Sub 17 Nacional club PVYO",
   },
   {
     veredict:
-      "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular..",
-    name: "Juan Pablo Martinez",
-    position: "DT",
+      "Es interesante encontrar esta clase de herramientas que impulsan a los jovenes olvidados por el deporte nacional e internacional",
+    name: "Jeison Moncada",
+    position:
+      "Fisioterapeuta en áreas de futbol egresado de la Universidad de la Sabana",
+  },
+  {
+    veredict:
+      "Recomendarias realizar capacitaciones para qque clubes y representantes aprendan a manejar esta herramienta y puedan aprovecharla de la mejor manera",
+    name: "Carlos Rozo",
+    position: "Gerente General clubo PVYO",
   },
 ];

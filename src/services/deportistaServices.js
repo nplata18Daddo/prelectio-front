@@ -35,3 +35,11 @@ export function GetDeportistas(data) {
     data: data,
   });
 }
+
+export function GetDeportistaById(id) {
+  return axios({
+    method: "get",
+    url: "api/deportista/getById/" + id,
+    baseURL: process.env.REACT_APP_BASE_URL,
+  });
+}

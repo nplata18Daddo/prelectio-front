@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { CODES } from "../../../consts/codes";
 import baseProfile from "../../../assets/register/emptyProfile.png";
+import { useNavigate } from "react-router-dom";
 
 export const AthleteCard = (props) => {
-  const [imageUrl, setImageUrl] = useState(null);
-
+  const navigate = useNavigate();
   const img =
     props.item.usuario.foto_usuario_base_64 != null
       ? "data:image/png;base64," + props.item.usuario.foto_usuario_base_64
@@ -15,10 +15,14 @@ export const AthleteCard = (props) => {
 
   return (
     <Card
+      onClick={() => {
+        navigate("/recruiter/athlete/" + props.item.id_deportista);
+      }}
       sx={{
         filter: "drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.37))",
         backgroundColor: "#282828",
         borderRadius: "15px",
+        "&:hover": { cursor: "pointer" },
       }}
     >
       <CardMedia title="Profile Picture" style={{ position: "relative" }}>
@@ -32,7 +36,12 @@ export const AthleteCard = (props) => {
           sx={{ fontWeight: "bold", color: "#FFFFFF" }}
           noWrap
         >
-          {props.item.usuario.nombre_usuario}
+          {props.item.usuario.nombre_usuario
+            .split(" ")
+            .map(function (nombre) {
+              return nombre.charAt(0).toUpperCase() + nombre.slice(1);
+            })
+            .join(" ")}
         </Typography>
         <Typography
           gutterBottom

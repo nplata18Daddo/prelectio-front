@@ -51,6 +51,11 @@ export const CODES = {
     { label: "Delantero Centro", value: 11 },
   ],
 
+  TIPO_DOCUMENTO_CODES: [
+    { label: "CC", value: 1 },
+    { label: "CE", value: 2 },
+    { label: "TI", value: 3 },
+  ],
   CODES_HABILIDADES: [
     { label: "Agilidad", value: 1 },
     { label: "Agresividad", value: 2 },

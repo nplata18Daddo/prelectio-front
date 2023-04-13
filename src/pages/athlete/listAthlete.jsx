@@ -11,7 +11,15 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
-import { Container, Row, Form, InputGroup, Col } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Form,
+  InputGroup,
+  Col,
+  Spinner,
+  Button,
+} from "react-bootstrap";
 import { AthleteCard } from "../../components/components/athlete/athleteCard";
 import { CODES } from "../../consts/codes";
 import { GetDeportistas } from "../../services/deportistaServices";
@@ -93,6 +101,7 @@ export const ListAthletes = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+      setAthletes([]);
       const [messages] = await Promise.all([GetDeportistas()]);
 
       if (messages.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
@@ -127,18 +136,38 @@ export const ListAthletes = () => {
             style={{ margin: "0" }}
             className="listAthletes__searchBarWrapper"
           >
-            <InputGroup>
-              <InputGroup.Text className="display__small">
-                <i className="bi bi-search"></i>
-              </InputGroup.Text>
-              <Form.Control
-                className=""
-                type="search"
-                placeholder="Buscar por nombre"
-                aria-label="Search"
-                onChange={handleSearch}
-              />
-            </InputGroup>
+            <Col xs={8} md={10}>
+              <InputGroup>
+                <InputGroup.Text className="display__small">
+                  <i className="bi bi-search"></i>
+                </InputGroup.Text>
+                <Form.Control
+                  disabled={athletes.length === 0}
+                  type="search"
+                  placeholder="Buscar por nombre"
+                  aria-label="Search"
+                  onChange={handleSearch}
+                />
+              </InputGroup>
+            </Col>
+            <Col
+              xs={4}
+              md={2}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Button
+                className="listAthletes__button"
+                onClick={() => {
+                  setRefresh(!refresh);
+                }}
+              >
+                Actualizar
+              </Button>
+            </Col>
           </Row>
           <Row className="listAthletes__filterWrapper">
             <Col
@@ -151,6 +180,7 @@ export const ListAthletes = () => {
                 <InputGroup>
                   <InputLabel id="genero-label">Género</InputLabel>
                   <Select
+                    disabled={athletes.length === 0}
                     style={{ width: selectedGenero ? "88%" : "100%" }}
                     labelId="genero-label"
                     id="genero"
@@ -183,6 +213,7 @@ export const ListAthletes = () => {
                 <InputGroup>
                   <InputLabel id="posicion-label">Posición</InputLabel>
                   <Select
+                    disabled={athletes.length === 0}
                     style={{ width: selectedPosicion ? "88%" : "100%" }}
                     labelId="posicion-label"
                     id="Posición"
@@ -220,6 +251,7 @@ export const ListAthletes = () => {
                 <InputGroup>
                   <InputLabel id="posicion-label">Pierna Hábil</InputLabel>
                   <Select
+                    disabled={athletes.length === 0}
                     style={{ width: selectedPierna ? "88%" : "100%" }}
                     labelId="pierna_habil-label"
                     id="pierna_habil"
@@ -252,6 +284,7 @@ export const ListAthletes = () => {
                 <InputGroup>
                   <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DesktopDatePicker
+                      disabled={athletes.length === 0}
                       sx={{
                         width: "88%",
                       }}
@@ -314,20 +347,32 @@ export const ListAthletes = () => {
             </Col>
           </Row>
           <Row className="listAthletes__listWrapper">
-            {filteredAthletes.map((item, index) => {
-              return (
-                <Col
-                  xs={12}
-                  sm={6}
-                  md={6}
-                  lg={3}
-                  key={index}
-                  className="listAthletes__cardCol"
-                >
-                  <AthleteCard item={item} key={index} />
-                </Col>
-              );
-            })}
+            {athletes.length === 0 ? (
+              <div
+                style={{
+                  alignContent: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <Spinner variant="primary" />
+              </div>
+            ) : (
+              filteredAthletes.map((item, index) => {
+                return (
+                  <Col
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={3}
+                    key={index}
+                    className="listAthletes__cardCol"
+                  >
+                    <AthleteCard item={item} key={index} />
+                  </Col>
+                );
+              })
+            )}
           </Row>
           <Row>
             <Col
