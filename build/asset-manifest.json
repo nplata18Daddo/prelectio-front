@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.191eb632.css",
-    "main.js": "/static/js/main.ff6a8f91.js",
+    "main.css": "/static/css/main.cf371172.css",
+    "main.js": "/static/js/main.940740fc.js",
     "static/js/787.e0bbd9dd.chunk.js": "/static/js/787.e0bbd9dd.chunk.js",
     "static/media/IMG_7308.jpg": "/static/media/IMG_7308.fbe0081b2c60eebb8229.jpg",
     "static/media/IMG_7216.jpg": "/static/media/IMG_7216.f92eb48a0ccb374ab0af.jpg",
@@ -11,6 +11,7 @@
     "static/media/IMG_8108.jpg": "/static/media/IMG_8108.d1edcf669162537f1cd5.jpg",
     "static/media/IMG_8188.jpg": "/static/media/IMG_8188.0ae35c43819bbd6457bf.jpg",
     "static/media/IMG_8144.jpg": "/static/media/IMG_8144.08715cc24c8fbc301873.jpg",
+    "static/media/registerDeportistaBackground.png": "/static/media/registerDeportistaBackground.82b03191a0507ff03aca.png",
     "static/media/fondoLogin.png": "/static/media/fondoLogin.8773173a81408e8b2749.png",
     "static/media/HomeBanner.png": "/static/media/HomeBanner.84149c64e9337d64f7aa.png",
     "static/media/registerBackground.png": "/static/media/registerBackground.93e64657db082b4ced17.png",
@@ -29,12 +30,12 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/index.html",
-    "main.191eb632.css.map": "/static/css/main.191eb632.css.map",
-    "main.ff6a8f91.js.map": "/static/js/main.ff6a8f91.js.map",
+    "main.cf371172.css.map": "/static/css/main.cf371172.css.map",
+    "main.940740fc.js.map": "/static/js/main.940740fc.js.map",
     "787.e0bbd9dd.chunk.js.map": "/static/js/787.e0bbd9dd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.191eb632.css",
-    "static/js/main.ff6a8f91.js"
+    "static/css/main.cf371172.css",
+    "static/js/main.940740fc.js"
   ]
 }

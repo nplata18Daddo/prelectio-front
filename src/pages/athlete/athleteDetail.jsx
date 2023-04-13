@@ -522,7 +522,7 @@ export const AthleteDetail = () => {
                               disabled
                               maxLength="20"
                               className="display__small"
-                              placeholder="Tu celular"
+                              placeholder="Habilidad deportista"
                               value={
                                 CODES.CODES_HABILIDADES.find(
                                   (habi) => habi.value == item.id_habilidad
