@@ -19,7 +19,7 @@ import {
 } from "../../services/adminServices";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-
+import  SendEmailModal from "../../components/components/modals/ModalSendMail"
 export const AthleteDetail = () => {
   const { id } = useParams();
   const [athleteInfo, setAthleteInfo] = useState(null);
@@ -86,6 +86,15 @@ export const AthleteDetail = () => {
           </div>
         ) : (
           <Row className="athleteDetail__mainInfoRow">
+            <Col xs={12}>
+            <Row xs={12}style={{display:"flex", flexDirection:"column", alignItems:"flex-end", minWidth:"20%"}}>
+            <Col xs={12} style={{ minHeight:"35px", marginTop:"10px"}}> 
+           
+           <SendEmailModal id_usuario= {athleteInfo.id_usuario}/>
+           </Col>
+            </Row>
+            </Col>
+            
             <Col xs={12} className="athleteDetail__mainInfoRow__mainInfoCol">
               <Row className="athleteDetail__mainInfoRow__mainInfoCol__imgRow">
                 {img ? (
@@ -592,11 +601,20 @@ export const AthleteDetail = () => {
                             </CardContent>
                           </Card>
                         </Col>
+                        
                       );
                     })
                   )}
                 </Row>
               </Row>
+            </Col>
+            <Col xs={12}>
+            <Row xs={12}style={{display:"flex", flexDirection:"column", alignItems:"center", minWidth:"20%"}}>
+            <Col xs={12} style={{ minHeight:"35px", marginTop:"10px"}}> 
+           
+           <SendEmailModal id_usuario= {athleteInfo.id_usuario}/>
+           </Col>
+            </Row>
             </Col>
           </Row>
         )}

@@ -24,6 +24,17 @@ export function GetApprovedRecruiters(data) {
     data: data,
   });
 }
+export function SendMail(data) {
+  return axios({
+    method: "POST",
+    url: "api/mensaje",
+    headers: {
+      Authorization: GetToken(),
+    },
+    baseURL: process.env.REACT_APP_BASE_URL,
+    data: data,
+  });
+}
 
 export function GetRecruiterDetail(data) {
   return axios({

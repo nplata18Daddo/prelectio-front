@@ -21,6 +21,7 @@ import {
   UpdateProfileAthlete,
 } from "../../services/adminServices";
 import { UpdateProfileRecruiter } from "../../services/recruiterServices";
+import  SendEmailModal from "../../components/components/modals/ModalSendMail"
 import { ModalInfo } from "../../components/components/modals/ModalInfo";
 export const AthleteProfile = () => {
   const [departments, setDepartments] = useState([]);
@@ -867,6 +868,9 @@ export const AthleteProfile = () => {
            
           </p>
         </Form>
+                
+                    
+                
       </Col>
     </Container>
   );
