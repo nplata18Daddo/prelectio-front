@@ -81,12 +81,12 @@ export function GetTrayectoriaDeportista(data) {
   });
 }
 export function UpdateProfileAthlete(data) {
-  console.log("goingg")
   return axios({
     method: "PUT",
     data: data,
     url: "api/deportista/update/",
     baseURL: process.env.REACT_APP_BASE_URL,
+    headers: { "Content-Type": "multipart/form-data" },
   });
 }
 

@@ -14,6 +14,7 @@ import { CODES } from "../../consts/codes";
 import { getCiudades, getDepartamentos } from "../../services/locationServices";
 import * as yup from "yup";
 import ColombianFlag from "../../assets/register/colombia.png";
+import EditIcon from "@mui/icons-material/Edit";
 import {
   GetAthleteDetail,
   GetHabilidadDeportista,
@@ -21,8 +22,10 @@ import {
   UpdateProfileAthlete,
 } from "../../services/adminServices";
 import { UpdateProfileRecruiter } from "../../services/recruiterServices";
-import  SendEmailModal from "../../components/components/modals/ModalSendMail"
+import SendEmailModal from "../../components/components/modals/ModalSendMail";
+import baseProfile from "../../assets/register/emptyProfile.png";
 import { ModalInfo } from "../../components/components/modals/ModalInfo";
+import { IconButton } from "@mui/material";
 export const AthleteProfile = () => {
   const [departments, setDepartments] = useState([]);
   const [cities, setCities] = useState([]);
@@ -36,6 +39,9 @@ export const AthleteProfile = () => {
   const [userData, setUserData] = useState({});
   const [selectedValues, setSelectedValues] = useState([]);
   const [trayectorias, setTrayectorias] = useState([]);
+  const [img, setImg] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
   const handleSelect = (e) => {
     const selectedOptions = Array.from(
@@ -86,7 +92,6 @@ export const AthleteProfile = () => {
     { label: "Saque Largo Con Manos", value: "20" },
     { label: "Tiros Libres", value: "21" },
   ];
-
   useEffect(() => {
     const fetchData = async () => {
       const [cities, departments] = await Promise.all([
@@ -117,6 +122,14 @@ export const AthleteProfile = () => {
         };
         const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
 
+        if (userInfo.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          const img =
+            userInfo.data.responseMessage.foto_usuario_base_64 != null
+              ? "data:image/png;base64," +
+                userInfo.data.responseMessage.foto_usuario_base_64
+              : baseProfile;
+          setImg(img);
+        }
         const [habilidadesDeportista] = await Promise.all([
           GetHabilidadDeportista(
             userInfo.data.responseMessage.deportista[0].id_deportista
@@ -168,7 +181,6 @@ export const AthleteProfile = () => {
         id: activeUser.id_usuario,
       };
       const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
-      console.log(userInfo)
       const [trayectoriasD] = await Promise.all([
         GetTrayectoriaDeportista(
           userInfo.data.responseMessage.deportista[0].id_deportista
@@ -190,7 +202,6 @@ export const AthleteProfile = () => {
       }
     } */
     setTrayectorias(trayectoriass);
-    console.log(trayectorias);
     setRefresh(false);
   }
 
@@ -202,12 +213,9 @@ export const AthleteProfile = () => {
         id: activeUser.id_usuario,
       };
       const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
-      
 
       id_deportistaa =
         userInfo.data.responseMessage.deportista[0].id_deportista;
-      console.log(userInfo.data.responseMessage.deportista[0].id_deportista);
-      console.log(id_deportistaa);
 
       let newfield = {
         id_trayectoria: "",
@@ -227,7 +235,6 @@ export const AthleteProfile = () => {
     let trayectoriass = [...trayectorias];
     trayectoriass[index].descripcion_trayectoria = descripcion;
     setTrayectorias(trayectoriass);
-    console.log(trayectorias);
     setRefresh(false);
   }
   function setTituloTrayectoria(index, titulo) {
@@ -235,7 +242,6 @@ export const AthleteProfile = () => {
     let trayectoriass = [...trayectorias];
     trayectoriass[index].titulo_trayectoria = titulo;
     setTrayectorias(trayectoriass);
-    console.log(trayectorias);
     setRefresh(false);
   }
 
@@ -248,7 +254,6 @@ export const AthleteProfile = () => {
       trayectoriass[index].fecha_fin = fecha;
     }
     setTrayectorias(trayectoriass);
-    console.log(trayectorias);
     setRefresh(false);
   }
 
@@ -271,7 +276,7 @@ export const AthleteProfile = () => {
       watch("historia") === "" ||
       watch("video") === "" ||
       watch("posicion") === "" ||
-      watch("pierna") === "" ;
+      watch("pierna") === "";
 
     return disabled;
   };
@@ -288,46 +293,43 @@ export const AthleteProfile = () => {
   };
 
   const handleUpdate = async (data) => {
-    console.log(data);
-
-
-    let id_deportistaa = 0  
+    let id_deportistaa = 0;
     const activeUser = JSON.parse(localStorage.getItem("user"));
-      const obj = {
-        id: activeUser.id_usuario,
-      };
-      const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
+    const obj = {
+      id: activeUser.id_usuario,
+    };
+    const [userInfo] = await Promise.all([GetAthleteDetail(obj)]);
 
-      id_deportistaa =
-        userInfo.data.responseMessage.deportista[0].id_deportista;
+    id_deportistaa = userInfo.data.responseMessage.deportista[0].id_deportista;
     setLoading(true);
     try {
-      const obj = {
-        id_usuario: userData.id_usuario,
-        id_deportista: id_deportistaa,
-        nombre_usuario: data.name,
-        email_usuario: data.email,
-        telefono_usuario: data.phone,
-        tipo_documento_usuario: data.documentType,
-        numero_documento_usuario: data.documentNumber,
-        fecha_nacimiento_usuario: date,
-        id_departamento: data.department,
-        id_ciudad: data.city,
-        direccion_usuario: data.direccion,
-        descripcion_usuario: data.description,
-        genero_usuario: data.genero,
-        altura_deportista: data.altura,
-        peso_deportista: data.peso,
-        historia_clinica_deportista: data.historia,
-        habilidades: selectedValues,
-        video_deportista: data.video,
-        posicion_deportista: data.posicion,
-        trayectoria: trayectorias,
-        foto_usuario: userData.foto_usuario,
-        pierna_habil_deportista: data.pierna,
-      };
-      console.log(obj)
-      const service = await UpdateProfileAthlete(obj);
+      const formData = new FormData();
+      formData.append("id_usuario", userData.id_usuario);
+      formData.append("id_deportista", id_deportistaa);
+      formData.append("telefono_usuario", data.phone);
+      formData.append("nombre_usuario", data.name);
+      formData.append("email_usuario", data.email);
+      formData.append("numero_documento_usuario", data.documentNumber);
+      formData.append("tipo_documento_usuario", data.documentType);
+      formData.append("foto_usuario", imageFile);
+      formData.append("fecha_nacimiento_usuario", date);
+      formData.append("genero_usuario", data.genero);
+      formData.append("descripcion_usuario", data.description);
+      formData.append("id_departamento", data.department);
+      formData.append("id_ciudad", data.city);
+      formData.append("peso_deportista", data.peso);
+      formData.append("altura_deportista", data.altura);
+      formData.append("posicion_deportista", data.posicion);
+      formData.append("pierna_habil_deportista", data.pierna);
+      formData.append("habilidades", JSON.stringify(selectedValues));
+      formData.append("direccion_usuario", data.direccion);
+      formData.append("password_usuario", data.password);
+      formData.append("rol_usuario", "2");
+      formData.append("historia_clinica_deportista", data.historia);
+      formData.append("changePass", false);
+      formData.append("video_deportista", data.video);
+      formData.append("trayectoria", JSON.stringify(trayectorias));
+      const service = await UpdateProfileAthlete(formData);
 
       setResponseMessage(service);
       setLoading(false);
@@ -344,6 +346,19 @@ export const AthleteProfile = () => {
     }
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageDataUrl = reader.result;
+        setImagePreviewUrl(imageDataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <Container className="edit__form__container">
       <ModalInfo
@@ -353,6 +368,56 @@ export const AthleteProfile = () => {
       />
       <Col xs={12}>
         <Form onSubmit={handleSubmit(handleUpdate)}>
+          <Col xs={12} className="athleteDetail__mainInfoRow__mainInfoCol">
+            <Row className="athleteDetail__mainInfoRow__mainInfoCol__imgRow">
+              <div style={{ position: "relative" }}>
+                {img ? (
+                  <img
+                    src={imageFile ? imagePreviewUrl : img}
+                    className="athleteDetail__mainInfoRow__mainInfoCol__imgRow__img"
+                  ></img>
+                ) : (
+                  <Spinner />
+                )}
+                {img && (
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                    sx={{
+                      position: "absolute",
+                      bottom: "-12%",
+                      right: "47%",
+                      width: "6%",
+                    }}
+                  >
+                    <input
+                      id="photo-upload"
+                      className="imageInput__fotoDiv__fileUpload"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        handleImageChange(e);
+                      }}
+                    ></input>
+                    <EditIcon
+                      fontSize="large"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        padding: "15%",
+                      }}
+                      sx={{
+                        backgroundColor: "#00ccff",
+                        color: "white",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  </IconButton>
+                )}
+              </div>
+            </Row>
+          </Col>
           <Form.Group
             className="mb-3 mt-3"
             controlId="formBasicEmail"
@@ -604,7 +669,6 @@ export const AthleteProfile = () => {
                 </option>
                 <option value="1">Derecha</option>
                 <option value="2">Izquierda</option>
-                
               </Form.Select>
             </Form.Group>
             <Form.Group
@@ -710,7 +774,6 @@ export const AthleteProfile = () => {
                             )
                           );
                         }
-                        console.log(selectedValues);
                       }}
                     />
                   </Col>
@@ -734,7 +797,7 @@ export const AthleteProfile = () => {
                   <Row className="mb-2" key={index}>
                     <Col xs={11}>
                       <Row className="mb-2">
-                      <Col xs={12} md={4}>
+                        <Col xs={12} md={4}>
                           <InputGroup>
                             <Form.Control
                               maxLength="100"
@@ -742,10 +805,7 @@ export const AthleteProfile = () => {
                               className="edit__input  display__small"
                               placeholder="Trayectoria"
                               onChange={(e) => {
-                                setTituloTrayectoria(
-                                  index,
-                                  e.target.value
-                                );
+                                setTituloTrayectoria(index, e.target.value);
                               }}
                             />
                           </InputGroup>
@@ -826,9 +886,15 @@ export const AthleteProfile = () => {
                 ))}
               </Row>
             </Form.Group>
-            <Col xs={12} style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+            <Col
+              xs={12}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Button
-              
                 color="primary"
                 onClick={() => {
                   addTrayectoriaField();
@@ -864,13 +930,8 @@ export const AthleteProfile = () => {
           >
             {loading ? <Spinner animation="border" /> : "Actualizar"}
           </Button>
-          <p className="display__label text-white mt-4">
-           
-          </p>
+          <p className="display__label text-white mt-4"></p>
         </Form>
-                
-                    
-                
       </Col>
     </Container>
   );
