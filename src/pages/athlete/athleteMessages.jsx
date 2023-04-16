@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { MailContent } from "../../components/components/mail/mailContent";
 import { MailDetail } from "../../components/components/mail/mailDetail";
 import { CODES } from "../../consts/codes";
@@ -78,6 +78,21 @@ export const AthleteMessages = () => {
   };
   return (
     <Container style={{ marginTop: "3rem", marginBottom: "5rem" }}>
+      <Row style={{ justifyContent: "end" }} className="mb-4">
+        <Col xs={3}>
+          <Button
+            style={{ fontSize: "14px" }}
+            className="login__submit display__label weight__bold"
+            variant="primary"
+            onClick={() => {
+              setRefresh(!refresh);
+            }}
+            type="submit"
+          >
+            Actualizar
+          </Button>
+        </Col>
+      </Row>
       <div className="mail__container">
         <Row style={{ margin: "0" }}>
           <Col xs={12} className="mail__searchBar">
@@ -124,6 +139,8 @@ export const AthleteMessages = () => {
           </Col>
           <Col className="email-details__wrapper" xs={12} md={8}>
             <MailContent
+              refresh={refresh}
+              setRefresh={setRefresh}
               selectedItem={selectedItem}
               mails={filteredEmails}
               loading={loading}

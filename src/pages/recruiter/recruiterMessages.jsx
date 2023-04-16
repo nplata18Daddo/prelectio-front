@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 import { MailRecruiterDetail } from "../../components/components/mailRecruiters/mailRecruiterDetail";
 import { MailRecruiterContent } from "../../components/components/mailRecruiters/mailRecruiterContent";
@@ -107,6 +107,21 @@ export const RecruiterMessages = () => {
   };
   return (
     <Container style={{ marginTop: "3rem", marginBottom: "5rem" }}>
+      <Row style={{ justifyContent: "end" }} className="mb-4">
+        <Col xs={3}>
+          <Button
+            style={{ fontSize: "14px" }}
+            className="login__submit display__label weight__bold"
+            variant="primary"
+            onClick={() => {
+              setRefresh(!refresh);
+            }}
+            type="submit"
+          >
+            Actualizar
+          </Button>
+        </Col>
+      </Row>
       <div className="mail__container">
         <Row style={{ margin: "0" }}>
           <Col xs={12} className="mail__searchBar">
@@ -184,12 +199,16 @@ export const RecruiterMessages = () => {
           <Col className="email-details__wrapper" xs={12} md={8}>
             {showSent ? (
               <MailRecruiterContent
+                refresh={refresh}
+                setRefresh={setRefresh}
                 selectedItem={selectedItem}
                 mails={filteredEmails}
                 loading={loading}
               />
             ) : (
               <MailContent
+                refresh={refresh}
+                setRefresh={setRefresh}
                 reply={true}
                 selectedItem={selectedItem}
                 mails={filteredEmails}

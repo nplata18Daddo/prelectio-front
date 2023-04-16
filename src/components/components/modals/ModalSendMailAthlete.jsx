@@ -34,6 +34,7 @@ function SendEmailModalAthlete(props) {
           setOpenModalInfo(true);
           setSubject("");
           setContent("");
+          props.setRefresh(!props.refresh);
         }
       }
     };
@@ -98,11 +99,21 @@ function SendEmailModalAthlete(props) {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer style={{ textAlign: "center", justifyContent: "center" }}>
+          <Button
+            style={{ fontSize: "14px" }}
+            variant="secondary"
+            onClick={handleClose}
+          >
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleSubmit} type="submit">
+          <Button
+            style={{ fontSize: "14px" }}
+            className="login__submit display__label weight__bold"
+            variant="primary"
+            onClick={handleSubmit}
+            type="submit"
+          >
             Enviar
           </Button>
         </Modal.Footer>

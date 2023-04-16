@@ -45,6 +45,8 @@ export const MailContent = (props) => {
               <div className="email-details__buttons">
                 {!props.reply && (
                   <SendEmailModalAthlete
+                    refresh={props.refresh}
+                    setRefresh={props.setRefresh}
                     id_usuario={props.selectedItem.de}
                     message={props.selectedItem}
                   />
