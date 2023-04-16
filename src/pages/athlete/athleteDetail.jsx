@@ -19,7 +19,7 @@ import {
 } from "../../services/adminServices";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import  SendEmailModal from "../../components/components/modals/ModalSendMail"
+import SendEmailModal from "../../components/components/modals/ModalSendMail";
 export const AthleteDetail = () => {
   const { id } = useParams();
   const [athleteInfo, setAthleteInfo] = useState(null);
@@ -27,7 +27,14 @@ export const AthleteDetail = () => {
   const [cities, setCities] = useState([]);
   const [habilidadesDeportista, setHabilidadesDeportista] = useState([]);
   const [trayectoriasDeportista, setTrayectoriasDeportista] = useState([]);
+  const [user, setUser] = useState(null);
   const [img, setImg] = useState(null);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       const [cities, departments, athlete, habilidades, trayectorias] =
@@ -87,14 +94,23 @@ export const AthleteDetail = () => {
         ) : (
           <Row className="athleteDetail__mainInfoRow">
             <Col xs={12}>
-            <Row xs={12}style={{display:"flex", flexDirection:"column", alignItems:"flex-end", minWidth:"20%"}}>
-            <Col xs={4} style={{ minHeight:"10%", marginTop:"10px"}}> 
-           
-           <SendEmailModal id_usuario= {athleteInfo.id_usuario}/>
-           </Col>
-            </Row>
+              <Row
+                xs={12}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  minWidth: "20%",
+                }}
+              >
+                <Col xs={4} style={{ minHeight: "10%", marginTop: "10px" }}>
+                  {parseInt(user.rol_usuario) !== 0 && (
+                    <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                  )}
+                </Col>
+              </Row>
             </Col>
-            
+
             <Col xs={12} className="athleteDetail__mainInfoRow__mainInfoCol">
               <Row className="athleteDetail__mainInfoRow__mainInfoCol__imgRow">
                 {img ? (
@@ -123,10 +139,9 @@ export const AthleteDetail = () => {
                 <iframe
                   className="athleteDetail__mainInfoRow__mainInfoCol__videoRow__video"
                   src={`https://www.youtube.com/embed/${
-                    athleteInfo.video_deportista.includes("youtu.be")?
-                    athleteInfo.video_deportista.split("youtu.be/")[1]
-                    :
-                    athleteInfo.video_deportista.split("v=")[1]
+                    athleteInfo.video_deportista.includes("youtu.be")
+                      ? athleteInfo.video_deportista.split("youtu.be/")[1]
+                      : athleteInfo.video_deportista.split("v=")[1]
                   }`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -604,7 +619,6 @@ export const AthleteDetail = () => {
                             </CardContent>
                           </Card>
                         </Col>
-                        
                       );
                     })
                   )}
@@ -612,12 +626,21 @@ export const AthleteDetail = () => {
               </Row>
             </Col>
             <Col xs={12}>
-            <Row xs={12}style={{display:"flex", flexDirection:"column", alignItems:"center", minWidth:"20%"}}>
-            <Col xs={12} style={{ minHeight:"35px", marginTop:"10px"}}> 
-           
-           <SendEmailModal id_usuario= {athleteInfo.id_usuario}/>
-           </Col>
-            </Row>
+              <Row
+                xs={12}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  minWidth: "20%",
+                }}
+              >
+                <Col xs={12} style={{ minHeight: "35px", marginTop: "10px" }}>
+                  {parseInt(user.rol_usuario) !== 0 && (
+                    <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                  )}
+                </Col>
+              </Row>
             </Col>
           </Row>
         )}
