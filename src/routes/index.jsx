@@ -53,7 +53,7 @@ function AppRoutes() {
             <Route path="recruiters" element={<AdminRecruiters />} />
             <Route path="recruiter/:id" element={<AdminRecruiterDetail />} />
 
-            <Route path="athletes" element={<AdminAthletes />} />
+            <Route path="athletes" element={<ListAthletes />} />
           </Route>
         </Route>
 

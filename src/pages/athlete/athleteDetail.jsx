@@ -27,7 +27,14 @@ export const AthleteDetail = () => {
   const [cities, setCities] = useState([]);
   const [habilidadesDeportista, setHabilidadesDeportista] = useState([]);
   const [trayectoriasDeportista, setTrayectoriasDeportista] = useState([]);
+  const [user, setUser] = useState(null);
   const [img, setImg] = useState(null);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       const [cities, departments, athlete, habilidades, trayectorias] =
@@ -97,7 +104,9 @@ export const AthleteDetail = () => {
                 }}
               >
                 <Col xs={4} style={{ minHeight: "10%", marginTop: "10px" }}>
-                  <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                  {parseInt(user.rol_usuario) !== 0 && (
+                    <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                  )}
                 </Col>
               </Row>
             </Col>
@@ -607,7 +616,9 @@ export const AthleteDetail = () => {
                 }}
               >
                 <Col xs={12} style={{ minHeight: "35px", marginTop: "10px" }}>
-                  <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                  {parseInt(user.rol_usuario) !== 0 && (
+                    <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                  )}
                 </Col>
               </Row>
             </Col>
