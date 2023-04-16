@@ -123,6 +123,9 @@ export const AthleteDetail = () => {
                 <iframe
                   className="athleteDetail__mainInfoRow__mainInfoCol__videoRow__video"
                   src={`https://www.youtube.com/embed/${
+                    athleteInfo.video_deportista.includes("youtu.be")?
+                    athleteInfo.video_deportista.split("youtu.be/")[1]
+                    :
                     athleteInfo.video_deportista.split("v=")[1]
                   }`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
