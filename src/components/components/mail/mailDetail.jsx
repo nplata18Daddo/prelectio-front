@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const moment = require("moment");
 export const MailDetail = (props) => {

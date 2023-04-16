@@ -8,7 +8,7 @@ export const MailRecruiterContent = (props) => {
   if (!props.loading && props.mails.length === 0 && !props.selectedItem) {
     return (
       <div className="loading__wrapper">
-        <h4> No has contactaco ningun deportista.</h4>
+        <h4> No has contactaco a nadie por el momento.</h4>
       </div>
     );
   }
@@ -31,10 +31,7 @@ export const MailRecruiterContent = (props) => {
       <div className="email-details__container" style={{ textAlign: "start" }}>
         <div className="email-details__header">
           <div className="email-details__info">
-            <strong>
-              {props.selectedItem.usuario_para.nombre_usuario}{" "}
-              {"<" + props.selectedItem.usuario_para.email_usuario + ">"}
-            </strong>
+            <strong>{props.selectedItem.usuario_para?.nombre_usuario} </strong>
 
             <div className="pull-right">
               <span>

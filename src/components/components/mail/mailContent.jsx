@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "moment/locale/es-mx";
 import { Spinner } from "react-bootstrap";
+import SendEmailModalAthlete from "../modals/ModalSendMailAthlete";
 const moment = require("moment");
 
 moment.locale("es");
 export const MailContent = (props) => {
+  const [openReply, setOpenReply] = useState(false);
   if (!props.loading && props.mails.length === 0 && !props.selectedItem) {
     return (
       <div className="loading__wrapper">
@@ -31,10 +33,7 @@ export const MailContent = (props) => {
       <div className="email-details__container" style={{ textAlign: "start" }}>
         <div className="email-details__header">
           <div className="email-details__info">
-            <strong>
-              {props.selectedItem.usuario_de.nombre_usuario}{" "}
-              {"<" + props.selectedItem.usuario_de.email_usuario + ">"}
-            </strong>
+            <strong>{props.selectedItem.usuario_de.nombre_usuario} </strong>
 
             <div className="pull-right">
               <span>
@@ -43,10 +42,19 @@ export const MailContent = (props) => {
                   .locale("es")
                   .format("MMMM D YYYY")}
               </span>
+              <div className="email-details__buttons">
+                {!props.reply && (
+                  <SendEmailModalAthlete
+                    id_usuario={props.selectedItem.de}
+                    message={props.selectedItem}
+                  />
+                )}
+              </div>
             </div>
             <div>{props.selectedItem.subject_mensaje}</div>
           </div>
         </div>
+
         <div className="email-details__message">
           <p>{props.selectedItem.contenido_mensaje}</p>
         </div>

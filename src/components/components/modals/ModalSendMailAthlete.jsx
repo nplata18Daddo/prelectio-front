@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { SendMail } from "../../../services/adminServices";
 import { CODES } from "../../../consts/codes";
 import { ModalInfo } from "../../../components/components/modals/ModalInfo";
 
-function SendEmailModal(props) {
+function SendEmailModalAthlete(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -43,16 +43,22 @@ function SendEmailModal(props) {
     // Send email using subject and content inputs
   };
 
+  useEffect(() => {
+    if (show) {
+      if (props.message) {
+        setSubject("Re:" + props.message.subject_mensaje);
+      }
+    }
+  }, [show, props]);
+
   return (
     <>
-      <Button
-        variant="primary"
-        onClick={handleShow}
-        className="listAthletes__button"
-        style={{ minHeight: "40px" }}
-      >
-        Contactar
-      </Button>
+      <div onClick={handleShow}>
+        <span>
+          <i class="bi bi-reply"></i>
+        </span>
+      </div>
+
       <ModalInfo
         data={responseMessage}
         open={openModalInfo}
@@ -68,6 +74,7 @@ function SendEmailModal(props) {
             <Form.Group controlId="formSubject">
               <Form.Label>Asunto</Form.Label>
               <Form.Control
+                disabled
                 type="text"
                 placeholder="Ingrese el asunto"
                 value={subject}
@@ -75,7 +82,7 @@ function SendEmailModal(props) {
               />
             </Form.Group>
 
-            <Form.Group controlId="formContent" className="mt-3">
+            <Form.Group controlId="formContent " className="mt-3">
               <Form.Label>Contenido</Form.Label>
               <Form.Control
                 as="textarea"
@@ -100,4 +107,4 @@ function SendEmailModal(props) {
   );
 }
 
-export default SendEmailModal;
+export default SendEmailModalAthlete;
