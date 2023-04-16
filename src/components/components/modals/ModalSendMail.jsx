@@ -59,15 +59,18 @@ function SendEmailModal(props) {
         setOpen={setOpenModalInfo}
       />
 
-      <Modal show={show} onHide={handleClose} size="md" centered={true}>
+      <Modal show={show} onHide={handleClose} size="lg" centered={true}>
         <Modal.Header closeButton>
           <Modal.Title>Enviar Correo</Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-5">
           <Form>
             <Form.Group controlId="formSubject">
-              <Form.Label>Asunto</Form.Label>
+              <Form.Label className="weight__bold" style={{ fontSize: "14px" }}>
+                Asunto
+              </Form.Label>
               <Form.Control
+                style={{ fontSize: "14px" }}
                 type="text"
                 placeholder="Ingrese el asunto"
                 value={subject}
@@ -76,8 +79,11 @@ function SendEmailModal(props) {
             </Form.Group>
 
             <Form.Group controlId="formContent" className="mt-3">
-              <Form.Label>Contenido</Form.Label>
+              <Form.Label className="weight__bold" style={{ fontSize: "14px" }}>
+                Contenido
+              </Form.Label>
               <Form.Control
+                style={{ fontSize: "14px" }}
                 as="textarea"
                 placeholder="Ingrese el contenido del correo"
                 rows={5}
@@ -87,11 +93,21 @@ function SendEmailModal(props) {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer style={{ textAlign: "center", justifyContent: "center" }}>
+          <Button
+            style={{ fontSize: "14px" }}
+            variant="secondary"
+            onClick={handleClose}
+          >
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleSubmit} type="submit">
+          <Button
+            className="login__submit display__label weight__bold"
+            style={{ fontSize: "14px" }}
+            variant="primary"
+            onClick={handleSubmit}
+            type="submit"
+          >
             Enviar
           </Button>
         </Modal.Footer>

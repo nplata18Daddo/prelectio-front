@@ -65,14 +65,16 @@ function SendEmailModalAthlete(props) {
         setOpen={setOpenModalInfo}
       />
 
-      <Modal show={show} onHide={handleClose} size="md" centered={true}>
+      <Modal show={show} onHide={handleClose} size="lg" centered={true}>
         <Modal.Header closeButton>
           <Modal.Title>Enviar Correo</Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-5">
           <Form>
             <Form.Group controlId="formSubject">
-              <Form.Label>Asunto</Form.Label>
+              <Form.Label className="weight__bold" style={{ fontSize: "14px" }}>
+                Asunto
+              </Form.Label>
               <Form.Control
                 disabled
                 type="text"
@@ -83,7 +85,9 @@ function SendEmailModalAthlete(props) {
             </Form.Group>
 
             <Form.Group controlId="formContent " className="mt-3">
-              <Form.Label>Contenido</Form.Label>
+              <Form.Label className="weight__bold" style={{ fontSize: "14px" }}>
+                Contenido
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 placeholder="Ingrese el contenido del correo"
