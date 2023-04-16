@@ -26,7 +26,7 @@ export const AthleteCard = (props) => {
       }}
     >
       <CardMedia title="Profile Picture" style={{ position: "relative" }}>
-        {img ? <img style={{ width: "100%" }} src={img}></img> : <Spinner />}{" "}
+        {img ? <img style={{ width: "100%" , aspectRatio:"1/1"}} src={img}></img> : <Spinner />}{" "}
       </CardMedia>
       <CardContent>
         <Typography
