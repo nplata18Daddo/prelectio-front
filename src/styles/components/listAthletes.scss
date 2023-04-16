@@ -42,6 +42,13 @@
     background: linear-gradient(270deg, #00459a 0%, #00ccff 105.68%);
     border-radius: 12px;
     border: none;
+    font-size: 20px;
+    @include tablet{
+      font-size: 15px;
+    }
+    @include phone {
+      font-size: 10px;
+    }
     &:hover,
     &:disabled,
     &:active,

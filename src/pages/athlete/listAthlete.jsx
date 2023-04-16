@@ -34,7 +34,7 @@ export const ListAthletes = () => {
   const [selectedPosicion, setSelectedPosicion] = useState(null);
   const [selectedPierna, setSelectedPierna] = useState(null);
   const [selectedAnio, setSelectedAnio] = useState(null);
-  const [showedAthletes, setShowedAthletes] = useState(5);
+  const [showedAthletes, setShowedAthletes] = useState(15);
   const [selectedPage, setSelectedPage] = useState(1);
 
   const posiciones = CODES.CODES_POSICIONES;
@@ -340,6 +340,7 @@ export const ListAthletes = () => {
                   >
                     <MenuItem value={5}>5</MenuItem>
                     <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={15}>15</MenuItem>
                     <MenuItem value={20}>20</MenuItem>
                   </Select>
                 </Col>
