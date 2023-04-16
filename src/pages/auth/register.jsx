@@ -47,14 +47,19 @@ export const Register = () => {
       <div className="register__background">
         <Row className=" p-4 responsive__margin">
           <Col xs={12} style={{ textAlign: "left" }}>
-            <img
-              className="login__logo"
-              src={LogoPrelectio}
-              alt="logo prelectio"
-            ></img>
+            <Link to="/">
+              <img
+                className="login__logo"
+                src={LogoPrelectio}
+                alt="logo prelectio"
+              ></img>
+            </Link>
           </Col>
         </Row>
-        <Row className="justify-content-center mt-5 pb-5">
+        <Row
+          className="justify-content-center pb-5"
+          style={{ marginTop: "6rem" }}
+        >
           <Col xs={10} md={6}>
             <Card body className="register__card p-4 ">
               <Row>

@@ -22,6 +22,6 @@ export const reviews = [
     veredict:
       "Recomendarias realizar capacitaciones para qque clubes y representantes aprendan a manejar esta herramienta y puedan aprovecharla de la mejor manera",
     name: "Carlos Rozo",
-    position: "Gerente General clubo PVYO",
+    position: "Gerente General club PVYO",
   },
 ];

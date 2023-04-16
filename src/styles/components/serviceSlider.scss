@@ -39,10 +39,6 @@
           margin-bottom: 5%;
         }
         &__btn {
-          @include phone {
-            width: 80%;
-          }
-          width: 30%;
           background-color: $accentGrey;
           border: none;
           font-size: $font-size-default;
