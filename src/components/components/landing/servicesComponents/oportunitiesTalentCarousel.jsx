@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { ServiceSlider } from "../serviceSlider";
-import oportunidadesImg from "../../../../assets/home/oportunidadesSliderPicture.png";
-import oportunidadesImgRes from "../../../../assets/home/oportunidadesSliderResponsive.png";
-import talentoImg from "../../../../assets/home/oportunidadesSliderPicture.png";
-import talentoImgRes from "../../../../assets/home/oportunidadesSliderResponsive.png";
+import oportunidadesImg from "../../../../assets/home/talentsFull.png";
+import oportunidadesImgRes from "../../../../assets/home/talentsPreview.png";
+import talentoImg from "../../../../assets/home/recruitersFull.png";
+import talentoImgRes from "../../../../assets/home/recruitersPreview.png";
 import { Button, Carousel, Col, Row } from "react-bootstrap";
 
 export const OportunitiesTalentCarousel = () => {
