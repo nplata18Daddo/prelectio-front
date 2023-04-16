@@ -19,7 +19,7 @@ import {
 } from "../../services/adminServices";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import  SendEmailModal from "../../components/components/modals/ModalSendMail"
+import SendEmailModal from "../../components/components/modals/ModalSendMail";
 export const AthleteDetail = () => {
   const { id } = useParams();
   const [athleteInfo, setAthleteInfo] = useState(null);
@@ -87,14 +87,21 @@ export const AthleteDetail = () => {
         ) : (
           <Row className="athleteDetail__mainInfoRow">
             <Col xs={12}>
-            <Row xs={12}style={{display:"flex", flexDirection:"column", alignItems:"flex-end", minWidth:"20%"}}>
-            <Col xs={4} style={{ minHeight:"10%", marginTop:"10px"}}> 
-           
-           <SendEmailModal id_usuario= {athleteInfo.id_usuario}/>
-           </Col>
-            </Row>
+              <Row
+                xs={12}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  minWidth: "20%",
+                }}
+              >
+                <Col xs={4} style={{ minHeight: "10%", marginTop: "10px" }}>
+                  <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                </Col>
+              </Row>
             </Col>
-            
+
             <Col xs={12} className="athleteDetail__mainInfoRow__mainInfoCol">
               <Row className="athleteDetail__mainInfoRow__mainInfoCol__imgRow">
                 {img ? (
@@ -123,10 +130,9 @@ export const AthleteDetail = () => {
                 <iframe
                   className="athleteDetail__mainInfoRow__mainInfoCol__videoRow__video"
                   src={`https://www.youtube.com/embed/${
-                    athleteInfo.video_deportista.includes("youtu.be")?
-                    athleteInfo.video_deportista.split("youtu.be/")[1]
-                    :
-                    athleteInfo.video_deportista.split("v=")[1]
+                    athleteInfo.video_deportista.includes("youtu.be")
+                      ? athleteInfo.video_deportista.split("youtu.be/")[1]
+                      : athleteInfo.video_deportista.split("v=")[1]
                   }`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -139,7 +145,7 @@ export const AthleteDetail = () => {
                   <h2 style={{ textAlign: "start" }}>Información básica</h2>
                 </Row>
                 <Row>
-                  <Col xs={12} md={6}>
+                  <Col xs={12} md={12}>
                     <Form.Group
                       className="mb-3 mt-3"
                       controlId="formBasicEmail"
@@ -155,26 +161,6 @@ export const AthleteDetail = () => {
                           value={athleteInfo.usuario.nombre_usuario}
                           className="edit__input  display__small"
                           placeholder="Nombre completo deportista"
-                        />
-                      </InputGroup>
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} md={6}>
-                    <Form.Group
-                      className="mb-3 mt-3"
-                      controlId="name"
-                      style={{ textAlign: "start" }}
-                    >
-                      <Form.Label className=" display__small">
-                        Correo
-                      </Form.Label>
-                      <InputGroup>
-                        <Form.Control
-                          disabled
-                          value={athleteInfo.usuario.email_usuario}
-                          maxLength="100"
-                          className="edit__input  display__small"
-                          placeholder="Correo Deportista"
                         />
                       </InputGroup>
                     </Form.Group>
@@ -604,7 +590,6 @@ export const AthleteDetail = () => {
                             </CardContent>
                           </Card>
                         </Col>
-                        
                       );
                     })
                   )}
@@ -612,12 +597,19 @@ export const AthleteDetail = () => {
               </Row>
             </Col>
             <Col xs={12}>
-            <Row xs={12}style={{display:"flex", flexDirection:"column", alignItems:"center", minWidth:"20%"}}>
-            <Col xs={12} style={{ minHeight:"35px", marginTop:"10px"}}> 
-           
-           <SendEmailModal id_usuario= {athleteInfo.id_usuario}/>
-           </Col>
-            </Row>
+              <Row
+                xs={12}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  minWidth: "20%",
+                }}
+              >
+                <Col xs={12} style={{ minHeight: "35px", marginTop: "10px" }}>
+                  <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                </Col>
+              </Row>
             </Col>
           </Row>
         )}
