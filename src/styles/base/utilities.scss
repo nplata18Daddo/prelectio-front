@@ -35,3 +35,13 @@
   font-size: 12px !important;
   font-family: "Urbanist", sans-serif;
 }
+.MuiFormLabel-root {
+  @include tablet {
+    margin-top: 10px !important;
+  }
+}
+.input-group {
+  @include tablet {
+    flex-wrap: nowrap !important;
+  }
+}

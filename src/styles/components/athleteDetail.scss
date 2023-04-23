@@ -11,7 +11,9 @@
         &__img {
           width: 25%;
           aspect-ratio: 1/1;
-          border-radius: 50%;
+          border-radius: 30%;
+          object-fit: cover;
+          object-position: top;
           @include tablet {
             width: 50%;
           }
@@ -52,17 +54,14 @@
       &__basicInfoRow {
         padding: 0 5%;
         margin-bottom: 2vh;
-
       }
       &__sportInfoRow {
         padding: 0 5%;
         margin-bottom: 2vh;
-
       }
       &__habilidadesRow {
         padding: 0 5%;
         margin-bottom: 2vh;
-
       }
       &__trayectoriaRow {
         padding: 0 5%;

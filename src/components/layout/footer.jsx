@@ -82,9 +82,11 @@ export const Footer = () => {
             </Button>
           </Col>
           <Col xs={1} className="footer__bottomRow__SNCol">
-            <Button className="footer__bottomRow__SNCol__SNButton">
-              <AiFillInstagram className="footer__bottomRow__SNCol__SNButton__icon" />
-            </Button>
+            <a href="https://instagram.com/prelectio_?igshid=YmMyMTA2M2Y=">
+              <Button className="footer__bottomRow__SNCol__SNButton">
+                <AiFillInstagram className="footer__bottomRow__SNCol__SNButton__icon" />
+              </Button>
+            </a>
           </Col>
           <Col xs={1} className="footer__bottomRow__SNCol">
             <Button className="footer__bottomRow__SNCol__SNButton">

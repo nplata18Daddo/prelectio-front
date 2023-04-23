@@ -54,7 +54,9 @@ export const DptoSelectField = ({ ...props }) => {
                 props.setSelectedDpto(e.target.value);
               }}
             >
-              <MenuItem disabled>{props.placeholder}</MenuItem>
+              <MenuItem value={0} disabled>
+                {props.placeholder}
+              </MenuItem>
               {props.options.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item.value}>

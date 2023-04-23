@@ -35,7 +35,7 @@ export const ImageInput = ({ ...props }) => {
           //     error={error?.message ? true : false}
           //     onChange={(e) => field.onChange(e.target.value)}
           //   />
-          <div className="imageInput">
+          <div className="imageInput mt-3">
             <h4 style={{ marginBottom: "2vh" }}>¡Sube tu mejor foto!</h4>
             <div className="imageInput__fotoDiv">
               <div

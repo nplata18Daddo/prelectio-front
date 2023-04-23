@@ -7,7 +7,7 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CODES } from "../../consts/codes";
 import { GetDeportistaById } from "../../services/deportistaServices";
 import ColombianFlag from "../../assets/register/colombia.png";
@@ -29,11 +29,11 @@ export const AthleteDetail = () => {
   const [trayectoriasDeportista, setTrayectoriasDeportista] = useState([]);
   const [user, setUser] = useState(null);
   const [img, setImg] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     setUser(user);
-  });
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,7 +75,7 @@ export const AthleteDetail = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <Container>
@@ -93,6 +93,19 @@ export const AthleteDetail = () => {
           </div>
         ) : (
           <Row className="athleteDetail__mainInfoRow">
+            <Col xs={12} className="px-4 mt-3">
+              <h1
+                onClick={() => navigate(-1)}
+                className="display__large weight__bold pb-1 d-flex align-items-center"
+                style={{ textAlign: "start", cursor: "pointer" }}
+              >
+                <i
+                  className="bi bi-arrow-left-circle colors__lightBlue"
+                  style={{ fontSize: "20px", marginRight: "15px" }}
+                ></i>
+                <span>Ir atrás</span>
+              </h1>
+            </Col>
             <Col xs={12}>
               <Row
                 xs={12}
@@ -104,9 +117,7 @@ export const AthleteDetail = () => {
                 }}
               >
                 <Col xs={4} style={{ minHeight: "10%", marginTop: "10px" }}>
-                  {parseInt(user.rol_usuario) !== 0 && (
-                    <SendEmailModal id_usuario={athleteInfo.id_usuario} />
-                  )}
+                  <SendEmailModal id_usuario={athleteInfo.id_usuario} />
                 </Col>
               </Row>
             </Col>
@@ -115,6 +126,7 @@ export const AthleteDetail = () => {
               <Row className="athleteDetail__mainInfoRow__mainInfoCol__imgRow">
                 {img ? (
                   <img
+                    alt="imagen deportista"
                     src={img}
                     className="athleteDetail__mainInfoRow__mainInfoCol__imgRow__img"
                   ></img>
@@ -345,6 +357,35 @@ export const AthleteDetail = () => {
                           ).nombre_ciudad
                         }
                       />
+                    </Form.Group>
+                  </Col>
+
+                  <Col xs={12} md={12}>
+                    <Form.Group
+                      className="mb-3 mt-3"
+                      controlId="formBasicEmail"
+                      style={{ textAlign: "start" }}
+                    >
+                      <Form.Label className="display__small">
+                        Videos Mejores Momentos
+                      </Form.Label>
+                      <InputGroup>
+                        <a
+                          href={athleteInfo.video_deportista}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ width: "100%", cursor: "pointer" }}
+                        >
+                          <Form.Control
+                            style={{ width: "100%", cursor: "pointer" }}
+                            disabled
+                            maxLength="100"
+                            value={athleteInfo.video_deportista}
+                            className="edit__input  display__small"
+                            placeholder="Nombre completo deportista"
+                          />
+                        </a>
+                      </InputGroup>
                     </Form.Group>
                   </Col>
                 </Row>

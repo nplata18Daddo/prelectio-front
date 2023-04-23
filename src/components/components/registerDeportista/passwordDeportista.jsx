@@ -11,7 +11,7 @@ export const PasswordDeportista = ({ ...props }) => {
     <div className="passwordDeportista">
       <Container className="passwordDeportista__container">
         <Row>
-          <Col xs={12} md={8} style={{ padding: "5rem" }}>
+          <Col xs={12} md={8} style={{ padding: "3rem" }}>
             <Row>
               <Col xs={12}>
                 <h1
@@ -60,42 +60,42 @@ export const PasswordDeportista = ({ ...props }) => {
               <Col className="text-white display__label" xs={12}>
                 <p style={{ textAlign: "left" }}>
                   {" "}
-                    {REGEXP.ONE_LOWER_LETTER.test(password) ? (
-                      <i className="bi bi-check-lg"></i>
-                    ) : (
-                      <i className="bi bi-x-lg"></i>
-                    )}{" "}
+                  {REGEXP.ONE_LOWER_LETTER.test(password) ? (
+                    <i className="bi bi-check-lg"></i>
+                  ) : (
+                    <i className="bi bi-x-lg"></i>
+                  )}{" "}
                   Al menos una minúscula.
                 </p>
               </Col>
               <Col className="text-white display__label" xs={12}>
                 <p style={{ textAlign: "left" }}>
                   {REGEXP.ONE_UPPER_LETTER.test(password) ? (
-                      <i className="bi bi-check-lg"></i>
-                    ) : (
-                      <i className="bi bi-x-lg"></i>
-                    )}{" "}
+                    <i className="bi bi-check-lg"></i>
+                  ) : (
+                    <i className="bi bi-x-lg"></i>
+                  )}{" "}
                   Al menos una mayúscula..
                 </p>
               </Col>
               <Col className="text-white display__label" xs={12}>
                 <p style={{ textAlign: "left" }}>
                   {" "}
-                    {REGEXP.ONE_NUMBER.test(password) ? (
-                      <i className="bi bi-check-lg"></i>
-                    ) : (
-                      <i className="bi bi-x-lg"></i>
-                    )}{" "}
+                  {REGEXP.ONE_NUMBER.test(password) ? (
+                    <i className="bi bi-check-lg"></i>
+                  ) : (
+                    <i className="bi bi-x-lg"></i>
+                  )}{" "}
                   Al menos un número.
                 </p>
               </Col>
               <Col className="text-white display__label" xs={12}>
                 <p style={{ textAlign: "left" }}>
                   {REGEXP.ONE_SPECIAL_CHAR.test(password) ? (
-                      <i className="bi bi-check-lg"></i>
-                    ) : (
-                      <i className="bi bi-x-lg"></i>
-                    )}{" "}
+                    <i className="bi bi-check-lg"></i>
+                  ) : (
+                    <i className="bi bi-x-lg"></i>
+                  )}{" "}
                   Al menos un carácter especial.
                 </p>
               </Col>

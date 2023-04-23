@@ -32,7 +32,15 @@ export const AthleteCard = (props) => {
       >
         <CardMedia title="Profile Picture" style={{ position: "relative" }}>
           {img ? (
-            <img style={{ width: "100%", aspectRatio: "1/1" }} src={img}></img>
+            <img
+              style={{
+                width: "100%",
+                aspectRatio: "1/1",
+                objectFit: "cover",
+                objectPosition: "top",
+              }}
+              src={img}
+            ></img>
           ) : (
             <Spinner />
           )}{" "}
@@ -56,7 +64,7 @@ export const AthleteCard = (props) => {
             gutterBottom
             variant="p"
             component="div"
-            sx={{ color: "#FFFFFF" }}
+            sx={{ color: "#FFFFFF", fontSize: "12px" }}
           >
             {props.item.usuario.genero_usuario == 1
               ? "Masculino"

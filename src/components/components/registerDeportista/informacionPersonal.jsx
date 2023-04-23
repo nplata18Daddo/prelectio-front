@@ -53,7 +53,11 @@ export const InformacionPersonal = (props) => {
             </InputLabel>
             <InputField label="Numero Documento" name="numDoc" />
           </Col>
-          <Col md={3} className="informacionPersonal__container__row__col">
+          <Col
+            md={3}
+            className="informacionPersonal__container__row__col"
+            style={{ textAlign: "initial" }}
+          >
             <InputLabel style={{ marginBottom: "0.5vh" }}>
               <h4 style={{ textAlign: "left", color: "white" }}>
                 Fecha Nacimiento
@@ -90,7 +94,7 @@ export const InformacionPersonal = (props) => {
             <SelectField
               label="Municipio"
               name="municipio"
-              placeholder="Departamento"
+              placeholder="Municipio"
               options={props.selectedCities}
             />
           </Col>
