@@ -52,7 +52,11 @@ function AppRoutes() {
           <Route path="admin">
             <Route path="recruiters" element={<AdminRecruiters />} />
             <Route path="recruiter/:id" element={<AdminRecruiterDetail />} />
+          </Route>
+        </Route>
 
+        <Route element={<LayoutUser role="admin" routeName="Deportistas" />}>
+          <Route path="admin">
             <Route path="athletes" element={<ListAthletes />} />
           </Route>
         </Route>

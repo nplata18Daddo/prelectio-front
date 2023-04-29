@@ -20,6 +20,7 @@ import { PasswordDeportista } from "../../components/components/registerDeportis
 import { Trayectoria } from "../../components/components/registerDeportista/trayectoria";
 
 export const RegisterDeportista = () => {
+  const MAX_FILE_SIZE = 5242880; //100KB
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [departments, setDepartments] = useState([]);
@@ -264,7 +265,14 @@ export const RegisterDeportista = () => {
     yup.object().shape({
       descripcion: yup.string().required("Agrega la descripcion"),
       link_video: yup.string().required("Ingresa un link a tu video"),
-      image: yup.string().required("Debes seleccionar una foto de perfil"),
+      image: yup
+        .mixed()
+        .required("Debes seleccionar una foto de perfil")
+        .test(
+          "is-valid-size",
+          "La foto de debe tener un tamaño maximo de 5MB",
+          (value) => value && value.size <= MAX_FILE_SIZE
+        ),
     }),
     //Validation for trayectoria
     yup.object().shape({}),

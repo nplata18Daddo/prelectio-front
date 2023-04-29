@@ -19,23 +19,36 @@ import {
   Col,
   Spinner,
   Button,
+  FormLabel,
 } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { AthleteCard } from "../../components/components/athlete/athleteCard";
 import { CODES } from "../../consts/codes";
+import {
+  fetchAthlete,
+  getAthlete,
+  getAthleteStatus,
+  resetAthleteStatus,
+} from "../../parts/athleteSlice";
 import { GetDeportistas } from "../../services/deportistaServices";
 
 export const ListAthletes = () => {
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [athletes, setAthletes] = useState([]);
+
   const [filteredAthletes, setFilteredAthletes] = useState([]);
   const [filteredLength, setFilteredLength] = useState(0);
   const [selectedGenero, setSelectedGenero] = useState(null);
   const [selectedPosicion, setSelectedPosicion] = useState(null);
   const [selectedPierna, setSelectedPierna] = useState(null);
   const [selectedAnio, setSelectedAnio] = useState(null);
-  const [showedAthletes, setShowedAthletes] = useState(15);
+  const [showedAthletes, setShowedAthletes] = useState(10);
   const [selectedPage, setSelectedPage] = useState(1);
+
+  const dispatch = useDispatch();
+
+  const athleteStatus = useSelector(getAthleteStatus);
+  const athleteList = useSelector(getAthlete);
 
   const posiciones = CODES.CODES_POSICIONES;
   const handleGeneroChange = (event) => {
@@ -52,7 +65,7 @@ export const ListAthletes = () => {
   };
 
   useEffect(() => {
-    let filteredAthletes = athletes.filter((item) => {
+    let filteredAthletes = athleteList.filter((item) => {
       if (selectedGenero !== null) {
         if (selectedGenero !== item.usuario.genero_usuario) {
           return false;
@@ -99,35 +112,40 @@ export const ListAthletes = () => {
   ]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    if (athleteList.length === 0) {
       setLoading(true);
-      setAthletes([]);
-      const [messages] = await Promise.all([GetDeportistas()]);
+    }
 
-      if (messages.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
-        setLoading(false);
-        setAthletes(messages.data.responseMessage);
-        setFilteredLength(messages.data.responseMessage.length);
-        let filteredAthletes = JSON.parse(
-          JSON.stringify(messages.data.responseMessage)
-        ).splice(showedAthletes * (selectedPage - 1), showedAthletes);
-        setFilteredAthletes(filteredAthletes);
+    const requestAthletes = async () => {
+      try {
+        dispatch(fetchAthlete()).then((item) => {
+          setFilteredLength(item.payload.length);
+          let filteredAthletes = JSON.parse(
+            JSON.stringify(item.payload)
+          ).splice(showedAthletes * (selectedPage - 1), showedAthletes);
+          setFilteredAthletes(filteredAthletes);
+        });
+      } catch (error) {
+        console.log("==============Error Get athletes======================");
+        console.log(error);
+        console.log("====================================");
       }
     };
-
-    fetchData();
-  }, [refresh]);
+    requestAthletes();
+    setLoading(false);
+  }, [dispatch, refresh]);
 
   const handleSearch = (event) => {
     setSelectedGenero(null);
     setSelectedPosicion(null);
     setSelectedPierna(null);
     const value = event.target.value.toLowerCase();
-    let filteredAthletes = athletes.filter((item) => {
+    let filteredAthletes = athleteList.filter((item) => {
       return item.usuario.nombre_usuario.toLowerCase().includes(value);
     });
     setFilteredAthletes(filteredAthletes);
   };
+
   return (
     <div className="listAthletes">
       <Container style={{ marginTop: "3rem", marginBottom: "5rem" }}>
@@ -142,7 +160,8 @@ export const ListAthletes = () => {
                   <i className="bi bi-search"></i>
                 </InputGroup.Text>
                 <Form.Control
-                  disabled={athletes.length === 0}
+                  className="display__label"
+                  disabled={athleteList.length === 0}
                   type="search"
                   placeholder="Buscar por nombre"
                   aria-label="Search"
@@ -162,7 +181,12 @@ export const ListAthletes = () => {
               <Button
                 className="listAthletes__button"
                 onClick={() => {
+                  dispatch(resetAthleteStatus());
                   setRefresh(!refresh);
+                  setSelectedGenero(null);
+                  setSelectedPosicion(null);
+                  setSelectedPierna(null);
+                  setSelectedAnio(null);
                 }}
               >
                 Actualizar
@@ -177,17 +201,18 @@ export const ListAthletes = () => {
               className="listAthletes__filterWrapper__col"
             >
               <FormControl fullWidth>
-                <InputGroup>
-                  <InputLabel id="genero-label">Género</InputLabel>
+                <InputGroup className="no__wrap">
+                  <FormLabel className="display__label">Género</FormLabel>
                   <Select
-                    disabled={athletes.length === 0}
+                    disabled={athleteList.length === 0}
                     style={{ width: selectedGenero ? "88%" : "100%" }}
-                    labelId="genero-label"
-                    id="genero"
-                    label="Género"
                     value={selectedGenero ? selectedGenero : ""}
                     onChange={handleGeneroChange}
+                    displayEmpty
                   >
+                    <MenuItem disabled value="">
+                      Género
+                    </MenuItem>
                     <MenuItem value={1}>Masculino</MenuItem>
                     <MenuItem value={2}>Femenino</MenuItem>
                   </Select>
@@ -210,17 +235,18 @@ export const ListAthletes = () => {
               className="listAthletes__filterWrapper__col"
             >
               <FormControl fullWidth>
-                <InputGroup>
-                  <InputLabel id="posicion-label">Posición</InputLabel>
+                <InputGroup className="no__wrap">
+                  <FormLabel className="display__label">Posición</FormLabel>
                   <Select
-                    disabled={athletes.length === 0}
+                    disabled={athleteList.length === 0}
                     style={{ width: selectedPosicion ? "88%" : "100%" }}
-                    labelId="posicion-label"
-                    id="Posición"
-                    label="Posición"
+                    displayEmpty
                     value={selectedPosicion ? selectedPosicion : ""}
                     onChange={handlePosicionChange}
                   >
+                    <MenuItem disabled value="">
+                      Posición
+                    </MenuItem>
                     {posiciones.map((item, index) => {
                       return (
                         <MenuItem value={item.value} key={index}>
@@ -247,18 +273,19 @@ export const ListAthletes = () => {
               lg={3}
               className="listAthletes__filterWrapper__col"
             >
-              <FormControl fullWidth>
-                <InputGroup>
-                  <InputLabel id="posicion-label">Pierna Hábil</InputLabel>
+              <FormControl className="no__wrap" fullWidth>
+                <InputGroup className="no__wrap">
+                  <FormLabel className="display__label">Pierna Hábil</FormLabel>
                   <Select
-                    disabled={athletes.length === 0}
+                    disabled={athleteList.length === 0}
                     style={{ width: selectedPierna ? "88%" : "100%" }}
-                    labelId="pierna_habil-label"
-                    id="pierna_habil"
-                    label="Pierna Hábil"
+                    displayEmpty
                     value={selectedPierna ? selectedPierna : ""}
                     onChange={handlePiernaChange}
                   >
+                    <MenuItem disabled value="">
+                      Pierna Hábil
+                    </MenuItem>
                     <MenuItem value={1}>Derecha</MenuItem>
                     <MenuItem value={2}>Izquierda</MenuItem>
                   </Select>
@@ -281,15 +308,19 @@ export const ListAthletes = () => {
               className="listAthletes__filterWrapper__col"
             >
               <FormControl fullWidth>
-                <InputGroup>
+                <InputGroup className="no__wrap">
+                  <FormLabel className="display__label">
+                    Año de nacimiento
+                  </FormLabel>
                   <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DesktopDatePicker
-                      disabled={athletes.length === 0}
+                      disabled={athleteList.length === 0}
                       sx={{
                         width: "88%",
                       }}
                       autoComplete="off"
-                      label="Año de nacimiento"
+                      label=""
+                      placeholder="Año de nacimiento"
                       value={selectedAnio ? moment(selectedAnio) : null}
                       onChange={(e) => {
                         handleAnioChange(e.format("YYYY"));
@@ -348,7 +379,7 @@ export const ListAthletes = () => {
             </Col>
           </Row>
           <Row className="listAthletes__listWrapper">
-            {athletes.length === 0 ? (
+            {athleteList.length === 0 ? (
               <div
                 style={{
                   alignContent: "center",
