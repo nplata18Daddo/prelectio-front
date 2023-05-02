@@ -33,6 +33,7 @@ export const RegisterDeportista = () => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(false);
   const [openModalAction, setOpenModalAction] = useState(false);
+  const [allowImage, setAllowImage] = useState(true);
   const [trayectoria, setTrayectoria] = useState([
     {
       titulo_trayectoria: "",
@@ -89,14 +90,20 @@ export const RegisterDeportista = () => {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    setImageFile(file);
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const imageDataUrl = reader.result;
-        setImagePreviewUrl(imageDataUrl);
-      };
-      reader.readAsDataURL(file);
+    setAllowImage(true);
+    if (file.size > MAX_FILE_SIZE) {
+      setAllowImage(false);
+    } else {
+      setAllowImage(true);
+      setImageFile(file);
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const imageDataUrl = reader.result;
+          setImagePreviewUrl(imageDataUrl);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
@@ -116,6 +123,7 @@ export const RegisterDeportista = () => {
       case 2:
         return (
           <VideoYFotoPerfil
+            allowImage={allowImage}
             handleImageChange={handleImageChange}
             imagePreviewUrl={imagePreviewUrl}
           />
@@ -265,14 +273,7 @@ export const RegisterDeportista = () => {
     yup.object().shape({
       descripcion: yup.string().required("Agrega la descripcion"),
       link_video: yup.string().required("Ingresa un link a tu video"),
-      image: yup
-        .mixed()
-        .required("Debes seleccionar una foto de perfil")
-        .test(
-          "is-valid-size",
-          "La foto de debe tener un tamaño maximo de 5MB",
-          (value) => value && value.size <= MAX_FILE_SIZE
-        ),
+      image: yup.mixed().required("Debes seleccionar una foto de perfil"),
     }),
     //Validation for trayectoria
     yup.object().shape({}),
@@ -332,7 +333,13 @@ export const RegisterDeportista = () => {
 
   const handleNext = async () => {
     const isStepValid = await trigger();
-    if (isStepValid) setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === 2) {
+      if (allowImage) {
+        if (isStepValid) setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }
+    } else {
+      if (isStepValid) setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);

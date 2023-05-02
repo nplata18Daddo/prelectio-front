@@ -101,6 +101,11 @@ export const ImageInput = ({ ...props }) => {
                 {error.message}
               </span>
             )}
+            {!props.allowImage && (
+              <span style={{ color: "red", marginTop: "10px" }}>
+                La imagen debe de pesar menos de Megas.
+              </span>
+            )}
           </div>
         )}
         rules={{ required: true }}

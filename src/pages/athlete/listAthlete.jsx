@@ -42,7 +42,9 @@ export const ListAthletes = () => {
   const [selectedPosicion, setSelectedPosicion] = useState(null);
   const [selectedPierna, setSelectedPierna] = useState(null);
   const [selectedAnio, setSelectedAnio] = useState(null);
-  const [showedAthletes, setShowedAthletes] = useState(10);
+
+  const [applyFilter, setApplyFilter] = useState(false);
+  const [showedAthletes, setShowedAthletes] = useState(12);
   const [selectedPage, setSelectedPage] = useState(1);
 
   const dispatch = useDispatch();
@@ -67,21 +69,25 @@ export const ListAthletes = () => {
   useEffect(() => {
     let filteredAthletes = athleteList.filter((item) => {
       if (selectedGenero !== null) {
+        setApplyFilter(true);
         if (selectedGenero !== item.usuario.genero_usuario) {
           return false;
         }
       }
       if (selectedPosicion !== null) {
+        setApplyFilter(true);
         if (selectedPosicion != item.posicion_deportista) {
           return false;
         }
       }
       if (selectedPierna !== null) {
+        setApplyFilter(true);
         if (selectedPierna != item.pierna_habil_deportista) {
           return false;
         }
       }
       if (selectedAnio !== null) {
+        setApplyFilter(true);
         if (
           !moment(selectedAnio).isSame(
             item.usuario.fecha_nacimiento_usuario,
@@ -136,6 +142,7 @@ export const ListAthletes = () => {
   }, [dispatch, refresh]);
 
   const handleSearch = (event) => {
+    setApplyFilter(true);
     setSelectedGenero(null);
     setSelectedPosicion(null);
     setSelectedPierna(null);
@@ -179,7 +186,7 @@ export const ListAthletes = () => {
               }}
             >
               <Button
-                className="listAthletes__button"
+                className="listAthletes__button display__label"
                 onClick={() => {
                   dispatch(resetAthleteStatus());
                   setRefresh(!refresh);
@@ -369,10 +376,10 @@ export const ListAthletes = () => {
                       setShowedAthletes(e.target.value);
                     }}
                   >
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={15}>15</MenuItem>
-                    <MenuItem value={20}>20</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={12}>12</MenuItem>
+                    <MenuItem value={24}>24</MenuItem>
+                    <MenuItem value={48}>48</MenuItem>
                   </Select>
                 </Col>
               </Row>
@@ -387,7 +394,10 @@ export const ListAthletes = () => {
                   display: "flex",
                 }}
               >
-                <Spinner variant="primary" />
+                <Spinner
+                  variant="primary"
+                  style={{ fontSize: "24px", fill: "black" }}
+                />
               </div>
             ) : (
               filteredAthletes.map((item, index) => {
@@ -406,6 +416,14 @@ export const ListAthletes = () => {
               })
             )}
           </Row>
+          {filteredAthletes.length === 0 &&
+            athleteList.length > 0 &&
+            applyFilter && (
+              <h1>
+                {" "}
+                No hay deportistas que cumplan los filtros seleccionados.
+              </h1>
+            )}
           <Row>
             <Col
               style={{

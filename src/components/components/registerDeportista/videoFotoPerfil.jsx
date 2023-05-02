@@ -93,6 +93,7 @@ export const VideoYFotoPerfil = (props) => {
           </Col>
           <Col xs={12} md={6}>
             <ImageInput
+              allowImage={props.allowImage}
               handleImageChange={props.handleImageChange}
               imagePreviewUrl={props.imagePreviewUrl}
               label="Foto de perfil"

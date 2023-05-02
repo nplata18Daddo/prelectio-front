@@ -11,7 +11,7 @@
 
   &__listWrapper {
     height: 70%;
-    overflow-x: scroll;
+
     margin-bottom: 5vh;
   }
   &__searchBarWrapper {
@@ -44,7 +44,7 @@
     font-weight: bold !important;
     color: $mainWhite;
     height: 100%;
-    width: 85%;
+    width: 60%;
     background-color: $accentBlue;
     background: linear-gradient(270deg, #00459a 0%, #00ccff 105.68%);
     border-radius: 12px;
