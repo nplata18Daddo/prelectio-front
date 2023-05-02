@@ -31,6 +31,8 @@ export const Main = () => {
         </Col>
         <Col xs={12} md={6} className="home__mainRow__rightCol">
           <img
+            loading="lazy"
+            decoding="async"
             className="home__mainRow__rightCol__picture"
             src={homeBanner}
           ></img>
