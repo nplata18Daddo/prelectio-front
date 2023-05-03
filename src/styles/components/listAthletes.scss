@@ -52,8 +52,10 @@
     font-size: 20px;
     @include tablet {
       font-size: 15px;
+      width: 100% !important;
     }
     @include phone {
+      width: 100% !important;
       font-size: 10px;
     }
     &:hover,
