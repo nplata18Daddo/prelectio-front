@@ -56,7 +56,7 @@ function SendEmailModalAthlete(props) {
     <>
       <div onClick={handleShow}>
         <span>
-          <i class="bi bi-reply"></i>
+          <i className="bi bi-reply"></i>
         </span>
       </div>
 

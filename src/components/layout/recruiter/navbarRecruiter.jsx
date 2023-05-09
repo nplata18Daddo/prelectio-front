@@ -2,15 +2,27 @@ import React, { useState } from "react";
 import { Button, Col, Collapse, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logoPrelectio from "../../../assets/logo_prelectio.png";
+import { CODES } from "../../../consts/codes";
+import { LogoutService } from "../../../services/authServices";
 
 export const NavBarRecruiter = (props) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("user");
-      navigate("/");
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userMail = user.email_usuario;
+      const logout = async () => {
+        const obj = { email: userMail };
+        const [logout] = await Promise.all([LogoutService(obj)]);
+
+        if (logout.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("user");
+          navigate("/");
+        }
+      };
+      await logout();
     } catch (error) {
       console.log("==============Error handleLogout======================");
       console.log(error);

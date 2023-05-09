@@ -1,8 +1,24 @@
 import axios from "axios";
 import GetToken from "../config/getToken";
 
+const axiosInstance = axios.create();
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user");
+      window.location = "/login";
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export function GetPendingRecruiters(data) {
-  return axios({
+  return axiosInstance({
     method: "GET",
     url: "api/reclutador/pendientes",
     headers: {
@@ -14,7 +30,7 @@ export function GetPendingRecruiters(data) {
 }
 
 export function GetApprovedRecruiters(data) {
-  return axios({
+  return axiosInstance({
     method: "GET",
     url: "api/reclutador/aprobados",
     headers: {
@@ -25,7 +41,7 @@ export function GetApprovedRecruiters(data) {
   });
 }
 export function SendMail(data) {
-  return axios({
+  return axiosInstance({
     method: "POST",
     url: "api/mensaje",
     headers: {
@@ -37,7 +53,7 @@ export function SendMail(data) {
 }
 
 export function GetRecruiterDetail(data) {
-  return axios({
+  return axiosInstance({
     method: "GET",
     url: "api/reclutador/detail/" + data.id,
     headers: {
@@ -48,7 +64,7 @@ export function GetRecruiterDetail(data) {
   });
 }
 export function GetAthleteDetail(data) {
-  return axios({
+  return axiosInstance({
     method: "GET",
     url: "api/deportista/" + data.id,
     headers: {
@@ -59,7 +75,7 @@ export function GetAthleteDetail(data) {
   });
 }
 export function GetHabilidadDeportista(data) {
-  return axios({
+  return axiosInstance({
     method: "GET",
     url: "api/habilidadDeportista/deportista/" + data,
     headers: {
@@ -70,7 +86,7 @@ export function GetHabilidadDeportista(data) {
   });
 }
 export function GetTrayectoriaDeportista(data) {
-  return axios({
+  return axiosInstance({
     method: "GET",
     url: "api/trayectoria/findByDeportista/" + data,
     headers: {
@@ -81,7 +97,7 @@ export function GetTrayectoriaDeportista(data) {
   });
 }
 export function UpdateProfileAthlete(data) {
-  return axios({
+  return axiosInstance({
     method: "PUT",
     data: data,
     url: "api/deportista/update/",
@@ -91,7 +107,7 @@ export function UpdateProfileAthlete(data) {
 }
 
 export function ChangeRecruiterStatus(data) {
-  return axios({
+  return axiosInstance({
     method: "PUT",
     url: "api/reclutador/cambiarEstado/" + data.id,
     headers: {
@@ -102,7 +118,7 @@ export function ChangeRecruiterStatus(data) {
   });
 }
 export function GetDashboardInfo(data) {
-  return axios({
+  return axiosInstance({
     method: "GET",
     url: "api/dashboard/",
     headers: {

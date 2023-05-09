@@ -56,7 +56,7 @@ export const AdminRecruiterDetail = () => {
                   style={{ textAlign: "start", cursor: "pointer" }}
                 >
                   <i
-                    class="bi bi-arrow-left-circle "
+                    className="bi bi-arrow-left-circle "
                     style={{ fontSize: "20px", marginRight: "15px" }}
                   ></i>
                   <span>Ir atrás</span>

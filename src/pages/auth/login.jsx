@@ -15,8 +15,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { CODES } from "../../consts/codes";
-import { LoginService } from "../../services/authServices";
-import bcrypt from "bcryptjs";
+import { LoginService, LogoutService } from "../../services/authServices";
+import { ModalLogOut } from "../../components/components/modals/modalLogOut";
+
 export const Login = () => {
   const [loading, setLoading] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
@@ -24,7 +25,9 @@ export const Login = () => {
   const [unathorized, setUnauthorized] = useState(false);
   const [noUser, setNoUser] = useState(false);
   const [showPass, setShowPass] = useState(false);
-
+  const [openModalAction, setOpenModalAction] = useState(false);
+  const [userMail, setUserMail] = useState("");
+  const [responseMessage, setResponseMessage] = useState(false);
   const schema = yup.object().shape({
     password: yup.string().required("*Este campo es requerido"),
     email: yup
@@ -107,8 +110,13 @@ export const Login = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        setSystemError(true);
-        console.log(error);
+        if (error.response?.status === CODES.COD_RESPONSE_HTTP_UNAUTHORIZED) {
+          setUserMail(data.email);
+          setOpenModalAction(true);
+          setResponseMessage(error.response.data);
+        } else {
+          setSystemError(true);
+        }
       }
     } catch (error) {
       console.log("==============Error login======================");
@@ -121,8 +129,23 @@ export const Login = () => {
     event.preventDefault();
     setShowPass(!showPass);
   };
+  const logout = async () => {
+    const obj = { email: userMail };
+    const [logout] = await Promise.all([LogoutService(obj)]);
+
+    if (logout.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+      setOpenModalAction(false);
+      setUserMail("");
+    }
+  };
   return (
     <div className="login__background">
+      <ModalLogOut
+        data={responseMessage}
+        open={openModalAction}
+        setOpen={setOpenModalAction}
+        action={logout}
+      />
       <Row className=" p-4">
         <Col xs={12} style={{ textAlign: "left" }}>
           <img
@@ -197,7 +220,7 @@ export const Login = () => {
                       <InputGroup.Text className="login__input__icon__pass display__small">
                         <i
                           onClick={handleShowPass}
-                          class={showPass ? "bi bi-eye" : "bi bi-eye-slash"}
+                          className={showPass ? "bi bi-eye" : "bi bi-eye-slash"}
                         ></i>
                       </InputGroup.Text>
                       {errors.password && (

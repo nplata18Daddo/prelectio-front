@@ -70,7 +70,7 @@ export const Register = () => {
                     style={{ textAlign: "start", cursor: "pointer" }}
                   >
                     <i
-                      class="bi bi-arrow-left-circle colors__lightBlue"
+                      className="bi bi-arrow-left-circle colors__lightBlue"
                       style={{ fontSize: "20px", marginRight: "15px" }}
                     ></i>
                     <span>Ir atrás</span>
@@ -95,7 +95,7 @@ export const Register = () => {
                         </Col>
                         <Col xs={12}>
                           {" "}
-                          <div class="register__line mt-5"></div>
+                          <div className="register__line mt-5"></div>
                         </Col>
                         <Col xs={12}>
                           <p className="display__large weight__bold colors__lightBlue  mt-3">
@@ -128,7 +128,7 @@ export const Register = () => {
                           ></img>
                         </Col>
                         <Col xs={12}>
-                          <div class="register__line mt-5"></div>
+                          <div className="register__line mt-5"></div>
                         </Col>
                         <Col xs={12}>
                           <p className="display__large weight__bold colors__lightBlue mt-3">
