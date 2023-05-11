@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Collapse, Row } from "react-bootstrap";
+import { Button, Col, Collapse, Row, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logoPrelectio from "../../../assets/logo_prelectio.png";
 import { CODES } from "../../../consts/codes";
@@ -7,9 +7,11 @@ import { LogoutService } from "../../../services/authServices";
 
 export const NavBarAthlete = (props) => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
+      setLoading(true);
       const user = JSON.parse(localStorage.getItem("user"));
       const userMail = user.email_usuario;
       const logout = async () => {
@@ -20,6 +22,7 @@ export const NavBarAthlete = (props) => {
           localStorage.removeItem("access_token");
           localStorage.removeItem("user");
           navigate("/");
+          setLoading(false);
         }
       };
       await logout();
@@ -65,7 +68,7 @@ export const NavBarAthlete = (props) => {
                     className="navbar__col__buttonRow__button__primary"
                     onClick={handleLogout}
                   >
-                    Salir
+                    {loading ? <Spinner /> : "Salir"}
                   </Button>
                 </Col>
               </>
@@ -108,7 +111,7 @@ export const NavBarAthlete = (props) => {
               justifyContent: "center",
             }}
           >
-            <Link to="/" style={{ width: "fit-content" }}>
+            <Link to="/athlete/messages" style={{ width: "fit-content" }}>
               <img style={{ width: "50%" }} src={logoPrelectio}></img>
             </Link>
           </Col>
@@ -138,7 +141,7 @@ export const NavBarAthlete = (props) => {
                       onClick={handleLogout}
                       className="navbar__responsive__col__buttonRow__button__primary"
                     >
-                      Salir
+                      {loading ? <Spinner /> : "Salir"}
                     </Button>
                   </Link>
                 </Row>

@@ -272,7 +272,10 @@ export const RegisterDeportista = () => {
     //validation for step3
     yup.object().shape({
       descripcion: yup.string().required("Agrega la descripcion"),
-      link_video: yup.string().required("Ingresa un link a tu video"),
+      link_video: yup
+        .string()
+        .required("Ingresa un link a tu video")
+        .matches(/youtu/i, "El video debe estar subido en youtube"),
       image: yup.mixed().required("Debes seleccionar una foto de perfil"),
     }),
     //Validation for trayectoria

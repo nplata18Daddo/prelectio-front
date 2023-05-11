@@ -66,9 +66,9 @@ export const VideoYFotoPerfil = (props) => {
                   <Tooltip
                     title={
                       <h5>
-                        Se recomienda un video de youtube corto, de alta
-                        calidad, donde demuestres tus mejores talentos y
-                        habilidades.
+                        Se debe subir un video publico en Youtube. Se recomienda
+                        un video corto, de maximo 3 minutos, donde demuestres
+                        tus mejores talentos y habilidades.
                       </h5>
                     }
                     placement="top"

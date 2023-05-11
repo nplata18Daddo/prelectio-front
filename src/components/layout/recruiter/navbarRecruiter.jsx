@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Collapse, Row } from "react-bootstrap";
+import { Button, Col, Collapse, Row, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logoPrelectio from "../../../assets/logo_prelectio.png";
 import { CODES } from "../../../consts/codes";
@@ -8,8 +8,10 @@ import { LogoutService } from "../../../services/authServices";
 export const NavBarRecruiter = (props) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const handleLogout = async () => {
     try {
+      setLoading(true);
       const user = JSON.parse(localStorage.getItem("user"));
       const userMail = user.email_usuario;
       const logout = async () => {
@@ -19,6 +21,7 @@ export const NavBarRecruiter = (props) => {
         if (logout.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
           localStorage.removeItem("access_token");
           localStorage.removeItem("user");
+          setLoading(false);
           navigate("/");
         }
       };
@@ -74,7 +77,7 @@ export const NavBarRecruiter = (props) => {
                     className="navbar__col__buttonRow__button__primary"
                     onClick={handleLogout}
                   >
-                    Salir
+                    {loading ? <Spinner /> : "Salir"}
                   </Button>
                 </Col>
               </>
@@ -117,7 +120,7 @@ export const NavBarRecruiter = (props) => {
               justifyContent: "center",
             }}
           >
-            <Link to="/" style={{ width: "fit-content" }}>
+            <Link to="/recruiter/messages" style={{ width: "fit-content" }}>
               <img style={{ width: "50%" }} src={logoPrelectio}></img>
             </Link>
           </Col>
@@ -154,7 +157,7 @@ export const NavBarRecruiter = (props) => {
                       onClick={handleLogout}
                       className="navbar__responsive__col__buttonRow__button__primary"
                     >
-                      Salir
+                      {loading ? <Spinner /> : "Salir"}
                     </Button>
                   </Link>
                 </Row>

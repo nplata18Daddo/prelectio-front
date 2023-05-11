@@ -344,7 +344,7 @@ export const AthleteDetail = () => {
                       style={{ textAlign: "start" }}
                     >
                       <Form.Label className=" display__small">
-                        Departamento
+                        Ciudad
                       </Form.Label>
                       <Form.Control
                         className=" display__small"
