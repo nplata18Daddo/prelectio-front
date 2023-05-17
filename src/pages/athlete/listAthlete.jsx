@@ -31,6 +31,7 @@ import {
   resetAthleteStatus,
 } from "../../parts/athleteSlice";
 import { GetDeportistas } from "../../services/deportistaServices";
+import { getCiudades, getDepartamentos } from "../../services/locationServices";
 
 export const ListAthletes = () => {
   const [refresh, setRefresh] = useState(false);
@@ -42,6 +43,12 @@ export const ListAthletes = () => {
   const [selectedPosicion, setSelectedPosicion] = useState(null);
   const [selectedPierna, setSelectedPierna] = useState(null);
   const [selectedAnio, setSelectedAnio] = useState(null);
+  const [selectedHabilidad, setSelectedHabilidad] = useState(null);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [departments, setDepartments] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [filteredCities, setFilteredCities] = useState([]);
 
   const [applyFilter, setApplyFilter] = useState(false);
   const [showedAthletes, setShowedAthletes] = useState(12);
@@ -65,9 +72,24 @@ export const ListAthletes = () => {
   const handleAnioChange = (event) => {
     setSelectedAnio(event);
   };
+  const handleHabilidadChange = (event) => {
+    setSelectedHabilidad(event.target.value);
+  };
+  const handleDepartmentChange = (event) => {
+    setSelectedCity(null);
+    let filteredCities = cities.filter(
+      (city) => city.id_departamento === event.target.value
+    );
+    setFilteredCities(filteredCities);
+    setSelectedDepartment(event.target.value);
+  };
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
 
   useEffect(() => {
     let filteredAthletes = athleteList.filter((item) => {
+      console.log(item);
       if (selectedGenero !== null) {
         setApplyFilter(true);
         if (selectedGenero !== item.usuario.genero_usuario) {
@@ -97,6 +119,27 @@ export const ListAthletes = () => {
           return false;
         }
       }
+      if (selectedHabilidad !== null) {
+        setApplyFilter(true);
+        let habi = item.habilidad_deportista.find(
+          (element) => element.id_habilidad === selectedHabilidad
+        );
+        if (!habi) {
+          return false;
+        }
+      }
+      if (selectedCity !== null) {
+        setApplyFilter(true);
+        if (selectedCity != item.usuario.id_ciudad) {
+          return false;
+        }
+      }
+      if (selectedDepartment !== null) {
+        setApplyFilter(true);
+        if (selectedDepartment != item.usuario.id_departamento) {
+          return false;
+        }
+      }
       return true;
     });
     if (Math.ceil(filteredLength / showedAthletes) <= selectedPage - 1) {
@@ -113,6 +156,9 @@ export const ListAthletes = () => {
     selectedPosicion,
     selectedPierna,
     selectedAnio,
+    selectedHabilidad,
+    selectedCity,
+    selectedDepartment,
     showedAthletes,
     selectedPage,
   ]);
@@ -137,6 +183,33 @@ export const ListAthletes = () => {
         console.log("====================================");
       }
     };
+    const fetchData = async () => {
+      const [cities, departments] = await Promise.all([
+        getCiudades(),
+        getDepartamentos(),
+      ]);
+
+      if (cities.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+        setCities(cities.data.responseMessage);
+        setFilteredCities(cities.data.responseMessage);
+      }
+      if (
+        departments.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST
+      ) {
+        let dptos = departments.data.responseMessage.map((item) => {
+          return {
+            label: item.nombre_departamento
+              .split(" ")
+              .map((item) => item.charAt(0) + item.substring(1).toLowerCase())
+              .join(" "),
+            value: item.id_departamento,
+          };
+        });
+        setDepartments(dptos);
+      }
+    };
+
+    fetchData();
     requestAthletes();
     setLoading(false);
   }, [dispatch, refresh]);
@@ -346,6 +419,129 @@ export const ListAthletes = () => {
                   )}
                 </InputGroup>
               </FormControl>
+            </Col>
+            <Col
+              xs={12}
+              sm={6}
+              lg={3}
+              className="listAthletes__filterWrapper__col"
+            >
+              <FormControl className="no__wrap" fullWidth>
+                <InputGroup className="no__wrap">
+                  <FormLabel className="display__label">Habilidad</FormLabel>
+                  <Select
+                    disabled={athleteList.length === 0}
+                    style={{ width: selectedHabilidad ? "88%" : "100%" }}
+                    displayEmpty
+                    value={selectedHabilidad ? selectedHabilidad : ""}
+                    onChange={handleHabilidadChange}
+                  >
+                    <MenuItem disabled value="">
+                      Habilidad
+                    </MenuItem>
+                    {CODES.CODES_HABILIDADES.map((habilidad) => {
+                      return (
+                        <MenuItem key={habilidad.value} value={habilidad.value}>
+                          {habilidad.label}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  {selectedHabilidad && (
+                    <InputGroup.Text
+                      style={{ width: "12%" }}
+                      className="display__small"
+                      onClick={() => setSelectedHabilidad(null)}
+                    >
+                      <i className="bi bi-x"></i>
+                    </InputGroup.Text>
+                  )}
+                </InputGroup>
+              </FormControl>
+            </Col>
+            <Col
+              xs={12}
+              sm={6}
+              lg={3}
+              className="listAthletes__filterWrapper__col"
+            >
+              <InputGroup className="no__wrap">
+                <FormLabel className="display__label">Departamento</FormLabel>
+                <Select
+                  disabled={athleteList.length === 0}
+                  style={{ width: selectedDepartment ? "88%" : "100%" }}
+                  displayEmpty
+                  value={selectedDepartment ? selectedDepartment : ""}
+                  onChange={handleDepartmentChange}
+                >
+                  <MenuItem disabled value="">
+                    Departamento
+                  </MenuItem>
+                  {departments.map((dpto, index) => {
+                    return (
+                      <MenuItem key={index} value={dpto.value}>
+                        {dpto.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                {selectedDepartment && (
+                  <InputGroup.Text
+                    style={{ width: "12%" }}
+                    className="display__small"
+                    onClick={() => {
+                      setSelectedDepartment(null);
+                      setSelectedCity(null);
+                      setFilteredCities(cities);
+                    }}
+                  >
+                    <i className="bi bi-x"></i>
+                  </InputGroup.Text>
+                )}
+              </InputGroup>
+            </Col>
+            <Col
+              xs={12}
+              sm={6}
+              lg={3}
+              className="listAthletes__filterWrapper__col"
+            >
+              <InputGroup className="no__wrap">
+                <FormLabel className="display__label">Municipio</FormLabel>
+                <Select
+                  disabled={athleteList.length === 0}
+                  style={{ width: selectedCity ? "88%" : "100%" }}
+                  displayEmpty
+                  value={selectedCity ? selectedCity : ""}
+                  onChange={handleCityChange}
+                >
+                  <MenuItem disabled value="">
+                    Municipio
+                  </MenuItem>
+                  {filteredCities.map((city, index) => {
+                    return (
+                      <MenuItem key={index} value={city.id_ciudad}>
+                        {city.nombre_ciudad
+                          .split(" ")
+                          .map(
+                            (item) =>
+                              item.charAt(0) + item.substring(1).toLowerCase()
+                          )
+                          .join(" ")}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                {selectedCity && (
+                  <InputGroup.Text
+                    style={{ width: "12%" }}
+                    className="display__small"
+                    onClick={() => setSelectedCity(null)}
+                  >
+                    <i className="bi bi-x"></i>
+                  </InputGroup.Text>
+                )}
+              </InputGroup>
             </Col>
           </Row>
           <Row className="listAthletes__paginationWrapper">
