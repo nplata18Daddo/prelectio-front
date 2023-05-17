@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, TextField, useFormControl } from "@mui/material";
+import { IconButton, TextField, Tooltip, useFormControl } from "@mui/material";
 import {
   Controller,
   useFormContext,
@@ -9,6 +9,10 @@ import {
 import UploadIcon from "@mui/icons-material/Upload";
 import emptyProfile from "../../../../assets/register/emptyProfile.png";
 import { PhotoCamera } from "@mui/icons-material";
+import InfoIcon from "@mui/icons-material/Info";
+import { Col, Row } from "react-bootstrap";
+import ExampleProfilePic from "../../../../assets/register/exampleProfilePic.png";
+
 export const ImageInput = ({ ...props }) => {
   const { fieldState } = useController(props);
   const { control } = useFormContext();
@@ -36,7 +40,40 @@ export const ImageInput = ({ ...props }) => {
           //     onChange={(e) => field.onChange(e.target.value)}
           //   />
           <div className="imageInput mt-3">
-            <h4 style={{ marginBottom: "2vh" }}>¡Sube tu mejor foto!</h4>
+            <h4 style={{ marginBottom: "2vh" }}>
+              ¡Sube tu mejor foto!{" "}
+              <Tooltip
+                title={
+                  <Row style={{ padding: "10px" }}>
+                    <Col xs={12}>
+                      <h5 className="display__regular">
+                        Se recomienda subir una foto donde se vea tu rostro
+                        completo. Un ejemplo de una buena foto de perfil es:
+                      </h5>
+                    </Col>
+                    <Col xs={12} style={{ textAlign: "center" }}>
+                      <img
+                        src={ExampleProfilePic}
+                        alt="Ejemplo foto perfil"
+                      ></img>
+                    </Col>
+                  </Row>
+                }
+                placement="top"
+              >
+                <IconButton style={{ padding: 0, marginLeft: "10px" }}>
+                  <InfoIcon
+                    fontSize="large"
+                    sx={{
+                      color: "#00ccff",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
+            </h4>
+
             <div className="imageInput__fotoDiv">
               <div
                 style={{
