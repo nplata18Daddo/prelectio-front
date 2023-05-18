@@ -1,0 +1,10 @@
+.informacionAcudiente {
+  &__container {
+    min-height: 35vh;
+    padding-top: 5vh;
+    &__row {
+      margin-top: 3vh;
+      margin-bottom: 3vh;
+    }
+  }
+}

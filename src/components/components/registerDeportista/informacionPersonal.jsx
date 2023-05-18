@@ -1,5 +1,5 @@
 import { InputLabel, Select } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { DateField } from "./FormFields/dateField";
 import { InputField } from "./FormFields/inputField";
@@ -8,8 +8,25 @@ import {
   MunicipioSelectField,
 } from "./FormFields/departamentoSelectField";
 import { SelectField } from "./FormFields/selectField";
+import { useWatch } from "react-hook-form";
+import moment from "moment";
 
 export const InformacionPersonal = (props) => {
+  const fechaNacimiento = useWatch().fechaNacimiento;
+
+  useEffect(() => {
+    const fechaNacimientoMoment = moment(fechaNacimiento);
+    if (fechaNacimientoMoment) {
+      const today = moment();
+      const edad = today.diff(fechaNacimientoMoment, "years");
+      if (edad > 18) {
+        props.setUnderaged(false);
+      } else {
+        props.setUnderaged(true);
+      }
+    }
+  }, [fechaNacimiento]);
+
   return (
     <div className="informacionPersonal">
       <Container className="informacionPersonal__container">

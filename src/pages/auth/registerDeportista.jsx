@@ -18,6 +18,7 @@ import { ModalInfo } from "../../components/components/modals/ModalInfo";
 import { ModalAction } from "../../components/components/modals/ModalAction";
 import { PasswordDeportista } from "../../components/components/registerDeportista/passwordDeportista";
 import { Trayectoria } from "../../components/components/registerDeportista/trayectoria";
+import { InformacionAcudiente } from "../../components/components/registerDeportista/informacionAcudiente";
 
 export const RegisterDeportista = () => {
   const MAX_FILE_SIZE = 5242880; //100KB
@@ -34,6 +35,7 @@ export const RegisterDeportista = () => {
   const [responseMessage, setResponseMessage] = useState(false);
   const [openModalAction, setOpenModalAction] = useState(false);
   const [allowImage, setAllowImage] = useState(true);
+  const [underaged, setUnderaged] = useState(false);
   const [trayectoria, setTrayectoria] = useState([
     {
       titulo_trayectoria: "",
@@ -80,13 +82,22 @@ export const RegisterDeportista = () => {
     fetchData();
   }, []);
 
-  const steps = [
-    "Informacion Personal",
-    "Informacion Deportiva",
-    "Video y Foto de Perfil",
-    "Trayectoria",
-    "Contraseña",
-  ];
+  const steps = underaged
+    ? [
+        "Informacion Personal",
+        "Informacion Deportiva",
+        "Video y Foto de Perfil",
+        "Trayectoria",
+        "Contraseña",
+        "Información Acudiente",
+      ]
+    : [
+        "Informacion Personal",
+        "Informacion Deportiva",
+        "Video y Foto de Perfil",
+        "Trayectoria",
+        "Contraseña",
+      ];
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -108,37 +119,76 @@ export const RegisterDeportista = () => {
   };
 
   function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return (
-          <InformacionPersonal
-            departamentos={departments}
-            cities={cities}
-            setSelectedDpto={setSelectedDpto}
-            selectedCities={selectedCities}
-          />
-        );
-      case 1:
-        return <InformacionDeportiva />;
-      case 2:
-        return (
-          <VideoYFotoPerfil
-            allowImage={allowImage}
-            handleImageChange={handleImageChange}
-            imagePreviewUrl={imagePreviewUrl}
-          />
-        );
-      case 3:
-        return (
-          <Trayectoria
-            trayectoria={trayectoria}
-            setTrayectoria={setTrayectoria}
-          />
-        );
-      case 4:
-        return <PasswordDeportista />;
-      default:
-        return "Unknown step";
+    if (!underaged) {
+      switch (step) {
+        case 0:
+          return (
+            <InformacionPersonal
+              departamentos={departments}
+              cities={cities}
+              setSelectedDpto={setSelectedDpto}
+              selectedCities={selectedCities}
+              setUnderaged={setUnderaged}
+            />
+          );
+        case 1:
+          return <InformacionDeportiva />;
+        case 2:
+          return (
+            <VideoYFotoPerfil
+              allowImage={allowImage}
+              handleImageChange={handleImageChange}
+              imagePreviewUrl={imagePreviewUrl}
+            />
+          );
+        case 3:
+          return (
+            <Trayectoria
+              trayectoria={trayectoria}
+              setTrayectoria={setTrayectoria}
+            />
+          );
+        case 4:
+          return <PasswordDeportista />;
+        default:
+          return "Unknown step";
+      }
+    } else {
+      switch (step) {
+        case 0:
+          return (
+            <InformacionPersonal
+              departamentos={departments}
+              cities={cities}
+              setSelectedDpto={setSelectedDpto}
+              selectedCities={selectedCities}
+              setUnderaged={setUnderaged}
+            />
+          );
+        case 1:
+          return <InformacionDeportiva />;
+        case 2:
+          return (
+            <VideoYFotoPerfil
+              allowImage={allowImage}
+              handleImageChange={handleImageChange}
+              imagePreviewUrl={imagePreviewUrl}
+            />
+          );
+        case 3:
+          return (
+            <Trayectoria
+              trayectoria={trayectoria}
+              setTrayectoria={setTrayectoria}
+            />
+          );
+        case 4:
+          return <PasswordDeportista />;
+        case 5:
+          return <InformacionAcudiente />;
+        default:
+          return "Unknown step";
+      }
     }
   }
 
@@ -175,6 +225,16 @@ export const RegisterDeportista = () => {
       formData.append("video_deportista", data.link_video);
       formData.append("trayectoria", JSON.stringify(trayectoria));
 
+      if (underaged) {
+        let acudiente = {
+          tipo_documento_acudiente: data.tipoDocAcudiente,
+          numero_documento_acudiente: data.numDocAcudiente,
+          telefono_acudiente: data.telefonoAcudiente,
+          email_acudiente: data.emailAcudiente,
+          nombre_acudiente: data.nombreAcudiente,
+        };
+        formData.append("acudiente", JSON.stringify(acudiente));
+      }
       const service = await RegisterDeportistaService(formData);
       setLoading(false);
       if (service.status === 200) {
@@ -188,7 +248,7 @@ export const RegisterDeportista = () => {
           setOpenModalInfo(true);
         }
       }
-      //handleNext();
+      handleNext();
     } catch (error) {
       console.log(
         "==============Error Register Deportista======================"
@@ -198,132 +258,329 @@ export const RegisterDeportista = () => {
     }
   };
 
-  const defaultValues = {
-    nombreCompleto: "",
-    email: "",
-    tipoDoc: "",
-    numDoc: "",
-    fechaNacimiento: "",
-    celular: "",
-    departamento: "",
-    municipio: "",
-    direccion: "",
-    genero: "",
-    estatura: "",
-    peso: "",
-    pierna_habil: "",
-    habilidades: [],
-    posicion: "",
-    descripcion: "",
-    link_video: "",
-    image: "",
-    historia_clinica: "",
-    password: "",
-    passwordConfirmation: "",
-    trayectoria: [],
-  };
+  const defaultValues = underaged
+    ? {
+        nombreCompleto: "",
+        email: "",
+        tipoDoc: "",
+        numDoc: "",
+        fechaNacimiento: "",
+        celular: "",
+        departamento: "",
+        municipio: "",
+        direccion: "",
+        genero: "",
+        estatura: "",
+        peso: "",
+        pierna_habil: "",
+        habilidades: [],
+        posicion: "",
+        descripcion: "",
+        link_video: "",
+        image: "",
+        historia_clinica: "",
+        password: "",
+        passwordConfirmation: "",
+        trayectoria: [],
+        tipoDocAcudiente: "",
+        numDocAcudiente: "",
+        telefonoAcudiente: "",
+        emailAcudiente: "",
+        nombreAcudiente: "",
+      }
+    : {
+        nombreCompleto: "",
+        email: "",
+        tipoDoc: "",
+        numDoc: "",
+        fechaNacimiento: "",
+        celular: "",
+        departamento: "",
+        municipio: "",
+        direccion: "",
+        genero: "",
+        estatura: "",
+        peso: "",
+        pierna_habil: "",
+        habilidades: [],
+        posicion: "",
+        descripcion: "",
+        link_video: "",
+        image: "",
+        historia_clinica: "",
+        password: "",
+        passwordConfirmation: "",
+        trayectoria: [],
+      };
 
-  const validationSchema = [
-    //validation for step1
-    yup.object({
-      nombreCompleto: yup.string().required("Ingresa tu nombre completo"),
-      email: yup
-        .string()
-        .email("*Este campo debe ser un email válido")
-        .required("*Este campo es requerido"),
-      tipoDoc: yup
-        .number()
-        .required()
-        .typeError("Selecciona un tipo de documento"),
-      numDoc: yup.string().required("Ingresa tu número de documento"),
-      fechaNacimiento: yup
-        .string()
-        .required("Selecciona una fecha de nacimiento"),
-      celular: yup.number().required().typeError("Ingresa un número válido"),
-      departamento: yup
-        .number()
-        .required()
-        .typeError("Selecciona un departamento"),
-      municipio: yup.number().required().typeError("Selecciona un municipio"),
-      direccion: yup.string().required("Ingresa tu dirección"),
-      genero: yup.number().required().typeError("Selecciona un género"),
-    }),
-    //validation for step2
-    yup.object({
-      estatura: yup
-        .number()
-        .required()
-        .typeError("Ingresa una estatura válida (cm)"),
-      peso: yup.number().required().typeError("Ingresa un peso válido (Kg)"),
-      pierna_habil: yup
-        .string()
-        .required("Selecciona una pierna hábil")
-        .typeError("Selecciona una pierna hábil"),
-      posicion: yup.number().required().typeError("Selecciona una posición"),
-      habilidades: yup
-        .array()
-        .max(5, "Máximo selecciona 5 habilidades")
-        .min(1, "Mínimo seleccona 1 habilidad")
-        .typeError("Selecciona entre 1 y 5 habilidades"),
-      historia_clinica: yup
-        .string()
-        .required("Describe tu historia clínica en un texto corto"),
-    }),
-    //validation for step3
-    yup.object().shape({
-      descripcion: yup.string().required("Agrega la descripcion"),
-      link_video: yup
-        .string()
-        .required("Ingresa un link a tu video")
-        .matches(/youtu/i, "El video debe estar subido en youtube"),
-      image: yup.mixed().required("Debes seleccionar una foto de perfil"),
-    }),
-    //Validation for trayectoria
-    yup.object().shape({}),
-    //validation for password step
-    yup.object().shape({
-      password: yup
-        .string()
-        .required("Este campo es requerido")
-        .min(8, "Mínimo 8 caracteres")
-        .max(15, "Máximo 15 caracteres")
-        .test("upperCase", "Al menos una letra mayúscula", function (value) {
-          if (!!value) {
-            const schema = yup.string().matches(/^(?=.*?[A-Z])/);
-            return schema.isValidSync(value);
-          }
-          return true;
-        })
-        .test("lowerCase", "Al menos una letra minúscula", function (value) {
-          if (!!value) {
-            const schema = yup.string().matches(/(?=.*?[a-z])/);
-            return schema.isValidSync(value);
-          }
-          return true;
-        })
-        .test("number", "Al menos un número", function (value) {
-          if (!!value) {
-            const schema = yup.string().matches(/(?=.*?[0-9])/);
-            return schema.isValidSync(value);
-          }
-          return true;
-        })
-        .test("specialChar", "Al menos un caracter especial", function (value) {
-          if (!!value) {
-            const schema = yup.string().matches(/(?=.*?[#?!@$%^&*-])/);
-            return schema.isValidSync(value);
-          }
-          return true;
+  const validationSchema = underaged
+    ? [
+        //validation for step1
+        yup.object({
+          nombreCompleto: yup.string().required("Ingresa tu nombre completo"),
+          email: yup
+            .string()
+            .email("*Este campo debe ser un email válido")
+            .required("*Este campo es requerido"),
+          tipoDoc: yup
+            .number()
+            .required()
+            .typeError("Selecciona un tipo de documento"),
+          numDoc: yup.string().required("Ingresa tu número de documento"),
+          fechaNacimiento: yup
+            .string()
+            .required("Selecciona una fecha de nacimiento"),
+          celular: yup
+            .number()
+            .required()
+            .typeError("Ingresa un número válido"),
+          departamento: yup
+            .number()
+            .required()
+            .typeError("Selecciona un departamento"),
+          municipio: yup
+            .number()
+            .required()
+            .typeError("Selecciona un municipio"),
+          direccion: yup.string().required("Ingresa tu dirección"),
+          genero: yup.number().required().typeError("Selecciona un género"),
         }),
-      passwordConfirmation: yup
-        .string()
-        .required("Este campo es requerido")
-        .oneOf(
-          [yup.ref("password"), null],
-          "La nueva contraseña y su confirmación no coinciden"
-        ),
-    }),
-  ];
+        //validation for step2
+        yup.object({
+          estatura: yup
+            .number()
+            .required()
+            .typeError("Ingresa una estatura válida (cm)"),
+          peso: yup
+            .number()
+            .required()
+            .typeError("Ingresa un peso válido (Kg)"),
+          pierna_habil: yup
+            .string()
+            .required("Selecciona una pierna hábil")
+            .typeError("Selecciona una pierna hábil"),
+          posicion: yup
+            .number()
+            .required()
+            .typeError("Selecciona una posición"),
+          habilidades: yup
+            .array()
+            .max(5, "Máximo selecciona 5 habilidades")
+            .min(1, "Mínimo seleccona 1 habilidad")
+            .typeError("Selecciona entre 1 y 5 habilidades"),
+          historia_clinica: yup
+            .string()
+            .required("Describe tu historia clínica en un texto corto"),
+        }),
+        //validation for step3
+        yup.object().shape({
+          descripcion: yup.string().required("Agrega la descripcion"),
+          link_video: yup
+            .string()
+            .required("Ingresa un link a tu video")
+            .matches(/youtu/i, "El video debe estar subido en youtube"),
+          image: yup.mixed().required("Debes seleccionar una foto de perfil"),
+        }),
+        //Validation for trayectoria
+        yup.object().shape({}),
+        //validation for password step
+        yup.object().shape({
+          password: yup
+            .string()
+            .required("Este campo es requerido")
+            .min(8, "Mínimo 8 caracteres")
+            .max(15, "Máximo 15 caracteres")
+            .test(
+              "upperCase",
+              "Al menos una letra mayúscula",
+              function (value) {
+                if (!!value) {
+                  const schema = yup.string().matches(/^(?=.*?[A-Z])/);
+                  return schema.isValidSync(value);
+                }
+                return true;
+              }
+            )
+            .test(
+              "lowerCase",
+              "Al menos una letra minúscula",
+              function (value) {
+                if (!!value) {
+                  const schema = yup.string().matches(/(?=.*?[a-z])/);
+                  return schema.isValidSync(value);
+                }
+                return true;
+              }
+            )
+            .test("number", "Al menos un número", function (value) {
+              if (!!value) {
+                const schema = yup.string().matches(/(?=.*?[0-9])/);
+                return schema.isValidSync(value);
+              }
+              return true;
+            })
+            .test(
+              "specialChar",
+              "Al menos un caracter especial",
+              function (value) {
+                if (!!value) {
+                  const schema = yup.string().matches(/(?=.*?[#?!@$%^&*-])/);
+                  return schema.isValidSync(value);
+                }
+                return true;
+              }
+            ),
+          passwordConfirmation: yup
+            .string()
+            .required("Este campo es requerido")
+            .oneOf(
+              [yup.ref("password"), null],
+              "La nueva contraseña y su confirmación no coinciden"
+            ),
+        }),
+        yup.object({
+          tipoDocAcudiente: yup
+            .number()
+            .required()
+            .typeError("Selecciona un tipo de documento"),
+          numDocAcudiente: yup
+            .string()
+            .required("Ingresa tu número de documento"),
+          telefonoAcudiente: yup
+            .string()
+            .required("Ingresa tu número de teléfono"),
+          emailAcudiente: yup
+            .string()
+            .email("*Este campo debe ser un email válido")
+            .required("*Este campo es requerido"),
+          nombreAcudiente: yup.string().required("Ingresa tu nombre completo"),
+        }),
+      ]
+    : [
+        //validation for step1
+        yup.object({
+          nombreCompleto: yup.string().required("Ingresa tu nombre completo"),
+          email: yup
+            .string()
+            .email("*Este campo debe ser un email válido")
+            .required("*Este campo es requerido"),
+          tipoDoc: yup
+            .number()
+            .required()
+            .typeError("Selecciona un tipo de documento"),
+          numDoc: yup.string().required("Ingresa tu número de documento"),
+          fechaNacimiento: yup
+            .string()
+            .required("Selecciona una fecha de nacimiento"),
+          celular: yup
+            .number()
+            .required()
+            .typeError("Ingresa un número válido"),
+          departamento: yup
+            .number()
+            .required()
+            .typeError("Selecciona un departamento"),
+          municipio: yup
+            .number()
+            .required()
+            .typeError("Selecciona un municipio"),
+          direccion: yup.string().required("Ingresa tu dirección"),
+          genero: yup.number().required().typeError("Selecciona un género"),
+        }),
+        //validation for step2
+        yup.object({
+          estatura: yup
+            .number()
+            .required()
+            .typeError("Ingresa una estatura válida (cm)"),
+          peso: yup
+            .number()
+            .required()
+            .typeError("Ingresa un peso válido (Kg)"),
+          pierna_habil: yup
+            .string()
+            .required("Selecciona una pierna hábil")
+            .typeError("Selecciona una pierna hábil"),
+          posicion: yup
+            .number()
+            .required()
+            .typeError("Selecciona una posición"),
+          habilidades: yup
+            .array()
+            .max(5, "Máximo selecciona 5 habilidades")
+            .min(1, "Mínimo seleccona 1 habilidad")
+            .typeError("Selecciona entre 1 y 5 habilidades"),
+          historia_clinica: yup
+            .string()
+            .required("Describe tu historia clínica en un texto corto"),
+        }),
+        //validation for step3
+        yup.object().shape({
+          descripcion: yup.string().required("Agrega la descripcion"),
+          link_video: yup
+            .string()
+            .required("Ingresa un link a tu video")
+            .matches(/youtu/i, "El video debe estar subido en youtube"),
+          image: yup.mixed().required("Debes seleccionar una foto de perfil"),
+        }),
+        //Validation for trayectoria
+        yup.object().shape({}),
+        //validation for password step
+        yup.object().shape({
+          password: yup
+            .string()
+            .required("Este campo es requerido")
+            .min(8, "Mínimo 8 caracteres")
+            .max(15, "Máximo 15 caracteres")
+            .test(
+              "upperCase",
+              "Al menos una letra mayúscula",
+              function (value) {
+                if (!!value) {
+                  const schema = yup.string().matches(/^(?=.*?[A-Z])/);
+                  return schema.isValidSync(value);
+                }
+                return true;
+              }
+            )
+            .test(
+              "lowerCase",
+              "Al menos una letra minúscula",
+              function (value) {
+                if (!!value) {
+                  const schema = yup.string().matches(/(?=.*?[a-z])/);
+                  return schema.isValidSync(value);
+                }
+                return true;
+              }
+            )
+            .test("number", "Al menos un número", function (value) {
+              if (!!value) {
+                const schema = yup.string().matches(/(?=.*?[0-9])/);
+                return schema.isValidSync(value);
+              }
+              return true;
+            })
+            .test(
+              "specialChar",
+              "Al menos un caracter especial",
+              function (value) {
+                if (!!value) {
+                  const schema = yup.string().matches(/(?=.*?[#?!@$%^&*-])/);
+                  return schema.isValidSync(value);
+                }
+                return true;
+              }
+            ),
+          passwordConfirmation: yup
+            .string()
+            .required("Este campo es requerido")
+            .oneOf(
+              [yup.ref("password"), null],
+              "La nueva contraseña y su confirmación no coinciden"
+            ),
+        }),
+      ];
 
   const currentValidationSchema = validationSchema[activeStep];
   const methods = useForm({
@@ -385,7 +642,7 @@ export const RegisterDeportista = () => {
               ←
             </Button>
             <div className="registerDeportista__container__topRow__buttonCol__div">
-              <p>Ir atrás</p>
+              <p>Ir atrás {JSON.stringify(underaged)}</p>
             </div>
           </Col>
         </Row>
