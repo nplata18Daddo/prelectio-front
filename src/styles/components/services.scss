@@ -79,7 +79,6 @@
         font-size: $font-size-lgmd;
 
         @include phone {
-          width: 90%;
           font-size: $font-size-mdmd;
         }
       }

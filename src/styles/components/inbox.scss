@@ -107,6 +107,9 @@
 }
 .email-details__wrapper {
   background: rgba(255, 255, 255, 0.95);
+  @include phone {
+    min-width: 8rem;
+  }
 }
 .email-details__container {
   padding: 30px 20px 20px;

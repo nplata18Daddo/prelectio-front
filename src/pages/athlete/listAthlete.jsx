@@ -89,7 +89,6 @@ export const ListAthletes = () => {
 
   useEffect(() => {
     let filteredAthletes = athleteList.filter((item) => {
-      console.log(item);
       if (selectedGenero !== null) {
         setApplyFilter(true);
         if (selectedGenero !== item.usuario.genero_usuario) {
