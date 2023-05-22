@@ -6,7 +6,7 @@ import { CODES } from "../../../consts/codes";
 import baseProfile from "../../../assets/register/emptyProfile.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import LazyLoad from "react-lazy-load";
+
 export const AthleteCard = (props) => {
   const navigate = useNavigate();
   const img =
@@ -33,17 +33,15 @@ export const AthleteCard = (props) => {
       >
         <CardMedia title="Foto de perfil" style={{ position: "relative" }}>
           {img ? (
-            <LazyLoad key={props.item.id_deportista} offset={300}>
-              <img
-                style={{
-                  width: "100%",
-                  aspectRatio: "1/1",
-                  objectFit: "cover",
-                  objectPosition: "top",
-                }}
-                src={img}
-              ></img>
-            </LazyLoad>
+            <img
+              style={{
+                width: "100%",
+                aspectRatio: "1/1",
+                objectFit: "cover",
+                objectPosition: "top",
+              }}
+              src={img}
+            ></img>
           ) : (
             <Spinner />
           )}{" "}
