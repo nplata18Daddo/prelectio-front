@@ -16,6 +16,7 @@ import { getCiudades, getDepartamentos } from "../../services/locationServices";
 import {
   GetHabilidadDeportista,
   GetTrayectoriaDeportista,
+  GetAcudienteDeportista,
 } from "../../services/adminServices";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
@@ -28,6 +29,7 @@ export const AthleteDetail = () => {
   const [habilidadesDeportista, setHabilidadesDeportista] = useState([]);
   const [trayectoriasDeportista, setTrayectoriasDeportista] = useState([]);
   const [user, setUser] = useState(null);
+  const [acudiente, setAcudiente] = useState([]);
   const [img, setImg] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -37,14 +39,21 @@ export const AthleteDetail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [cities, departments, athlete, habilidades, trayectorias] =
-        await Promise.all([
-          getCiudades(),
-          getDepartamentos(),
-          GetDeportistaById(id),
-          GetHabilidadDeportista(id),
-          GetTrayectoriaDeportista(id),
-        ]);
+      const [
+        cities,
+        departments,
+        athlete,
+        habilidades,
+        trayectorias,
+        acudientes,
+      ] = await Promise.all([
+        getCiudades(),
+        getDepartamentos(),
+        GetDeportistaById(id),
+        GetHabilidadDeportista(id),
+        GetTrayectoriaDeportista(id),
+        GetAcudienteDeportista(id),
+      ]);
 
       if (cities.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
         setCities(cities.data.responseMessage);
@@ -72,6 +81,9 @@ export const AthleteDetail = () => {
         trayectorias.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST
       ) {
         setTrayectoriasDeportista(trayectorias.data.responseMessage);
+      }
+      if (acudientes.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+        setAcudiente(acudientes.data.responseMessage);
       }
     };
     fetchData();
@@ -117,7 +129,10 @@ export const AthleteDetail = () => {
                 }}
               >
                 <Col xs={4} style={{ minHeight: "10%", marginTop: "10px" }}>
-                  <SendEmailModal id_usuario={athleteInfo.id_usuario} />
+                  <SendEmailModal
+                    id_usuario={athleteInfo.id_usuario}
+                    acudiente={acudiente}
+                  />
                 </Col>
               </Row>
             </Col>

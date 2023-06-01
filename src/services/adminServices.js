@@ -74,6 +74,18 @@ export function GetAthleteDetail(data) {
     data: data,
   });
 }
+
+export function GetAcudienteDeportista(data) {
+  return axiosInstance({
+    method: "GET",
+    url: "api/acudiente/findByDeportista/" + data,
+    headers: {
+      Authorization: GetToken(),
+    },
+    baseURL: process.env.REACT_APP_BASE_URL,
+    data: data,
+  });
+}
 export function GetHabilidadDeportista(data) {
   return axiosInstance({
     method: "GET",

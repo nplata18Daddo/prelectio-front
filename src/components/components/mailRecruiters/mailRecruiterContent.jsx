@@ -1,6 +1,6 @@
 import React from "react";
 import "moment/locale/es-mx";
-import { Spinner } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 const moment = require("moment");
 
 moment.locale("es");
@@ -43,9 +43,18 @@ export const MailRecruiterContent = (props) => {
             </div>
             <div>{props.selectedItem.subject_mensaje}</div>
           </div>
-        </div>
+        </div>{" "}
+        <Row className="acudiente__row">
+          <p className="display__small weight__bold">
+            <i className="bi bi-lock" style={{ fontSize: "16px" }}></i>
+            Las llamadas y mensajes enviados a este chat ahora están seguros con
+            cifrado de extremo a extremo. Toca para más informacion
+          </p>
+        </Row>
         <div className="email-details__message">
-          <p>{props.selectedItem.contenido_mensaje}</p>
+          <p style={{ paddingTop: "15px" }}>
+            {props.selectedItem.contenido_mensaje}
+          </p>
         </div>
       </div>
     );

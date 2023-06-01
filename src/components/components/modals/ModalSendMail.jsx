@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import { SendMail } from "../../../services/adminServices";
 import { CODES } from "../../../consts/codes";
 import { ModalInfo } from "../../../components/components/modals/ModalInfo";
@@ -65,8 +65,94 @@ function SendEmailModal(props) {
         </Modal.Header>
         <Modal.Body className="p-5">
           <Form>
+            {props.acudiente.length > 0 && (
+              <>
+                <Row className="acudiente__row">
+                  <p className="display__small">
+                    {" "}
+                    <i
+                      className="bi bi-info-circle"
+                      style={{ fontSize: "16px" }}
+                    >
+                      {" "}
+                    </i>
+                    Este atleta es un menor de edad, antes de establecer una
+                    conexión debes comunicarte con el acudiente.
+                  </p>
+                </Row>
+                <Row>
+                  <p
+                    className="display__regular weight__bold"
+                    style={{ marginTop: "5px" }}
+                  >
+                    Información Acudiente:
+                  </p>
+                  <Col xs={12} md={6}>
+                    <Form.Group
+                      className="mb-3 mt-3"
+                      controlId="name"
+                      style={{ textAlign: "start" }}
+                    >
+                      <Form.Label className=" display__small">
+                        Nombre
+                      </Form.Label>
+                      <InputGroup>
+                        <Form.Control
+                          disabled
+                          maxLength="100"
+                          value={props.acudiente[0].nombre_acudiente}
+                          className="edit__input  display__small"
+                        />
+                      </InputGroup>
+                    </Form.Group>
+                  </Col>
+                  <Col xs={12} md={6}>
+                    <Form.Group
+                      className="mb-3 mt-3"
+                      controlId="name"
+                      style={{ textAlign: "start" }}
+                    >
+                      <Form.Label className=" display__small">
+                        Correo
+                      </Form.Label>
+                      <InputGroup>
+                        <Form.Control
+                          disabled
+                          maxLength="100"
+                          value={props.acudiente[0].email_acudiente}
+                          className="edit__input  display__small"
+                        />
+                      </InputGroup>
+                    </Form.Group>
+                  </Col>
+                  <Col xs={12}>
+                    <Form.Group
+                      className="mb-3 mt-3"
+                      controlId="name"
+                      style={{ textAlign: "start" }}
+                    >
+                      <Form.Label className=" display__small">
+                        Celular
+                      </Form.Label>
+                      <InputGroup>
+                        <Form.Control
+                          disabled
+                          maxLength="100"
+                          value={props.acudiente[0].telefono_acudiente}
+                          className="edit__input  display__small"
+                        />
+                      </InputGroup>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </>
+            )}
+
             <Form.Group controlId="formSubject">
-              <Form.Label className="weight__bold" style={{ fontSize: "14px" }}>
+              <Form.Label
+                className="weight__bold display__small"
+                style={{ fontSize: "14px" }}
+              >
                 Asunto
               </Form.Label>
               <Form.Control
@@ -79,7 +165,10 @@ function SendEmailModal(props) {
             </Form.Group>
 
             <Form.Group controlId="formContent" className="mt-3">
-              <Form.Label className="weight__bold" style={{ fontSize: "14px" }}>
+              <Form.Label
+                className="weight__bold display__small"
+                style={{ fontSize: "14px" }}
+              >
                 Contenido
               </Form.Label>
               <Form.Control
@@ -95,6 +184,7 @@ function SendEmailModal(props) {
         </Modal.Body>
         <Modal.Footer style={{ textAlign: "center", justifyContent: "center" }}>
           <Button
+            className="display__label weight__bold"
             style={{ fontSize: "14px" }}
             variant="secondary"
             onClick={handleClose}

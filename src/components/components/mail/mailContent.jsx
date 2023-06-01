@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "moment/locale/es-mx";
-import { Spinner } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 import SendEmailModalAthlete from "../modals/ModalSendMailAthlete";
 const moment = require("moment");
 
@@ -57,8 +57,17 @@ export const MailContent = (props) => {
           </div>
         </div>
 
+        <Row className="acudiente__row">
+          <p className="display__small weight__bold">
+            <i className="bi bi-lock" style={{ fontSize: "16px" }}></i>
+            Las llamadas y mensajes enviados a este chat ahora están seguros con
+            cifrado de extremo a extremo. Toca para más informacion
+          </p>
+        </Row>
         <div className="email-details__message">
-          <p>{props.selectedItem.contenido_mensaje}</p>
+          <p style={{ paddingTop: "15px" }}>
+            {props.selectedItem.contenido_mensaje}
+          </p>
         </div>
       </div>
     );
