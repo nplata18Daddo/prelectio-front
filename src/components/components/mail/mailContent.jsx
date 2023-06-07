@@ -60,8 +60,9 @@ export const MailContent = (props) => {
         <Row className="acudiente__row">
           <p className="display__small weight__bold">
             <i className="bi bi-lock" style={{ fontSize: "16px" }}></i>
-            Las llamadas y mensajes enviados a este chat ahora están seguros con
-            cifrado de extremo a extremo. Toca para más informacion
+            En Prelectio, estamos firmemente en contra de solicitar dinero a
+            cambio de favores o acuerdos comerciales. Mantenemos una política de
+            integridad y transparencia en todas nuestras operaciones.
           </p>
         </Row>
         <div className="email-details__message">
