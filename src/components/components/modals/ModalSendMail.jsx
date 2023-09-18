@@ -65,7 +65,7 @@ function SendEmailModal(props) {
         </Modal.Header>
         <Modal.Body className="p-5">
           <Form>
-            {props.acudiente.length > 0 && (
+            {props.acudiente && props.acudiente.length > 0 && (
               <>
                 <Row className="acudiente__row">
                   <p className="display__small">
