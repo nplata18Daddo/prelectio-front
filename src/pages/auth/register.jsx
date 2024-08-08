@@ -47,14 +47,19 @@ export const Register = () => {
       <div className="register__background">
         <Row className=" p-4 responsive__margin">
           <Col xs={12} style={{ textAlign: "left" }}>
-            <img
-              className="login__logo"
-              src={LogoPrelectio}
-              alt="logo prelectio"
-            ></img>
+            <Link to="/">
+              <img
+                className="login__logo"
+                src={LogoPrelectio}
+                alt="logo prelectio"
+              ></img>
+            </Link>
           </Col>
         </Row>
-        <Row className="justify-content-center mt-5 pb-5">
+        <Row
+          className="justify-content-center pb-5"
+          style={{ marginTop: "6rem" }}
+        >
           <Col xs={10} md={6}>
             <Card body className="register__card p-4 ">
               <Row>
@@ -65,7 +70,7 @@ export const Register = () => {
                     style={{ textAlign: "start", cursor: "pointer" }}
                   >
                     <i
-                      class="bi bi-arrow-left-circle colors__lightBlue"
+                      className="bi bi-arrow-left-circle colors__lightBlue"
                       style={{ fontSize: "20px", marginRight: "15px" }}
                     ></i>
                     <span>Ir atrás</span>
@@ -90,7 +95,7 @@ export const Register = () => {
                         </Col>
                         <Col xs={12}>
                           {" "}
-                          <div class="register__line mt-5"></div>
+                          <div className="register__line mt-5"></div>
                         </Col>
                         <Col xs={12}>
                           <p className="display__large weight__bold colors__lightBlue  mt-3">
@@ -98,7 +103,7 @@ export const Register = () => {
                           </p>
                         </Col>
                         <Col xs={12}>
-                          <p className="display__label text-white  mt-3">
+                          <p className="display__label  weight__bold text-white  mt-3">
                             Busca talento y contacta futuras estrellas.
                           </p>
                         </Col>
@@ -123,7 +128,7 @@ export const Register = () => {
                           ></img>
                         </Col>
                         <Col xs={12}>
-                          <div class="register__line mt-5"></div>
+                          <div className="register__line mt-5"></div>
                         </Col>
                         <Col xs={12}>
                           <p className="display__large weight__bold colors__lightBlue mt-3">
@@ -131,7 +136,7 @@ export const Register = () => {
                           </p>
                         </Col>
                         <Col xs={12}>
-                          <p className="display__label text-white mt-3">
+                          <p className="display__label weight__bold text-white mt-3">
                             Crea tu perfil y maximiza tus oportunidades
                           </p>
                         </Col>

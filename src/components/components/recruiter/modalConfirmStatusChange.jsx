@@ -38,7 +38,7 @@ export const ModalConfirmStatusChange = (props) => {
           <>
             Dar acceso
             <i
-              class="bi bi-arrow-right"
+              className="bi bi-arrow-right"
               style={{ fontSize: "16px", marginLeft: "5px" }}
             ></i>
           </>
@@ -46,7 +46,7 @@ export const ModalConfirmStatusChange = (props) => {
         {props.userData?.id_estado === 1 && (
           <>
             <i
-              class="bi bi-arrow-left"
+              className="bi bi-arrow-left"
               style={{ fontSize: "16px", marginRight: "5px" }}
             ></i>
             Remover acceso

@@ -89,7 +89,7 @@ export const ForgotPassword = () => {
                   style={{ textAlign: "start", cursor: "pointer" }}
                 >
                   <i
-                    class="bi bi-arrow-left-circle colors__lightBlue"
+                    className="bi bi-arrow-left-circle colors__lightBlue"
                     style={{ fontSize: "20px", marginRight: "15px" }}
                   ></i>
                   <span>Ir atrás</span>

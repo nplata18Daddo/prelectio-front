@@ -1,0 +1,28 @@
+.trayectoria {
+  &__container {
+    min-height: 35vh;
+    &__cardRow {
+      height: 30vh;
+      overflow-x: scroll;
+      &__card {
+        border-radius: 15px;
+        background-color: $accentGrey;
+        min-height: 25vh;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        padding: 1vh 3vw;
+        box-shadow: 0px 2.5px 0px 0px rgb(0, 0, 0, 0.5);
+        &__col {
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    }
+    &__bottomRow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

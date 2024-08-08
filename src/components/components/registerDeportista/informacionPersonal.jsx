@@ -1,5 +1,5 @@
 import { InputLabel, Select } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { DateField } from "./FormFields/dateField";
 import { InputField } from "./FormFields/inputField";
@@ -8,8 +8,25 @@ import {
   MunicipioSelectField,
 } from "./FormFields/departamentoSelectField";
 import { SelectField } from "./FormFields/selectField";
+import { useWatch } from "react-hook-form";
+import moment from "moment";
 
 export const InformacionPersonal = (props) => {
+  const fechaNacimiento = useWatch().fechaNacimiento;
+
+  useEffect(() => {
+    const fechaNacimientoMoment = moment(fechaNacimiento);
+    if (fechaNacimientoMoment) {
+      const today = moment();
+      const edad = today.diff(fechaNacimientoMoment, "years");
+      if (edad > 18) {
+        props.setUnderaged(false);
+      } else {
+        props.setUnderaged(true);
+      }
+    }
+  }, [fechaNacimiento]);
+
   return (
     <div className="informacionPersonal">
       <Container className="informacionPersonal__container">
@@ -35,6 +52,7 @@ export const InformacionPersonal = (props) => {
               </h4>
             </InputLabel>
             <SelectField
+              placeholder={"Tipo Documento"}
               options={[
                 { value: 1, label: "CC" },
                 { value: 2, label: "CE" },
@@ -44,18 +62,19 @@ export const InformacionPersonal = (props) => {
               name="tipoDoc"
             />
           </Col>
-          <Col
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "1.5vh",
-            }}
-            md={4}
-            className="informacionPersonal__container__row__col"
-          >
+          <Col md={4} className="informacionPersonal__container__row__col">
+            <InputLabel style={{ marginBottom: "0.5vh" }}>
+              <h4 style={{ textAlign: "left", color: "white" }}>
+                Número de documento
+              </h4>
+            </InputLabel>
             <InputField label="Numero Documento" name="numDoc" />
           </Col>
-          <Col md={3} className="informacionPersonal__container__row__col">
+          <Col
+            md={3}
+            className="informacionPersonal__container__row__col"
+            style={{ textAlign: "initial" }}
+          >
             <InputLabel style={{ marginBottom: "0.5vh" }}>
               <h4 style={{ textAlign: "left", color: "white" }}>
                 Fecha Nacimiento
@@ -78,6 +97,7 @@ export const InformacionPersonal = (props) => {
               </h4>
             </InputLabel>
             <DptoSelectField
+              placeholder={"Departamento"}
               options={props.departamentos}
               label="Departamento"
               name="departamento"
@@ -91,8 +111,15 @@ export const InformacionPersonal = (props) => {
             <SelectField
               label="Municipio"
               name="municipio"
+              placeholder="Municipio"
               options={props.selectedCities}
             />
+          </Col>
+          <Col md={3} className="informacionPersonal__container__row__col">
+            <InputLabel style={{ marginBottom: "0.5vh" }}>
+              <h4 style={{ textAlign: "left", color: "white" }}>Direccion</h4>
+            </InputLabel>
+            <InputField label="Direccion" name="direccion" />
           </Col>
           <Col md={3} className="informacionPersonal__container__row__col">
             <InputLabel style={{ marginBottom: "0.5vh" }}>
@@ -101,6 +128,7 @@ export const InformacionPersonal = (props) => {
             <SelectField
               label="Genero"
               name="genero"
+              placeholder="Género"
               options={[
                 { value: 1, label: "Masculino" },
                 { value: 2, label: "Femenino" },

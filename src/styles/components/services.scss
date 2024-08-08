@@ -4,6 +4,7 @@
   background-size: 100% 100%;
   background-position: right;
   background-repeat: no-repeat;
+  font-family: "Urbanist", sans-serif;
   &__mainContainer {
     &__titleRow {
       &__titleCol {
@@ -31,7 +32,7 @@
         background-color: $mainBlack;
         border-radius: 10px;
         border: none;
-        height: 5vh;
+        height: 6vh;
         width: 75%;
         @include phone {
           margin-top: 1vh;
@@ -78,7 +79,6 @@
         font-size: $font-size-lgmd;
 
         @include phone {
-          width: 90%;
           font-size: $font-size-mdmd;
         }
       }

@@ -26,24 +26,39 @@ export const Footer = () => {
             </Link>
           </Col>
           <Col xs={8} lg={8} className="text-center footer__topRow__col">
-            <Row className="footer__topRow__col__buttonRow">
+            <Row
+              className="footer__topRow__col__buttonRow"
+              style={{ paddingTop: "4rem" }}
+            >
               <Col md={2} xs={12}>
-                <Button className="footer__topRow__col__buttonRow__button">
+                <Button
+                  className="footer__topRow__col__buttonRow__button"
+                  href="#home"
+                >
                   Inicio
                 </Button>
               </Col>
               <Col md={2} xs={12}>
-                <Button className="footer__topRow__col__buttonRow__button">
+                <Button
+                  className="footer__topRow__col__buttonRow__button"
+                  href="#aboutUs"
+                >
                   Sobre Nosotros
                 </Button>
               </Col>
               <Col md={2} xs={12}>
-                <Button className="footer__topRow__col__buttonRow__button">
+                <Button
+                  className="footer__topRow__col__buttonRow__button"
+                  href="#aboutUs"
+                >
                   Quienes Somos
                 </Button>
               </Col>
               <Col md={2} xs={12}>
-                <Button className="footer__topRow__col__buttonRow__button">
+                <Button
+                  className="footer__topRow__col__buttonRow__button"
+                  href="#services"
+                >
                   Servicios
                 </Button>
               </Col>
@@ -67,9 +82,11 @@ export const Footer = () => {
             </Button>
           </Col>
           <Col xs={1} className="footer__bottomRow__SNCol">
-            <Button className="footer__bottomRow__SNCol__SNButton">
-              <AiFillInstagram className="footer__bottomRow__SNCol__SNButton__icon" />
-            </Button>
+            <a href="https://instagram.com/prelectio_?igshid=YmMyMTA2M2Y=">
+              <Button className="footer__bottomRow__SNCol__SNButton">
+                <AiFillInstagram className="footer__bottomRow__SNCol__SNButton__icon" />
+              </Button>
+            </a>
           </Col>
           <Col xs={1} className="footer__bottomRow__SNCol">
             <Button className="footer__bottomRow__SNCol__SNButton">

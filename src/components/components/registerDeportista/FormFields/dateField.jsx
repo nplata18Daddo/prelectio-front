@@ -20,23 +20,49 @@ export const DateField = ({ ...props }) => {
       <Controller
         {...props}
         render={({ field: { ref, ...field } }) => (
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <DesktopDatePicker
-              inputRef={ref}
-              autoComplete="off"
-              fullWidth
-              format="DD/MM/YYYY"
-              label={props.label}
-              value={field.value ? field.value : ""}
-              required
-              size="small"
-              shrink="true"
-              error={error?.message ? true : false}
-              onChange={(e) => {
-                field.onChange(e);
-              }}
-            />
-          </LocalizationProvider>
+          <>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+              <DesktopDatePicker
+                sx={{
+                  border: "1px solid white",
+                  borderRadius: "5px",
+                  "& .MuiSvgIcon-root": {
+                    color: "white",
+                  },
+                }}
+                inputlabelprops={{
+                  sx: {
+                    color: "white",
+                    borderColor: "white",
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: "red",
+                    borderColor: "white",
+                  },
+                }}
+                inputRef={ref}
+                autoComplete="off"
+                fullWidth
+                format="DD/MM/YYYY"
+                label=""
+                value={field.value ? field.value : ""}
+                required
+                size="small"
+                shrink="true"
+                error={error?.message ? true : false}
+                onChange={(e) => {
+                  field.onChange(e);
+                }}
+              />
+            </LocalizationProvider>
+            {error && (
+              <p className="error__message" style={{ color: "red" }}>
+                {error.message}
+              </p>
+            )}
+          </>
         )}
         rules={{ required: true }}
         variant="outlined"

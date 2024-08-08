@@ -4,14 +4,31 @@ import { Col, Container, Row } from "react-bootstrap";
 import { InputField } from "./FormFields/inputField";
 import { InputFieldMultiline } from "./FormFields/inputFieldMultiLine";
 import InfoIcon from "@mui/icons-material/Info";
+import { ImageInput } from "./FormFields/imageInput";
 
-export const VideoYFotoPerfil = () => {
+export const VideoYFotoPerfil = (props) => {
   return (
     <div className="videoFotoPerfil">
       <Container className="videoFotoPerfil__container">
         <Row className="videoFotoPerfil__container__row">
-          <Col md={6} className="videoFotoPerfil__container__row__leftCol">
+          <Col
+            xs={12}
+            md={6}
+            className="videoFotoPerfil__container__row__leftCol"
+          >
             <Row className="videoFotoPerfil__container__row__leftCol__topRow">
+              <InputLabel style={{ marginBottom: "0.5vh" }}>
+                <h5
+                  style={{
+                    textAlign: "left",
+                    color: "white",
+                    textOverflow: "clip",
+                    whiteSpace: "initial",
+                  }}
+                >
+                  Descripción
+                </h5>
+              </InputLabel>
               <InputFieldMultiline
                 rows={4}
                 label="Descripción del jugador"
@@ -49,9 +66,9 @@ export const VideoYFotoPerfil = () => {
                   <Tooltip
                     title={
                       <h5>
-                        Se recomienda un video de youtube corto, de alta
-                        calidad, donde demuestres tus mejores talentos y
-                        habilidades.
+                        Se debe subir un video publico en Youtube. Se recomienda
+                        un video corto, de maximo 3 minutos, donde demuestres
+                        tus mejores talentos y habilidades.
                       </h5>
                     }
                     placement="top"
@@ -73,6 +90,15 @@ export const VideoYFotoPerfil = () => {
                 <InputField label="Link a video" name="link_video" />
               </Row>
             </Row>
+          </Col>
+          <Col xs={12} md={6}>
+            <ImageInput
+              allowImage={props.allowImage}
+              handleImageChange={props.handleImageChange}
+              imagePreviewUrl={props.imagePreviewUrl}
+              label="Foto de perfil"
+              name="image"
+            />
           </Col>
         </Row>
       </Container>

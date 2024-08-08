@@ -8,7 +8,14 @@ export function LoginService(data) {
     data: data,
   });
 }
-
+export function LogoutService(data) {
+  return axios({
+    method: "post",
+    url: "api/auth/logout",
+    baseURL: process.env.REACT_APP_BASE_URL,
+    data: data,
+  });
+}
 export function ForgotPasswordService(data) {
   return axios({
     method: "post",

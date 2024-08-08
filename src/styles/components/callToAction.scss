@@ -1,51 +1,51 @@
-.callToAction{
-    background-color: $mainBlack;
-    &__mainContainer
-    {
-        padding: 8vh 0;
-        h1{
-            color: $mainWhite;
-            font-size: 35px;
-        }
-    &__mainRow
-    {
-        width: 100%;
-        &__leftRow
-        {
-            
-        }
-        &__rightRow
-        {
-            display: flex;
-            align-items: center !important;
-            justify-content: right;
-            @include phone{
-                justify-content: center;
-            }
-            &__button
-            {
-                border: none;
-                background-color: $lightBlue;
-                border-radius: 25px;
-                width: 15vw;
-                aspect-ratio: 4/1.2;
-                box-shadow: 12px 8px 4px rgba(0,0,0,0.25);
-                
-                @include phone{
-                    width: 80%;
-                    aspect-ratio: 4/1;
-                    margin-top: 2vh;
-                }
-                &:hover
-                {
-                    background-color: $lightBlue;
-                }
-                &:active
-                {
-                    background-color: $lightBlue !important;
-                }
-            }
-        }
+.callToAction {
+  background-color: $mainBlack;
+  font-family: "Urbanist", sans-serif;
+  &__mainContainer {
+    padding: 8vh 0;
+    h1 {
+      color: $mainWhite;
+      font-size: 35px;
     }
+    &__mainRow {
+      width: 100%;
+      @include tablet {
+        padding: 2rem;
+      }
+      &__leftRow {
+      }
+      &__rightRow {
+        display: flex;
+        align-items: center !important;
+        justify-content: right;
+        @include phone {
+          justify-content: center;
+        }
+        &__button {
+          border: none;
+          background: linear-gradient(270deg, #00459a 0%, #00ccff 105.68%);
+          border-radius: 25px;
+          width: 15vw;
+          aspect-ratio: 4/1.2;
+          box-shadow: 12px 8px 4px rgba(0, 0, 0, 0.25);
+
+          @include phone {
+            width: 100% !important;
+            aspect-ratio: 4/1;
+            margin-top: 2vh;
+          }
+          &:hover {
+            background: linear-gradient(270deg, #00459a 0%, #00ccff 105.68%);
+          }
+          &:active {
+            background: linear-gradient(
+              270deg,
+              #00459a 0%,
+              #00ccff 105.68%
+            ) !important;
+          }
+        }
+      }
     }
+  }
 }

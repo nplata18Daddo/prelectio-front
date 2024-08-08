@@ -1,22 +1,40 @@
 import React, { useState } from "react";
-import { Button, Col, Collapse, Row } from "react-bootstrap";
+import { Button, Col, Collapse, Row, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logoPrelectio from "../../../assets/logo_prelectio.png";
+import { CODES } from "../../../consts/codes";
+import { LogoutService } from "../../../services/authServices";
 
 export const NavBarUser = (props) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const handleLogout = async () => {
     try {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("user");
-      navigate("/");
+      setLoading(true);
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
+      const userMail = user.email_usuario;
+      const logout = async () => {
+        const obj = { email: userMail };
+        const [logout] = await Promise.all([LogoutService(obj)]);
+
+        if (logout.data.responseCode === CODES.COD_RESPONSE_SUCCESS_REQUEST) {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("user");
+          setLoading(false);
+          navigate("/");
+        }
+      };
+      await logout();
     } catch (error) {
       console.log("==============Error handleLogout======================");
       console.log(error);
       console.log("====================================");
     }
   };
+
+  console.log(props);
   return (
     <div>
       <Row className="navbar">
@@ -59,7 +77,7 @@ export const NavBarUser = (props) => {
                     className="navbar__col__buttonRow__button__primary"
                     onClick={handleLogout}
                   >
-                    Salir
+                    {loading ? <Spinner /> : "Salir"}
                   </Button>
                 </Col>
               </>
@@ -102,7 +120,7 @@ export const NavBarUser = (props) => {
               justifyContent: "center",
             }}
           >
-            <Link to="/" style={{ width: "fit-content" }}>
+            <Link to="/admin/home" style={{ width: "fit-content" }}>
               <img style={{ width: "50%" }} src={logoPrelectio}></img>
             </Link>
           </Col>
@@ -138,7 +156,7 @@ export const NavBarUser = (props) => {
                       onClick={handleLogout}
                       className="navbar__responsive__col__buttonRow__button__primary"
                     >
-                      Salir
+                      {loading ? <Spinner /> : "Salir"}
                     </Button>
                   </Link>
                 </Row>

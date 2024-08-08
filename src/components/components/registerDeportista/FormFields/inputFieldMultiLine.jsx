@@ -19,20 +19,40 @@ export const InputFieldMultiline = ({ ...props }) => {
       <Controller
         {...props}
         render={({ field: { ref, ...field } }) => (
-          <TextField
-            inputRef={ref}
-            autoComplete="off"
-            fullWidth
-            multiline
-            rows={props.rows}
-            label={props.label}
-            value={field.value ? field.value : ""}
-            required
-            size="small"
-            shrink="true"
-            error={error?.message ? true : false}
-            onChange={(e) => field.onChange(e.target.value)}
-          />
+          <>
+            <TextField
+              sx={{
+                border: "1px solid white",
+                borderRadius: "5px",
+              }}
+              inputlabelprops={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
+              inputProps={{
+                sx: {
+                  color: "white",
+                  borderColor: "white",
+                },
+              }}
+              inputRef={ref}
+              autoComplete="off"
+              fullWidth
+              multiline
+              rows={props.rows}
+              label=""
+              placeholder={props.label}
+              value={field.value ? field.value : ""}
+              required
+              size="small"
+              shrink="true"
+              error={error?.message ? true : false}
+              onChange={(e) => field.onChange(e.target.value)}
+            />
+            {error && <p style={{ color: "red" }}>{error.message}</p>}
+          </>
         )}
         rules={{ required: true }}
         variant="outlined"

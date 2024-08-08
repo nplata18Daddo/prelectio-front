@@ -17,22 +17,34 @@ export const NavBar = () => {
         <Col xs={8} lg={8} className="text-center navbar__col">
           <Row className="navbar__col__buttonRow">
             <Col xs={2}>
-              <Button className="navbar__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__col__buttonRow__button__secondary"
+                href="#home"
+              >
                 Inicio
               </Button>
             </Col>
             <Col xs={2}>
-              <Button className="navbar__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__col__buttonRow__button__secondary"
+                href="#aboutUs"
+              >
                 Sobre Nosotros
               </Button>
             </Col>
             <Col xs={2}>
-              <Button className="navbar__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__col__buttonRow__button__secondary"
+                href="#aboutUs"
+              >
                 Quienes Somos
               </Button>
             </Col>
             <Col xs={2}>
-              <Button className="navbar__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__col__buttonRow__button__secondary"
+                href="#services"
+              >
                 Servicios
               </Button>
             </Col>
@@ -78,22 +90,34 @@ export const NavBar = () => {
         <Collapse in={open}>
           <div id="navbarCollapse">
             <Row className="navbar__responsive__col__buttonRow">
-              <Button className="navbar__responsive__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__responsive__col__buttonRow__button__secondary"
+                href="#home"
+              >
                 Inicio
               </Button>
             </Row>
             <Row className="navbar__responsive__col__buttonRow">
-              <Button className="navbar__responsive__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__responsive__col__buttonRow__button__secondary"
+                href="#aboutUs"
+              >
                 Sobre Nosotros
               </Button>
             </Row>
             <Row className="navbar__responsive__col__buttonRow">
-              <Button className="navbar__responsive__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__responsive__col__buttonRow__button__secondary"
+                href="#aboutUs"
+              >
                 Quienes Somos
               </Button>
             </Row>
             <Row className="navbar__responsive__col__buttonRow">
-              <Button className="navbar__responsive__col__buttonRow__button__secondary">
+              <Button
+                className="navbar__responsive__col__buttonRow__button__secondary"
+                href="#services"
+              >
                 Servicios
               </Button>
             </Row>

@@ -2,10 +2,10 @@ import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 export const AboutUs = () => {
   return (
-    <div className="aboutUs">
+    <div className="aboutUs" id="aboutUs">
       <Container className="aboutUs__mainContainer">
         <Row className="aboutUs__mainContainer__topRow">
-          <h1>¿Qué es Prelectio?</h1>
+          <h1 className="text-center">¿Qué es Prelectio?</h1>
         </Row>
         <Row className="aboutUs__mainContainer__bottomRow">
           <h2>
